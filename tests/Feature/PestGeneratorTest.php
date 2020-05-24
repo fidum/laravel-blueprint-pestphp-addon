@@ -14,7 +14,7 @@ class PestGeneratorTest extends TestCase
     /** @var Blueprint */
     public $blueprint;
 
-    /** @var MockInterface  */
+    /** @var MockInterface */
     public $files;
 
     /** @var PestGenerator */

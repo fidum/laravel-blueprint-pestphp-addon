@@ -6,6 +6,6 @@ trait HasStubFilePath
 {
     protected function stubFilePath(string $fileName): string
     {
-        return dirname(__DIR__).'/stubs/' . $fileName;
+        return dirname(__DIR__).'/stubs/'.$fileName;
     }
 }

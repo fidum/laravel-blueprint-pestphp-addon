@@ -20,7 +20,7 @@ class PestGenerator implements Generator
     public function output(array $tree): array
     {
         if (empty($tree['models'])) {
-           return [];
+            return [];
         }
 
         $created = new Collection();
