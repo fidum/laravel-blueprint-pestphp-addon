@@ -16,13 +16,13 @@ jobs:
         include:
           - os: macos-latest
             php: 7.4
-            laravel: 7.x
+            laravel: 7.*
             dependency-version: prefer-stable
             testbench: 5.x
 
           - os: windows-latest
             php: 7.4
-            laravel: 7.x
+            laravel: 7.*
             dependency-version: prefer-stable
             testbench: 5.x
 
