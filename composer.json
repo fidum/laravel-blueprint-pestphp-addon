@@ -1,0 +1,56 @@
+{
+    "name": "fidum/laravel-blueprint-pestphp-addon",
+    "description": "Generic chart tiles for laravel dashboard",
+    "keywords": [
+        "fidum",
+        "laravel-shift",
+        "blueprint",
+        "laravel-blueprint-pestphp-addon",
+        "pest",
+        "pestphp"
+    ],
+    "homepage": "https://github.com/fidum/laravel-blueprint-pestphp-addon",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daniel Mason",
+            "email": "fidum.dev@gmail.com",
+            "homepage": "https://danielmason.co.uk",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.3",
+        "illuminate/support": "^7.0",
+        "laravel-shift/blueprint": "dev-master"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^5.0",
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Fidum\\BlueprintPestAddon\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Fidum\\BlueprintPestAddon\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Fidum\\BlueprintPestAddon\\BlueprintPestAddonServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
