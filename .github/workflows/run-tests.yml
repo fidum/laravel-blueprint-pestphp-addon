@@ -16,11 +16,15 @@ jobs:
         include:
           - os: macos-latest
             php: 7.4
+            laravel: 7.x
             dependency-version: prefer-stable
+            testbench: 5.x
 
           - os: windows-latest
             php: 7.4
+            laravel: 7.x
             dependency-version: prefer-stable
+            testbench: 5.x
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
 
