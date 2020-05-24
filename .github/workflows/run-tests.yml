@@ -8,13 +8,19 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest]
         php: [7.4, 7.3]
         laravel: [7.*]
         dependency-version: [prefer-lowest, prefer-stable]
+        testbench: [5.*]
         include:
-          - laravel: 7.*
-            testbench: 5.*
+          - os: macos-latest
+            php: 7.4
+            dependency-version: prefer-stable
+
+          - os: windows-latest
+            php: 7.4
+            dependency-version: prefer-stable
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
 
