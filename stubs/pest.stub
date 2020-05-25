@@ -5,7 +5,10 @@ use Illuminate\Foundation\Testing\WithFaker;
 use JMac\Testing\Traits\AdditionalAssertions;
 use Tests\TestCase;
 
-uses(TestCase::class)->in(__DIR__);
-uses(AdditionalAssertions::class);
-uses(RefreshDatabase::class);
+uses(
+    TestCase::class,
+    AdditionalAssertions::class,
+    RefreshDatabase::class
+)->in('Feature');
+
 uses(WithFaker::class);

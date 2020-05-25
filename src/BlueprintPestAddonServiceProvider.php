@@ -3,12 +3,11 @@
 namespace Fidum\BlueprintPestAddon;
 
 use Blueprint\Blueprint;
-use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
-class BlueprintPestAddonServiceProvider extends ServiceProvider implements DeferrableProvider
+class BlueprintPestAddonServiceProvider extends ServiceProvider
 {
-    public function boot(): void
+    public function register()
     {
         $this->app->extend(Blueprint::class, function (Blueprint $blueprint, $app) {
             $blueprint->swapGenerator(
@@ -18,12 +17,5 @@ class BlueprintPestAddonServiceProvider extends ServiceProvider implements Defer
 
             return $blueprint;
         });
-    }
-
-    public function provides()
-    {
-        return [
-            Blueprint::class,
-        ];
     }
 }
