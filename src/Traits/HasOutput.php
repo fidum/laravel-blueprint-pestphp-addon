@@ -2,9 +2,6 @@
 
 namespace Fidum\BlueprintPestAddon\Traits;
 
-use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
-
 trait HasOutput
 {
     /** @var array */
