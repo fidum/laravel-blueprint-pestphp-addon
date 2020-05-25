@@ -17,13 +17,13 @@ class MakePestGlobalFile implements Action
 
     public function execute(Filesystem $files, array $tree): Action
     {
-        $exists = $files->exists($this->outputFilePath);
+        $updated = $files->exists($this->outputFilePath);
 
         $content = $this->stubFileContent('pest.stub');
 
         $files->put($this->outputFilePath, $content);
 
-        $this->addOutput($this->outputFilePath, $exists);
+        $this->addOutput($this->outputFilePath, $updated);
 
         return $this;
     }

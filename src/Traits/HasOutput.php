@@ -28,7 +28,6 @@ trait HasOutput
 
     public function output(): array
     {
-        dump($this->output);
         return $this->output;
     }
 }
