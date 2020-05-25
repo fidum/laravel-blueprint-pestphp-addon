@@ -11,10 +11,10 @@ Installing this addon will allow you to generate [Pest](https://github.com/pestp
 
 ## Installation
 
-You can install this package and **Blueprint** via composer:
+You can install this package, [Laravel Test Assertions](https://github.com/jasonmccreary/laravel-test-assertions) and **[Blueprint](https://github.com/laravel-shift/blueprint)** via composer:
 
 ```bash
-composer require --dev laravel-shift/blueprint fidum/laravel-blueprint-pestphp-addon
+composer require --dev laravel-shift/blueprint fidum/laravel-blueprint-pestphp-addon jasonmccreary/laravel-test-assertions:^1.0
 ```
 
 ## Usage
