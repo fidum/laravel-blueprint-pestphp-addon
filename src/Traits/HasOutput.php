@@ -2,9 +2,6 @@
 
 namespace Fidum\BlueprintPestAddon\Traits;
 
-use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
-
 trait HasOutput
 {
     /** @var array */
@@ -29,6 +26,7 @@ trait HasOutput
     public function output(): array
     {
         dump($this->output);
+
         return $this->output;
     }
 }
