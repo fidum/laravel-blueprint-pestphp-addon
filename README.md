@@ -17,13 +17,13 @@ You can install this package and **Blueprint** via composer:
 composer require --dev laravel-shift/blueprint fidum/laravel-blueprint-pestphp-addon
 ```
 
-> :warning: You need to have [Pest](https://pestphp.com/docs/installation) installed in order for the tests to be generated successfully!
-
 ## Usage
 
-Refer to [Blueprint's Basic Usage](https://github.com/laravel-shift/blueprint#basic-usage) to get started. Afterwards you can run the `blueprint:build` command to generate Pest tests automatically.
+1. Install [Pest](https://github.com/pestphp/pest) by following their [installation instructions](https://pestphp.com/docs/installation/).
 
-Also read [Pest's Writing Tests](https://pestphp.com/docs/writing-tests/) to help understand the generated test output. 
+2. Refer to [Blueprint's Basic Usage](https://github.com/laravel-shift/blueprint#basic-usage) to get started. Afterwards you can run the `blueprint:build` command to generate Pest tests automatically.
+
+3. Read [Pest's Writing Tests](https://pestphp.com/docs/writing-tests/) to help understand the generated test output. 
 
 ## Testing
 ```bash
