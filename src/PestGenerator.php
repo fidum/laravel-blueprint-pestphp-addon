@@ -7,7 +7,6 @@ use Fidum\BlueprintPestAddon\Actions\MakeControllerTests;
 use Fidum\BlueprintPestAddon\Actions\MakePestGlobalFile;
 use Fidum\BlueprintPestAddon\Contracts\Action as ActionContract;
 use Fidum\BlueprintPestAddon\Traits\HasStubFile;
-use Illuminate\Support\Collection;
 
 class PestGenerator implements Generator
 {
