@@ -3,11 +3,15 @@
 namespace Fidum\BlueprintPestAddon;
 
 use Blueprint\Contracts\Generator;
+use Fidum\BlueprintPestAddon\Actions\MakeControllerTests;
+use Fidum\BlueprintPestAddon\Actions\MakePestGlobalFile;
+use Fidum\BlueprintPestAddon\Contracts\Action as ActionContract;
+use Fidum\BlueprintPestAddon\Traits\HasStubFile;
 use Illuminate\Support\Collection;
 
 class PestGenerator implements Generator
 {
-    use HasStubFilePath;
+    use HasStubFile;
 
     /** @var \Illuminate\Contracts\Filesystem\Filesystem */
     private $files;
@@ -23,11 +27,16 @@ class PestGenerator implements Generator
             return [];
         }
 
-        $created = new Collection();
+        $output = [];
 
-        $this->files->put('tests/Pest.php', file_get_contents($this->stubFilePath('pest.stub')));
-        $created->push('tests/Pest.php');
+        collect([
+            new MakePestGlobalFile,
+            new MakeControllerTests,
+        ])->each(function (ActionContract $action) use ($tree, &$output) {
+            $results = $action->execute($this->files, $tree)->output();
+            $output = array_merge_recursive($output, $results);
+        });
 
-        return ['created' => $created->toArray()];
+        return $output;
     }
 }
