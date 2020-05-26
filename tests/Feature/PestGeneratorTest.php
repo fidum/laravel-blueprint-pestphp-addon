@@ -5,6 +5,7 @@ namespace Fidum\BlueprintPestAddon\Tests\Feature;
 use Blueprint\Blueprint;
 use Blueprint\Lexers\ControllerLexer;
 use Blueprint\Lexers\ModelLexer;
+use Blueprint\Models\Controller;
 use Fidum\BlueprintPestAddon\PestGenerator;
 use Fidum\BlueprintPestAddon\Tests\TestCase;
 use Illuminate\Contracts\Filesystem\Filesystem;
@@ -20,6 +21,12 @@ class PestGeneratorTest extends TestCase
 
     /** @var PestGenerator */
     public $subject;
+
+    public $pestGlobalFile = 'tests/Pest.php';
+
+    public $exampleFeatureFile = 'tests/Feature/ExampleTest.php';
+
+    public $exampleUnitFile = 'tests/Unit/ExampleTest.php';
 
     protected function setUp(): void
     {
@@ -44,38 +51,89 @@ class PestGeneratorTest extends TestCase
         $this->assertSame([], $this->subject->output([]));
     }
 
-    public function testNothingGeneratedWithEmptyModelsTree()
+    public function testNothingGeneratedWithEmptyControllersTree()
     {
         $this->files->expects('exists')->never();
         $this->files->expects('put')->never();
 
         /** @var Blueprint $blueprint */
-        $this->assertSame([], $this->subject->output(['models' => []]));
+        $this->assertSame([], $this->subject->output(['controllers' => []]));
     }
 
-    public function testPestFileCreated()
-    {
-        $pestFile = 'tests/Pest.php';
-        $this->files->expects('exists')->with($pestFile)->andReturnFalse();
-        $this->files->expects('put')->with($pestFile, $this->fixture($pestFile));
-
+    /** @dataProvider provider */
+    public function testGeneratedOutput(
+        string $definition,
+        bool $pestGlobalFileExists,
+        bool $exampleFeature = false,
+        bool $exampleUnit = false
+    ) {
         /** @var Blueprint $blueprint */
-        $tokens = $this->blueprint->parse($this->definition());
+        $tokens = $this->blueprint->parse($this->definition($definition));
         $tree = $this->blueprint->analyze($tokens);
 
-        $this->assertSame(['created' => [$pestFile]], $this->subject->output($tree));
+        $exampleFileOutput = $this->getExampleTestsOutput($exampleFeature, $exampleUnit);
+        $pestGlobalFileOutput = $this->getPestGlobalFileOutput($pestGlobalFileExists);
+        $httpTestsOutput = $this->getHttpTestsOutput($tree);
+
+        $this->assertSame(
+            array_merge_recursive($pestGlobalFileOutput, $exampleFileOutput, $httpTestsOutput),
+            $this->subject->output($tree)
+        );
     }
 
-    public function testPestFileUpdated()
+    public function provider(): array
     {
-        $pestFile = 'tests/Pest.php';
-        $this->files->expects('exists')->with($pestFile)->andReturnTrue();
-        $this->files->expects('put')->with($pestFile, $this->fixture($pestFile));
+        return [
+            'basic http tests' => ['example.yml', false],
+            'basic http test where pest global file exists' => ['example.yml', true],
+            'basic http and example feature test files' => ['example.yml', true, true],
+            'basic http, example feature and unit test files' => ['example.yml', true, false, true],
+        ];
+    }
 
-        /** @var Blueprint $blueprint */
-        $tokens = $this->blueprint->parse($this->definition());
-        $tree = $this->blueprint->analyze($tokens);
+    private function getExampleTestsOutput(bool $featureExists, bool $unitExists): array
+    {
+        $this->files->expects('exists')->with($this->exampleFeatureFile)->andReturn($featureExists);
+        $this->files->expects('exists')->with($this->exampleUnitFile)->andReturn($unitExists);
 
-        $this->assertSame(['updated' => [$pestFile]], $this->subject->output($tree));
+        $output = [];
+
+        if ($featureExists) {
+            $this->files->expects('put')->with($this->exampleFeatureFile, $this->fixture($this->exampleFeatureFile));
+            $output['updated'][] = $this->exampleFeatureFile;
+        }
+
+        if ($unitExists) {
+            $this->files->expects('put')->with($this->exampleUnitFile, $this->fixture($this->exampleUnitFile));
+            $output['updated'][] = $this->exampleUnitFile;
+        }
+
+        return $output;
+    }
+
+    private function getHttpTestsOutput(array $tree): array
+    {
+        $this->files->expects('exists')->with('tests/Feature/Http/Controllers')->andReturnTrue();
+
+        $output = [];
+
+        /** @var Controller $controller */
+        foreach($tree['controllers'] as $controller) {
+            $ns = str_replace('\\', '/', Blueprint::relativeNamespace($controller->fullyQualifiedClassName()));
+            $path = 'tests/Feature/' . $ns . 'Test.php';
+            $this->files->expects('put')->with($path, $this->fixture($path));
+            $output['created'][] = $path;
+        }
+
+        return $output;
+    }
+
+    private function getPestGlobalFileOutput(bool $updated)
+    {
+        $this->files->expects('exists')->with($this->pestGlobalFile)->andReturn($updated);
+        $this->files->expects('put')->with($this->pestGlobalFile, $this->fixture($this->pestGlobalFile));
+
+        $key  = $updated ? 'updated' : 'created';
+        return [$key => [$this->pestGlobalFile]];
     }
 }

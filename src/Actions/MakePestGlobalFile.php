@@ -15,7 +15,7 @@ class MakePestGlobalFile implements Action
     /** @var string */
     private $outputFilePath = 'tests/Pest.php';
 
-    public function execute(Filesystem $files, array $tree): Action
+    public function execute($files, array $tree): Action
     {
         $updated = $files->exists($this->outputFilePath);
 

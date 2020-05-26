@@ -3,3 +3,19 @@ models:
     title: string:400
     content: longtext
     published_at: nullable timestamp
+    user_id: id
+
+controllers:
+  Post:
+    index:
+      query: all
+      render: post.index with:posts
+
+    store:
+      validate: title, content
+      save: post
+      send: ReviewNotification to:post.user with:post
+      dispatch: SyncMedia with:post
+      fire: NewPost with:post
+      flash: post.title
+      redirect: post.index
