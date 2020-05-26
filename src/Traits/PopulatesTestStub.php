@@ -9,15 +9,13 @@ trait PopulatesTestStub
         $stub = str_replace('DummyNamespace', $namespace, $stub);
         $stub = str_replace('// imports...', $imports, $stub);
         $stub = str_replace('// test cases...', $testCases, $stub);
-        $stub = $this->cleanBlankLines($stub);
+        $stub = $this->removeSequentialBlankLines($stub);
 
         return $stub;
     }
 
-    private function cleanBlankLines(string $string): string
+    private function removeSequentialBlankLines(string $string): string
     {
-        $result = preg_replace('/\n(\s*\n){2,}/', "\n\n", $string);
-
-        return $result.(windows_os() ? PHP_EOL : '');
+        return preg_replace('/\r?\n(\s*\r?\n){2,}/', "\n\n", $string);
     }
 }
