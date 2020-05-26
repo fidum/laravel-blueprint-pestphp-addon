@@ -18,6 +18,6 @@ trait PopulatesTestStub
     {
         $result = preg_replace('/\n(\s*\n){2,}/', "\n\n", $string);
 
-        return $result . (windows_os() ? PHP_EOL : '');
+        return $result.(windows_os() ? PHP_EOL : '');
     }
 }
