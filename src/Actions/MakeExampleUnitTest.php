@@ -3,9 +3,9 @@
 namespace Fidum\BlueprintPestAddon\Actions;
 
 use Fidum\BlueprintPestAddon\Contracts\Action;
-use Fidum\BlueprintPestAddon\Traits\PopulatesTestStub;
 use Fidum\BlueprintPestAddon\Traits\HasOutput;
 use Fidum\BlueprintPestAddon\Traits\HasStubFile;
+use Fidum\BlueprintPestAddon\Traits\PopulatesTestStub;
 
 class MakeExampleUnitTest implements Action
 {
@@ -33,10 +33,9 @@ class MakeExampleUnitTest implements Action
 
     private function testCase(): string
     {
-        return <<<PEST
+        return <<<'PEST'
 it('is a basic unit test')
     ->assertTrue(true);
 PEST;
-
     }
 }

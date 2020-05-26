@@ -118,9 +118,9 @@ class PestGeneratorTest extends TestCase
         $output = [];
 
         /** @var Controller $controller */
-        foreach($tree['controllers'] as $controller) {
+        foreach ($tree['controllers'] as $controller) {
             $ns = str_replace('\\', '/', Blueprint::relativeNamespace($controller->fullyQualifiedClassName()));
-            $path = 'tests/Feature/' . $ns . 'Test.php';
+            $path = 'tests/Feature/'.$ns.'Test.php';
             $this->files->expects('put')->with($path, $this->fixture($path));
             $output['created'][] = $path;
         }
@@ -133,7 +133,8 @@ class PestGeneratorTest extends TestCase
         $this->files->expects('exists')->with($this->pestGlobalFile)->andReturn($updated);
         $this->files->expects('put')->with($this->pestGlobalFile, $this->fixture($this->pestGlobalFile));
 
-        $key  = $updated ? 'updated' : 'created';
+        $key = $updated ? 'updated' : 'created';
+
         return [$key => [$this->pestGlobalFile]];
     }
 }
