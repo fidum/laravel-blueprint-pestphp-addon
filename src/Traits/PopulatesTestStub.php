@@ -16,6 +16,6 @@ trait PopulatesTestStub
 
     private function cleanBlankLines(string $string): string
     {
-        return preg_replace('/\n(\s*\n){2,}/', "\n\n", $string);
+        return preg_replace('/\n(\s*\n){2,}/', windows_os() ? "\r\n" : "\n\n", $string);
     }
 }
