@@ -2,7 +2,6 @@
 
 namespace Fidum\BlueprintPestAddon\Tests\Feature;
 
-
 it('expects nothing to be generated when tree is empty', function () {
     /** @var FeatureTestCase $this */
     $this->files->expects('exists')->never();
