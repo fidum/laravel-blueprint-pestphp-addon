@@ -5,7 +5,6 @@ namespace Fidum\BlueprintPestAddon\Actions;
 use Fidum\BlueprintPestAddon\Contracts\Action;
 use Fidum\BlueprintPestAddon\Traits\HasOutput;
 use Fidum\BlueprintPestAddon\Traits\HasStubFile;
-use Illuminate\Contracts\Filesystem\Filesystem;
 
 class MakePestGlobalFile implements Action
 {

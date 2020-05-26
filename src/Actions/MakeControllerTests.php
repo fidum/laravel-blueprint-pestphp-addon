@@ -28,7 +28,7 @@ class MakeControllerTests implements Action
         foreach ($tree['controllers'] as $controller) {
             $path = $this->getPath($controller);
 
-            if (!$files->exists(dirname($path))) {
+            if (! $files->exists(dirname($path))) {
                 $files->makeDirectory(dirname($path), 0755, true);
             }
 
@@ -56,7 +56,7 @@ class MakeControllerTests implements Action
         sort($imports);
 
         return implode(PHP_EOL, array_map(function ($class) {
-            return 'use ' . $class . ';';
+            return 'use '.$class.';';
         }, $imports));
     }
 
@@ -70,7 +70,7 @@ PEST;
 
     private function getNamespace(Controller $controller)
     {
-        return 'Tests\\Feature\\' . Blueprint::relativeNamespace($controller->fullyQualifiedNamespace());
+        return 'Tests\\Feature\\'.Blueprint::relativeNamespace($controller->fullyQualifiedNamespace());
     }
 
     private function getPath(Controller $controller)
@@ -78,7 +78,7 @@ PEST;
         // TODO: Use Blueprints TestGenerator?
         $path = str_replace('\\', '/', Blueprint::relativeNamespace($controller->fullyQualifiedClassName()));
 
-        return 'tests/Feature/' . $path . 'Test.php';
+        return 'tests/Feature/'.$path.'Test.php';
     }
 
     private function registerModels(array $tree)
