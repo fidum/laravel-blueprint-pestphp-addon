@@ -53,7 +53,7 @@ jobs:
           composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
 
       - name: Execute tests
-        run: vendor/bin/phpunit
+        run: vendor/bin/pest
 
       - name: Upload PHP test coverage report
         uses: codecov/codecov-action@v1
