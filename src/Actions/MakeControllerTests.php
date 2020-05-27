@@ -142,9 +142,9 @@ class MakeControllerTests implements Action
                     // $assertions['mock'][] = $assertion;
                 } elseif ($statement instanceof ValidateStatement) {
                     $class = $this->buildFormRequestName($controller, $name);
-                    $testCase = $this->buildFormRequestTestCase($hocCaseStub, $controller->fullyQualifiedClassName(), $name, config('blueprint.namespace') . '\\Http\\Requests\\' . $class);
+                    $testCase = $this->buildFormRequestTestCase($hocCaseStub, $controller->fullyQualifiedClassName(), $name, config('blueprint.namespace').'\\Http\\Requests\\'.$class);
 
-                    // if ($statement->data()) {
+                // if ($statement->data()) {
                     //     $this->addFakerTrait($controller);
                     //
                     //     foreach ($statement->data() as $data) {
@@ -261,7 +261,7 @@ class MakeControllerTests implements Action
                     //
                     // array_unshift($assertions['response'], ...$view_assertions);
                 } elseif ($statement instanceof RedirectStatement) {
-                //     $tested_bits |= self::TESTS_REDIRECT;
+                    //     $tested_bits |= self::TESTS_REDIRECT;
                 //
                 //     $assertion = sprintf('$response->assertRedirect(route(\'%s\'', $statement->route());
                 //
@@ -298,7 +298,7 @@ class MakeControllerTests implements Action
                 } elseif ($statement instanceof SessionStatement) {
                     // $assertions['response'][] = sprintf('$response->assertSessionHas(\'%s\', %s);', $statement->reference(), '$' . str_replace('.', '->', $statement->reference()));
                 } elseif ($statement instanceof EloquentStatement) {
-                //     $this->addRefreshDatabaseTrait($controller);
+                    //     $this->addRefreshDatabaseTrait($controller);
                 //
                 //     $model = $this->determineModel($controller->prefix(), $statement->reference());
                 //     $this->addImport($controller, config('blueprint.namespace') . '\\' . $model);
@@ -335,9 +335,9 @@ class MakeControllerTests implements Action
                 //
                 //     $this->addImport($controller, config('blueprint.namespace') . '\\' . $this->determineModel($controller->prefix(), $statement->model()));
                 // }
-            }
+                }
 
-            // $call = sprintf('$response = $this->%s(route(\'%s.%s\'', $this->httpMethodForAction($name), Str::kebab($context), $name);
+                // $call = sprintf('$response = $this->%s(route(\'%s.%s\'', $this->httpMethodForAction($name), Str::kebab($context), $name);
             //
             // if (in_array($name, ['edit', 'update', 'show', 'destroy'])) {
             //     $call .= ', $' . Str::camel($context);
@@ -367,7 +367,7 @@ class MakeControllerTests implements Action
             // $testCase = str_replace('// ...', trim($body), $testCase);
 
             if ($testCase) {
-                $testCases .= PHP_EOL . $testCase . PHP_EOL;
+                $testCases .= PHP_EOL.$testCase.PHP_EOL;
             }
         }
 
@@ -377,15 +377,15 @@ class MakeControllerTests implements Action
     private function buildFormRequestName(Controller $controller, string $name)
     {
         if (empty($controller->namespace())) {
-            return $controller->name() . Str::studly($name) . 'Request';
+            return $controller->name().Str::studly($name).'Request';
         }
 
-        return $controller->namespace() . '\\' . $controller->name() . Str::studly($name) . 'Request';
+        return $controller->namespace().'\\'.$controller->name().Str::studly($name).'Request';
     }
 
     private function buildFormRequestTestCase(string $stub, string $controller, string $action, string $formRequest)
     {
-        $assertion =  <<<END
+        $assertion = <<<END
 ->assertActionUsesFormRequest(
         \\${controller}::class,
         '${action}',
