@@ -8,7 +8,7 @@ trait PopulatesTestStub
     {
         $stub = str_replace('DummyNamespace', $namespace, $stub);
         $stub = str_replace("// imports...\n\n", $imports, $stub);
-        $stub = str_replace("// test cases...", $testCases, $stub);
+        $stub = str_replace('// test cases...', $testCases, $stub);
 
         return $stub;
     }
