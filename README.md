@@ -7,7 +7,7 @@
 
 :mega: Shoutout to [Jason McCreary](https://github.com/jasonmccreary) whose [Blueprint](https://github.com/laravel-shift/blueprint) and [Assertions](https://github.com/jasonmccreary/laravel-test-assertions) packages lay the groundwork for this small addon. Thank you Jason :raised_hands:
 
-Installing this addon will allow you to generate [Pest](https://github.com/pestphp/pest) tests instead of the standard PHPUnit tests with the `php artisan blueprint:build` command.
+Installing this addon will allow you to generate [Pest](https://github.com/pestphp/pest) controller tests instead of the standard PHPUnit controller tests with the `php artisan blueprint:build` command.
 
 ## Installation
 
