@@ -33,9 +33,8 @@ class MakeExampleUnitTest implements Action
 
     private function testCase(): string
     {
-        return <<<'PEST'
-it('is a basic unit test')
-    ->assertTrue(true);
-PEST;
+        $stub = $this->stubFileContent('case_hoc.stub');
+
+        return $this->populateTestCaseStub($stub, 'is a basic unit test', '->assertTrue(true)');
     }
 }

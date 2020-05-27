@@ -33,10 +33,10 @@ class MakeExampleFeatureTest implements Action
 
     private function testCase(): string
     {
-        return <<<'PEST'
-it('is a basic feature test')
-    ->get('/')
-    ->assertStatus(200);
-PEST;
+        $stub = $this->stubFileContent('case_hoc.stub');
+
+        $content = "->get('/')".PHP_EOL.str_pad('', 4, ' ', STR_PAD_LEFT).'->assertStatus(200)';
+
+        return $this->populateTestCaseStub($stub, 'is a basic feature test', $content);
     }
 }

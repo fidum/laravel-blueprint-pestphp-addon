@@ -62,10 +62,9 @@ class MakeControllerTests implements Action
 
     private function buildTestCases(Controller $controller)
     {
-        return <<<'PEST'
-it('this is an example test')
-    ->assertTrue(true);
-PEST;
+        $stub = $this->stubFileContent('case_hoc.stub');
+
+        return $this->populateTestCaseStub($stub, 'this is an example test', '->assertTrue(true)');
     }
 
     private function getNamespace(Controller $controller)
