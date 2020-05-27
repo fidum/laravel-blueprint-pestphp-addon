@@ -1,0 +1,45 @@
+models:
+  Book:
+    author_id: id
+    title: string:400
+    email: string:255
+    content: longtext
+    published_at: nullable timestamp
+
+  Author:
+    name: string:255
+    email: string:255
+
+controllers:
+  Book:
+    index:
+      query: all
+      render: book.index with:books
+
+    store:
+      validate: title, email, content
+      save: book
+      send: ReviewNotification to:book.author with:book
+      dispatch: SyncMedia with:book
+      fire: NewBook with:book
+      flash: book.title
+      redirect: book.index
+
+    update:
+      validate: title, email, content
+      update: book
+      send: ReviewNotification to:book.author with:book
+      dispatch: SyncMedia with:book
+      fire: UpdatedBook with:book
+      flash: book.title
+      redirect: book.index
+
+    destroy:
+      delete: book
+      send: ReviewNotification to:book with:book
+      dispatch: SyncMedia with:book
+      fire: DeletedBook with:book
+      redirect: book.index
+
+  Author:
+    resource

@@ -42,7 +42,7 @@ class FeatureTestCase extends TestCase
         $this->blueprint->registerGenerator($this->subject);
     }
 
-    protected function definition(string $fileName = 'example.yml')
+    protected function definition(string $fileName = 'simple.yml')
     {
         return $this->fixture('definitions'.DIRECTORY_SEPARATOR.$fileName);
     }
@@ -74,14 +74,23 @@ class FeatureTestCase extends TestCase
         return $output;
     }
 
-    protected function getHttpTestsOutput(array $tree): array
+    protected function getHttpTestsOutput(array $tree, string $path): array
     {
-        $this->files->expects('exists')->with('tests/Feature/Http/Controllers')->andReturnTrue();
+        $controllers = $tree['controllers'];
+
+        $this->files->expects('exists')
+            ->times(count($controllers))
+            ->with($path)
+            ->andReturnFalse();
+
+        $this->files->expects('makeDirectory')
+            ->times(count($controllers))
+            ->with($path, 0755, true);
 
         $output = [];
 
         /** @var Controller $controller */
-        foreach ($tree['controllers'] as $controller) {
+        foreach ($controllers as $controller) {
             $ns = str_replace('\\', '/', Blueprint::relativeNamespace($controller->fullyQualifiedClassName()));
             $path = 'tests/Feature/'.$ns.'Test.php';
             $this->files->expects('put')->with($path, $this->fixture($path));

@@ -2,6 +2,6 @@
 
 All notable changes to `fidum/laravel-blueprint-pestphp-addon` will be documented in this file
 
-## 0.0.1 - 2020-XX-XX
+## 1.0.0 - 2020-05-27
 
 - initial release

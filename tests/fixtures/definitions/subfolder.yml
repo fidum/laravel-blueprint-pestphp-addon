@@ -1,0 +1,14 @@
+models:
+  Invoice:
+    total: integer
+
+controllers:
+  Api/Invoice:
+    index:
+      query: all
+      respond: invoices
+    store:
+      validate: total
+      respond: 204
+    error:
+      respond: 400

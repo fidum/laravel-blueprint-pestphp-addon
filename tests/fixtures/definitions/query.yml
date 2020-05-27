@@ -1,0 +1,21 @@
+models:
+  Newspaper:
+    title: string:400
+    content: longtext
+    published_at: nullable timestamp
+
+controllers:
+  Newspaper:
+    index:
+      query: where:title where:content order:published_at limit:5
+      render: newspaper.index with:newspapers
+
+    edit:
+      find: id
+      render: newspaper.edit with:newspaper
+
+    update:
+      find: newspaper.id
+      query: where:newspaper.title take:3 pluck:newspaper.id
+      save: newspaper
+      redirect: newspaper.edit

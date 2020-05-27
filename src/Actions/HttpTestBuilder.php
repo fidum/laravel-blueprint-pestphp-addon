@@ -10,10 +10,10 @@ use Blueprint\Models\Statements\FireStatement;
 use Blueprint\Models\Statements\QueryStatement;
 use Blueprint\Models\Statements\RedirectStatement;
 use Blueprint\Models\Statements\RenderStatement;
+use Blueprint\Models\Statements\RespondStatement;
 use Blueprint\Models\Statements\SendStatement;
 use Blueprint\Models\Statements\SessionStatement;
 use Blueprint\Models\Statements\ValidateStatement;
-use Fidum\BlueprintPestAddon\RespondStatement;
 use Fidum\BlueprintPestAddon\Traits\HasOutput;
 use Fidum\BlueprintPestAddon\Traits\HasStubFile;
 use Fidum\BlueprintPestAddon\Traits\PopulatesTestStub;
@@ -310,7 +310,7 @@ class HttpTestBuilder
                             $assertions['sanity'][] = '$this->assertCount(1, $'.$plural.');';
                             $assertions['sanity'][] = sprintf('$%s = $%s->first();', $variable, $plural);
                         } else {
-                            $assertions['generic'][] = '$this->assertDatabaseHas('.Str::camel(Str::plural($model)).', [ /* ... */ ]);';
+                            $assertions['generic'][] = '$this->assertDatabaseHas(\''.Str::camel(Str::plural($model)).'\', [ /* ... */ ]);';
                         }
                     } elseif ($statement->operation() === 'find') {
                         $setup['data'][] = sprintf('$%s = factory(%s::class)->create();', $variable, $model);
