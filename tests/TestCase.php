@@ -23,14 +23,4 @@ class TestCase extends BaseTestCase
             BlueprintPestAddonServiceProvider::class,
         ];
     }
-
-    public function definition(string $fileName = 'example.yml')
-    {
-        return $this->fixture('definitions'.DIRECTORY_SEPARATOR.$fileName);
-    }
-
-    public function fixture(string $path)
-    {
-        return file_get_contents(__DIR__.DIRECTORY_SEPARATOR.'fixtures'.DIRECTORY_SEPARATOR.ltrim($path, DIRECTORY_SEPARATOR));
-    }
 }

@@ -42,6 +42,18 @@ class FeatureTestCase extends TestCase
         $this->blueprint->registerGenerator($this->subject);
     }
 
+    protected function definition(string $fileName = 'example.yml')
+    {
+        return $this->fixture('definitions'.DIRECTORY_SEPARATOR.$fileName);
+    }
+
+    protected function fixture(string $path)
+    {
+        return file_get_contents(
+            dirname(__DIR__, 1).DIRECTORY_SEPARATOR.'fixtures'.DIRECTORY_SEPARATOR.ltrim($path, DIRECTORY_SEPARATOR)
+        );
+    }
+
     protected function getExampleTestsOutput(bool $featureExists, bool $unitExists): array
     {
         $this->files->expects('exists')->with($this->exampleFeatureFile)->andReturn($featureExists);

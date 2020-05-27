@@ -38,7 +38,6 @@ it('generates the expected output', function (
 
     $this->assertCount($createdCount, $expectedOutput['created'] ?? [], 'created count incorrect');
     $this->assertCount($updatedCount, $expectedOutput['updated'] ?? [], 'updated count incorrect');
-
     $this->assertSame($expectedOutput, $this->subject->output($tree));
 })->with([
     'basic http tests' => ['example.yml', false, 2],
