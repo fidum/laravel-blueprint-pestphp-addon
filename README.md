@@ -9,6 +9,8 @@
 
 Installing this addon will allow you to generate [Pest](https://github.com/pestphp/pest) HTTP tests instead of the standard PHPUnit HTTP tests with the `php artisan blueprint:build` command.
 
+![Preview](docs/preview.png)
+
 ## Installation
 
 You can install this package and **[Blueprint](https://github.com/laravel-shift/blueprint)** via composer:
