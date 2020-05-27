@@ -2,7 +2,6 @@
 
 namespace Fidum\BlueprintPestAddon\Actions;
 
-use Blueprint\Blueprint;
 use Blueprint\Generators\FactoryGenerator;
 use Blueprint\Models\Controller;
 use Blueprint\Models\Statements\DispatchStatement;
@@ -51,11 +50,11 @@ class HttpTestBuilder
         $imports = array_unique($this->imports[$controller->name()] ?? []);
         sort($imports);
 
-        $suffix = count($imports) ? PHP_EOL . PHP_EOL : '';
+        $suffix = count($imports) ? PHP_EOL.PHP_EOL : '';
 
         return implode(PHP_EOL, array_map(function ($class) {
-                return 'use ' . $class . ';';
-            }, $imports)) . $suffix;
+            return 'use '.$class.';';
+        }, $imports)).$suffix;
     }
 
     public function testCases(Controller $controller)
@@ -90,7 +89,7 @@ class HttpTestBuilder
             foreach ($statements as $statement) {
                 if ($statement instanceof SendStatement) {
                     $this->addImport($controller, 'Illuminate\\Support\\Facades\\Mail');
-                    $this->addImport($controller, config('blueprint.namespace') . '\\Mail\\' . $statement->mail());
+                    $this->addImport($controller, config('blueprint.namespace').'\\Mail\\'.$statement->mail());
 
                     $setup['mock'][] = 'Mail::fake();';
 
@@ -102,29 +101,29 @@ class HttpTestBuilder
                         $assertion .= ', function ($mail)';
 
                         if ($statement->to()) {
-                            $conditions[] = '$mail->hasTo($' . str_replace('.', '->', $statement->to()) . ')';
+                            $conditions[] = '$mail->hasTo($'.str_replace('.', '->', $statement->to()).')';
                         }
 
                         foreach ($statement->data() as $data) {
                             if (Str::studly(Str::singular($data)) === $context) {
-                                $variables[] .= '$' . $data;
+                                $variables[] .= '$'.$data;
                                 $conditions[] .= sprintf('$mail->%s->is($%s)', $data, $data);
                             } else {
                                 [$model, $property] = explode('.', $data);
-                                $variables[] .= '$' . $model;
+                                $variables[] .= '$'.$model;
                                 $conditions[] .= sprintf('$mail->%s == $%s', $property ?? $model,
                                     str_replace('.', '->', $data()));
                             }
                         }
 
                         if ($variables) {
-                            $assertion .= ' use (' . implode(', ', array_unique($variables)) . ')';
+                            $assertion .= ' use ('.implode(', ', array_unique($variables)).')';
                         }
 
-                        $assertion .= ' {' . PHP_EOL;
+                        $assertion .= ' {'.PHP_EOL;
                         $assertion .= str_pad(' ', 8);
-                        $assertion .= 'return ' . implode(' && ', $conditions) . ';';
-                        $assertion .= PHP_EOL . str_pad(' ', 4) . '}';
+                        $assertion .= 'return '.implode(' && ', $conditions).';';
+                        $assertion .= PHP_EOL.str_pad(' ', 4).'}';
                     }
 
                     $assertion .= ');';
@@ -133,7 +132,7 @@ class HttpTestBuilder
                 } elseif ($statement instanceof ValidateStatement) {
                     $class = $this->buildFormRequestName($controller, $name);
                     $testCase = $this->buildFormRequestTestCase($hocCaseStub, $controller->fullyQualifiedClassName(),
-                        $name, config('blueprint.namespace') . '\\Http\\Requests\\' . $class);
+                        $name, config('blueprint.namespace').'\\Http\\Requests\\'.$class);
 
                     if ($statement->data()) {
                         foreach ($statement->data() as $data) {
@@ -145,19 +144,19 @@ class HttpTestBuilder
 
                             /** @var \Blueprint\Models\Model $model */
                             $local_model = $this->modelForContext($qualifier);
-                            if (!is_null($local_model) && $local_model->hasColumn($column)) {
+                            if (! is_null($local_model) && $local_model->hasColumn($column)) {
                                 $faker = FactoryGenerator::fakerData($local_model->column($column)->name()) ?? FactoryGenerator::fakerDataType($local_model->column($column)->dataType());
                             } else {
                                 $faker = 'word';
                             }
 
                             $setup['data'][] = sprintf('$%s = $this->faker->%s;', $data, $faker);
-                            $request_data[$data] = '$' . $data;
+                            $request_data[$data] = '$'.$data;
                         }
                     }
                 } elseif ($statement instanceof DispatchStatement) {
                     $this->addImport($controller, 'Illuminate\\Support\\Facades\\Queue');
-                    $this->addImport($controller, config('blueprint.namespace') . '\\Jobs\\' . $statement->job());
+                    $this->addImport($controller, config('blueprint.namespace').'\\Jobs\\'.$statement->job());
 
                     $setup['mock'][] = 'Queue::fake();';
 
@@ -170,24 +169,24 @@ class HttpTestBuilder
 
                         foreach ($statement->data() as $data) {
                             if (Str::studly(Str::singular($data)) === $context) {
-                                $variables[] .= '$' . $data;
+                                $variables[] .= '$'.$data;
                                 $conditions[] .= sprintf('$job->%s->is($%s)', $data, $data);
                             } else {
                                 [$model, $property] = explode('.', $data);
-                                $variables[] .= '$' . $model;
+                                $variables[] .= '$'.$model;
                                 $conditions[] .= sprintf('$job->%s == $%s', $property ?? $model,
                                     str_replace('.', '->', $data()));
                             }
                         }
 
                         if ($variables) {
-                            $assertion .= ' use (' . implode(', ', array_unique($variables)) . ')';
+                            $assertion .= ' use ('.implode(', ', array_unique($variables)).')';
                         }
 
-                        $assertion .= ' {' . PHP_EOL;
+                        $assertion .= ' {'.PHP_EOL;
                         $assertion .= str_pad(' ', 8);
-                        $assertion .= 'return ' . implode(' && ', $conditions) . ';';
-                        $assertion .= PHP_EOL . str_pad(' ', 4) . '}';
+                        $assertion .= 'return '.implode(' && ', $conditions).';';
+                        $assertion .= PHP_EOL.str_pad(' ', 4).'}';
                     }
 
                     $assertion .= ');';
@@ -204,8 +203,8 @@ class HttpTestBuilder
                         $assertion .= $statement->event();
                     } else {
                         $this->addImport($controller,
-                            config('blueprint.namespace') . '\\Events\\' . $statement->event());
-                        $assertion .= $statement->event() . '::class';
+                            config('blueprint.namespace').'\\Events\\'.$statement->event());
+                        $assertion .= $statement->event().'::class';
                     }
 
                     if ($statement->data()) {
@@ -215,24 +214,24 @@ class HttpTestBuilder
 
                         foreach ($statement->data() as $data) {
                             if (Str::studly(Str::singular($data)) === $context) {
-                                $variables[] .= '$' . $data;
+                                $variables[] .= '$'.$data;
                                 $conditions[] .= sprintf('$event->%s->is($%s)', $data, $data);
                             } else {
                                 [$model, $property] = explode('.', $data);
-                                $variables[] .= '$' . $model;
+                                $variables[] .= '$'.$model;
                                 $conditions[] .= sprintf('$event->%s == $%s', $property ?? $model,
                                     str_replace('.', '->', $data()));
                             }
                         }
 
                         if ($variables) {
-                            $assertion .= ' use (' . implode(', ', array_unique($variables)) . ')';
+                            $assertion .= ' use ('.implode(', ', array_unique($variables)).')';
                         }
 
-                        $assertion .= ' {' . PHP_EOL;
+                        $assertion .= ' {'.PHP_EOL;
                         $assertion .= str_pad(' ', 8);
-                        $assertion .= 'return ' . implode(' && ', $conditions) . ';';
-                        $assertion .= PHP_EOL . str_pad(' ', 4) . '}';
+                        $assertion .= 'return '.implode(' && ', $conditions).';';
+                        $assertion .= PHP_EOL.str_pad(' ', 4).'}';
                     }
 
                     $assertion .= ');';
@@ -250,7 +249,6 @@ class HttpTestBuilder
                         $view_assertions[] = sprintf('$response->assertViewHas(\'%s\');', $data);
                     }
 
-
                     array_unshift($assertions['response'], ...$view_assertions);
                 } elseif ($statement instanceof RedirectStatement) {
                     $tested_bits |= self::TESTS_REDIRECT;
@@ -259,10 +257,10 @@ class HttpTestBuilder
 
                     if ($statement->data()) {
                         $parameters = array_map(function ($parameter) {
-                            return '$' . $parameter;
+                            return '$'.$parameter;
                         }, $statement->data());
 
-                        $assertion .= ', [' . implode(', ', $parameters) . ']';
+                        $assertion .= ', ['.implode(', ', $parameters).']';
                     } elseif (Str::contains($statement->route(), '.')) {
                         [$model, $action] = explode('.', $statement->route());
                         if (in_array($action, ['edit', 'update', 'show', 'destroy'])) {
@@ -278,7 +276,7 @@ class HttpTestBuilder
 
                     if ($statement->content()) {
                         array_unshift($assertions['response'],
-                            '$response->assertJson($' . $statement->content() . ');');
+                            '$response->assertJson($'.$statement->content().');');
                     }
 
                     if ($statement->status() === 200) {
@@ -287,14 +285,14 @@ class HttpTestBuilder
                         array_unshift($assertions['response'], '$response->assertNoContent();');
                     } else {
                         array_unshift($assertions['response'],
-                            '$response->assertNoContent(' . $statement->status() . ');');
+                            '$response->assertNoContent('.$statement->status().');');
                     }
                 } elseif ($statement instanceof SessionStatement) {
                     $assertions['response'][] = sprintf('$response->assertSessionHas(\'%s\', %s);',
-                        $statement->reference(), '$' . str_replace('.', '->', $statement->reference()));
+                        $statement->reference(), '$'.str_replace('.', '->', $statement->reference()));
                 } elseif ($statement instanceof EloquentStatement) {
                     $model = $this->determineModel($controller->prefix(), $statement->reference());
-                    $this->addImport($controller, config('blueprint.namespace') . '\\' . $model);
+                    $this->addImport($controller, config('blueprint.namespace').'\\'.$model);
 
                     if ($statement->operation() === 'save') {
                         $tested_bits |= self::TESTS_SAVE;
@@ -304,15 +302,15 @@ class HttpTestBuilder
                             $plural = Str::plural($variable);
                             $assertion = sprintf('$%s = %s::query()', $plural, $model);
                             foreach ($request_data as $key => $datum) {
-                                $assertion .= PHP_EOL . sprintf('%s->where(\'%s\', %s)', $indent, $key, $datum);
+                                $assertion .= PHP_EOL.sprintf('%s->where(\'%s\', %s)', $indent, $key, $datum);
                             }
-                            $assertion .= PHP_EOL . $indent . '->get();';
+                            $assertion .= PHP_EOL.$indent.'->get();';
 
                             $assertions['sanity'][] = $assertion;
-                            $assertions['sanity'][] = '$this->assertCount(1, $' . $plural . ');';
+                            $assertions['sanity'][] = '$this->assertCount(1, $'.$plural.');';
                             $assertions['sanity'][] = sprintf('$%s = $%s->first();', $variable, $plural);
                         } else {
-                            $assertions['generic'][] = '$this->assertDatabaseHas(' . Str::camel(Str::plural($model)) . ', [ /* ... */ ]);';
+                            $assertions['generic'][] = '$this->assertDatabaseHas('.Str::camel(Str::plural($model)).', [ /* ... */ ]);';
                         }
                     } elseif ($statement->operation() === 'find') {
                         $setup['data'][] = sprintf('$%s = factory(%s::class)->create();', $variable, $model);
@@ -326,12 +324,12 @@ class HttpTestBuilder
                         $model);
 
                     $this->addImport($controller,
-                        config('blueprint.namespace') . '\\' . $this->determineModel($controller->prefix(),
+                        config('blueprint.namespace').'\\'.$this->determineModel($controller->prefix(),
                             $statement->model()));
                 }
 
                 if ($testCase) {
-                    $testCases .= PHP_EOL . $testCase . PHP_EOL;
+                    $testCases .= PHP_EOL.$testCase.PHP_EOL;
                     $testCase = null;
                 }
             }
@@ -340,7 +338,7 @@ class HttpTestBuilder
                 Str::kebab($context), $name);
 
             if (in_array($name, ['edit', 'update', 'show', 'destroy'])) {
-                $call .= ', $' . Str::camel($context);
+                $call .= ', $'.Str::camel($context);
             }
             $call .= ')';
 
@@ -353,15 +351,15 @@ class HttpTestBuilder
                     $call .= PHP_EOL;
                 }
 
-                $call .= str_pad(' ', 4) . ']';
+                $call .= str_pad(' ', 4).']';
             }
             $call .= ');';
 
-            $body = implode(PHP_EOL . PHP_EOL, array_map([$this, 'buildLines'], $this->uniqueSetupLines($setup)));
-            $body .= PHP_EOL . PHP_EOL;
-            $body .= str_pad(' ', 4) . $call;
-            $body .= PHP_EOL . PHP_EOL;
-            $body .= implode(PHP_EOL . PHP_EOL, array_map([$this, 'buildLines'], array_filter($assertions)));
+            $body = implode(PHP_EOL.PHP_EOL, array_map([$this, 'buildLines'], $this->uniqueSetupLines($setup)));
+            $body .= PHP_EOL.PHP_EOL;
+            $body .= str_pad(' ', 4).$call;
+            $body .= PHP_EOL.PHP_EOL;
+            $body .= implode(PHP_EOL.PHP_EOL, array_map([$this, 'buildLines'], array_filter($assertions)));
 
             $testCase = $this->populateTestCaseStub(
                 $caseStub,
@@ -370,7 +368,7 @@ class HttpTestBuilder
             );
 
             if ($testCase) {
-                $testCases .= PHP_EOL . $testCase . PHP_EOL;
+                $testCases .= PHP_EOL.$testCase.PHP_EOL;
             }
         }
 
@@ -385,10 +383,10 @@ class HttpTestBuilder
     private function buildFormRequestName(Controller $controller, string $name)
     {
         if (empty($controller->namespace())) {
-            return $controller->name() . Str::studly($name) . 'Request';
+            return $controller->name().Str::studly($name).'Request';
         }
 
-        return $controller->namespace() . '\\' . $controller->name() . Str::studly($name) . 'Request';
+        return $controller->namespace().'\\'.$controller->name().Str::studly($name).'Request';
     }
 
     private function buildFormRequestTestCase(string $stub, string $controller, string $action, string $formRequest)
@@ -406,7 +404,7 @@ END;
 
     private function buildLines($lines)
     {
-        return str_pad(' ', 4) . implode(PHP_EOL . str_pad(' ', 4), $lines);
+        return str_pad(' ', 4).implode(PHP_EOL.str_pad(' ', 4), $lines);
     }
 
     private function buildTestCaseName(string $name, int $tested_bits)
@@ -434,16 +432,16 @@ END;
         }
 
         if (empty($verifications)) {
-            return $name . ' behaves as expected';
+            return $name.' behaves as expected';
         }
 
-        $final_verification = array_pop($verifications) . ' on ' . $name;
+        $final_verification = array_pop($verifications).' on '.$name;
 
         if (empty($verifications)) {
             return $final_verification;
         }
 
-        return implode(' ', $verifications) . ' and ' . $final_verification;
+        return implode(' ', $verifications).' and '.$final_verification;
     }
 
     private function determineModel(string $prefix, ?string $reference)
@@ -480,14 +478,12 @@ END;
         }
 
         $matches = array_filter(array_keys($this->models), function ($key) use ($context) {
-            return Str::endsWith($key, '/' . Str::studly($context));
+            return Str::endsWith($key, '/'.Str::studly($context));
         });
 
         if (count($matches) === 1) {
             return $this->models[$matches[0]];
         }
-
-        return null;
     }
 
     private function registerModels(array $tree)

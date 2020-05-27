@@ -24,7 +24,7 @@ class MakeHttpTests implements Action
         foreach ($tree['controllers'] as $controller) {
             $path = $this->getPath($controller);
 
-            if (!$files->exists(dirname($path))) {
+            if (! $files->exists(dirname($path))) {
                 $files->makeDirectory(dirname($path), 0755, true);
             }
 
@@ -43,7 +43,7 @@ class MakeHttpTests implements Action
 
     private function getNamespace(Controller $controller)
     {
-        return 'Tests\\Feature\\' . Blueprint::relativeNamespace($controller->fullyQualifiedNamespace());
+        return 'Tests\\Feature\\'.Blueprint::relativeNamespace($controller->fullyQualifiedNamespace());
     }
 
     private function getPath(Controller $controller)
