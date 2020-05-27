@@ -49,5 +49,5 @@ it('generates the expected output', function (
     'multiple crud resources created with additional facades' => ['crud.yml', false, 3],
     'api resource controller test created' => ['api.yml', false, 2],
     'custom queries defined on controller routes' => ['query.yml', false, 2],
-    'defined response codes have expected assertions' => ['subfolder.yml', false, 2, 0, false, false, 'tests/Feature/Http/Controllers/Api'],
+    'controller test created in specified subfolder' => ['subfolder.yml', false, 2, 0, false, false, 'tests/Feature/Http/Controllers/Api'],
 ]);
