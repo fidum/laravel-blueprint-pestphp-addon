@@ -21,7 +21,7 @@
     ],
     "require": {
         "php": "^7.3",
-        "illuminate/support": "^7.0",
+        "illuminate/support": "^6.0|^7.0",
         "jasonmccreary/laravel-test-assertions": "^1.0",
         "laravel-shift/blueprint": "dev-master"
     },
