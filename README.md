@@ -7,7 +7,7 @@
 
 :mega: Shoutout to [Jason McCreary](https://github.com/jasonmccreary) whose [Blueprint](https://github.com/laravel-shift/blueprint) and [Assertions](https://github.com/jasonmccreary/laravel-test-assertions) packages lay the groundwork for this small addon. Thank you Jason :raised_hands:
 
-Installing this addon will allow you to generate [Pest](https://github.com/pestphp/pest) tests instead of the standard PHPUnit tests with the `php artisan blueprint:build` command.
+Installing this addon will allow you to generate [Pest](https://github.com/pestphp/pest) HTTP tests instead of the standard PHPUnit HTTP tests with the `php artisan blueprint:build` command.
 
 ## Installation
 
@@ -21,7 +21,7 @@ composer require --dev laravel-shift/blueprint fidum/laravel-blueprint-pestphp-a
 
 1. Install [Pest](https://github.com/pestphp/pest) by following their [installation instructions](https://pestphp.com/docs/installation/).
 
-2. Refer to [Blueprint's Basic Usage](https://github.com/laravel-shift/blueprint#basic-usage) to get started. Afterwards you can run the `blueprint:build` command to generate Pest tests automatically.
+2. Refer to [Blueprint's Basic Usage](https://github.com/laravel-shift/blueprint#basic-usage) to get started. Afterwards you can run the `blueprint:build` command to generate Pest HTTP tests automatically for your controllers.
 
 3. Read [Pest's Writing Tests](https://pestphp.com/docs/writing-tests/) to help understand the generated test output. 
 
