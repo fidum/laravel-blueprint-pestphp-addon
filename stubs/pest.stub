@@ -8,7 +8,6 @@ use Tests\TestCase;
 uses(
     TestCase::class,
     AdditionalAssertions::class,
-    RefreshDatabase::class
+    RefreshDatabase::class,
+    WithFaker::class
 )->in('Feature');
-
-uses(WithFaker::class);

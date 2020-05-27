@@ -3,7 +3,7 @@
 namespace Fidum\BlueprintPestAddon;
 
 use Blueprint\Contracts\Generator;
-use Fidum\BlueprintPestAddon\Actions\MakeControllerTests;
+use Fidum\BlueprintPestAddon\Actions\MakeHttpTests;
 use Fidum\BlueprintPestAddon\Actions\MakeExampleFeatureTest;
 use Fidum\BlueprintPestAddon\Actions\MakeExampleUnitTest;
 use Fidum\BlueprintPestAddon\Actions\MakePestGlobalFile;
@@ -32,9 +32,9 @@ class PestGenerator implements Generator
 
         collect([
             new MakePestGlobalFile,
-            new MakeControllerTests,
             new MakeExampleFeatureTest,
             new MakeExampleUnitTest,
+            new MakeHttpTests,
         ])->each(function (ActionContract $action) use ($tree, &$output) {
             $results = $action->execute($this->files, $tree)->output();
             $output = array_merge_recursive($output, $results);
