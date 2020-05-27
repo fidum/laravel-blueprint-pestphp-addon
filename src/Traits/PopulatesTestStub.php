@@ -16,6 +16,6 @@ trait PopulatesTestStub
 
     private function removeSequentialBlankLines(string $string): string
     {
-        return preg_replace('/\r?\n(\s*\r?\n){2,}/', "\n\n", $string);
+        return trim(preg_replace('/\r?\n(\s*\r?\n){2,}/', "\n\n", $string));
     }
 }
