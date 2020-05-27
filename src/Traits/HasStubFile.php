@@ -13,6 +13,6 @@ trait HasStubFile
     {
         $path = $this->stubFilePath($fileName);
 
-        return file_get_contents($path);
+        return trim(file_get_contents($path));
     }
 }
