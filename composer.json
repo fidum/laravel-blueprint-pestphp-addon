@@ -1,6 +1,6 @@
 {
     "name": "fidum/laravel-blueprint-pestphp-addon",
-    "description": "Generic chart tiles for laravel dashboard",
+    "description": "Generate pestphp tests from your laravel blueprint!",
     "keywords": [
         "fidum",
         "laravel-shift",
