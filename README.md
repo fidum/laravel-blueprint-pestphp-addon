@@ -21,7 +21,7 @@ composer require --dev laravel-shift/blueprint fidum/laravel-blueprint-pestphp-a
 
 1. Install [Pest](https://github.com/pestphp/pest) by following their [installation instructions](https://pestphp.com/docs/installation/).
 
-2. Refer to [Blueprint's Basic Usage](https://github.com/laravel-shift/blueprint#basic-usage) to get started. Afterwards you can run the `blueprint:build` command to generate Pest tests automatically.
+2. Refer to [Blueprint's Basic Usage](https://github.com/laravel-shift/blueprint#basic-usage) to get started. Afterwards you can run the `blueprint:build` command to generate Pest HTTP tests automatically for your controllers.
 
 3. Read [Pest's Writing Tests](https://pestphp.com/docs/writing-tests/) to help understand the generated test output. 
 
