@@ -12,19 +12,16 @@ jobs:
         php: [7.4, 7.3]
         laravel: [6.*, 7.*]
         dependency-version: [prefer-lowest, prefer-stable]
-        testbench: [5.*]
         include:
           - os: macos-latest
             php: 7.4
             laravel: 7.*
             dependency-version: prefer-stable
-            testbench: 5.x
 
           - os: windows-latest
             php: 7.4
             laravel: 7.*
             dependency-version: prefer-stable
-            testbench: 5.x
 
     name: P${{ matrix.php }} - ${{ matrix.os }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
 
@@ -49,7 +46,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+          composer require "laravel/framework:${{ matrix.laravel }}" --no-interaction --no-update
           composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
 
       - name: Execute tests
