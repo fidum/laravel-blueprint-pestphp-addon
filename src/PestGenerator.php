@@ -12,8 +12,6 @@ use Fidum\BlueprintPestAddon\Traits\HasStubFile;
 
 class PestGenerator implements Generator
 {
-    use HasStubFile;
-
     /** @var \Illuminate\Contracts\Filesystem\Filesystem */
     private $files;
 

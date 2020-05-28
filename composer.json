@@ -23,7 +23,7 @@
         "php": "^7.3",
         "illuminate/support": "^7.0",
         "jasonmccreary/laravel-test-assertions": "^1.0",
-        "laravel-shift/blueprint": "dev-master"
+        "laravel-shift/blueprint": "^1.13"
     },
     "require-dev": {
         "orchestra/testbench": "^5.0",
