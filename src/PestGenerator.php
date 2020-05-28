@@ -8,7 +8,6 @@ use Fidum\BlueprintPestAddon\Actions\MakeExampleUnitTest;
 use Fidum\BlueprintPestAddon\Actions\MakeHttpTests;
 use Fidum\BlueprintPestAddon\Actions\MakePestGlobalFile;
 use Fidum\BlueprintPestAddon\Contracts\Action as ActionContract;
-use Fidum\BlueprintPestAddon\Traits\HasStubFile;
 
 class PestGenerator implements Generator
 {
