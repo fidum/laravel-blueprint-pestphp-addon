@@ -42,12 +42,12 @@ class FeatureTestCase extends TestCase
         $this->blueprint->registerGenerator($this->subject);
     }
 
-    protected function definition(string $fileName = 'simple.yml')
+    protected function definition(string $fileName = 'simple.yml'): string
     {
         return $this->fixture('definitions'.DIRECTORY_SEPARATOR.$fileName);
     }
 
-    protected function fixture(string $path)
+    protected function fixture(string $path): string
     {
         return file_get_contents(
             dirname(__DIR__, 1).DIRECTORY_SEPARATOR.'fixtures'.DIRECTORY_SEPARATOR.ltrim($path, DIRECTORY_SEPARATOR)
@@ -100,7 +100,7 @@ class FeatureTestCase extends TestCase
         return $output;
     }
 
-    protected function getPestGlobalFileOutput(bool $updated)
+    protected function getPestGlobalFileOutput(bool $updated): array
     {
         $this->files->expects('exists')->with($this->pestGlobalFile)->andReturn($updated);
         $this->files->expects('put')->with($this->pestGlobalFile, $this->fixture($this->pestGlobalFile));
