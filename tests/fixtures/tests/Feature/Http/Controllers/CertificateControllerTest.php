@@ -27,7 +27,7 @@ it('saves on store', function () {
     $certificates = Certificate::query()
         ->where('certificate', $certificate)
         ->get();
-    $this->assertCount(1, $certificates);
+    assertCount(1, $certificates);
     $certificate = $certificates->first();
 });
 

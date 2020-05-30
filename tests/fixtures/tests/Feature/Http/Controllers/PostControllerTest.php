@@ -44,7 +44,7 @@ it('saves and redirects on store', function () {
         ->where('title', $title)
         ->where('content', $content)
         ->get();
-    $this->assertCount(1, $posts);
+    assertCount(1, $posts);
     $post = $posts->first();
 
     $response->assertRedirect(route('post.index'));

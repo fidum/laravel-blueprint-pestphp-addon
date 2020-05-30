@@ -49,7 +49,7 @@ it('saves and redirects on store', function () {
         ->where('email', $email)
         ->where('content', $content)
         ->get();
-    $this->assertCount(1, $books);
+    assertCount(1, $books);
     $book = $books->first();
 
     $response->assertRedirect(route('book.index'));

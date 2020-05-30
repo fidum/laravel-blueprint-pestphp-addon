@@ -307,7 +307,7 @@ class HttpTestBuilder
                             $assertion .= PHP_EOL.$indent.'->get();';
 
                             $assertions['sanity'][] = $assertion;
-                            $assertions['sanity'][] = '$this->assertCount(1, $'.$plural.');';
+                            $assertions['sanity'][] = 'assertCount(1, $'.$plural.');';
                             $assertions['sanity'][] = sprintf('$%s = $%s->first();', $variable, $plural);
                         } else {
                             $assertions['generic'][] = '$this->assertDatabaseHas(\''.Str::camel(Str::plural($model)).'\', [ /* ... */ ]);';

@@ -38,7 +38,7 @@ it('saves and redirects on store', function () {
     $authors = Author::query()
         ->where('author', $author)
         ->get();
-    $this->assertCount(1, $authors);
+    assertCount(1, $authors);
     $author = $authors->first();
 
     $response->assertRedirect(route('author.index'));
