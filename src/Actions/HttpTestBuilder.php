@@ -484,14 +484,12 @@ END;
         if (count($matches) === 1) {
             return $this->models[$matches[0]];
         }
-
-        return null;
     }
 
     private function modelNamespace(): string
     {
         return config('blueprint.models_namespace')
-            ? config('blueprint.namespace') . '\\' . config('blueprint.models_namespace')
+            ? config('blueprint.namespace').'\\'.config('blueprint.models_namespace')
             : config('blueprint.namespace');
     }
 
