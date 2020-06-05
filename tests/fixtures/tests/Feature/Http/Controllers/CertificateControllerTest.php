@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers;
 
-use App\Certificate;
+use App\Models\Certificate;
 
 it('index behaves as expected', function () {
     $certificates = factory(Certificate::class, 3)->create();
