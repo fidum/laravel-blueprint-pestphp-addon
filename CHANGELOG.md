@@ -5,7 +5,7 @@ All notable changes to `fidum/laravel-blueprint-pestphp-addon` will be documente
 ## 0.1.0 - 2020-05-30
 
 **Fixed**
-- use configured model namespace in tests (#11)
+- use configured model namespace in tests ([#11](https://github.com/fidum/laravel-blueprint-pestphp-addon/pull/11))
 
 ## 0.0.2 - 2020-05-30
 
