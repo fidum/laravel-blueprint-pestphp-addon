@@ -484,6 +484,8 @@ END;
         if (count($matches) === 1) {
             return $this->models[$matches[0]];
         }
+
+        return null;
     }
 
     private function modelNamespace(): string
