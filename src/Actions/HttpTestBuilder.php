@@ -292,7 +292,7 @@ class HttpTestBuilder
                         $statement->reference(), '$'.str_replace('.', '->', $statement->reference()));
                 } elseif ($statement instanceof EloquentStatement) {
                     $model = $this->determineModel($controller->prefix(), $statement->reference());
-                    $this->addImport($controller, config('blueprint.namespace').'\\'.$model);
+                    $this->addImport($controller, $this->modelNamespace().'\\'.$model);
 
                     if ($statement->operation() === 'save') {
                         $tested_bits |= self::TESTS_SAVE;
@@ -324,7 +324,7 @@ class HttpTestBuilder
                         $model);
 
                     $this->addImport($controller,
-                        config('blueprint.namespace').'\\'.$this->determineModel($controller->prefix(),
+                        $this->modelNamespace().'\\'.$this->determineModel($controller->prefix(),
                             $statement->model()));
                 }
 
@@ -484,6 +484,15 @@ END;
         if (count($matches) === 1) {
             return $this->models[$matches[0]];
         }
+
+        return null;
+    }
+
+    private function modelNamespace(): string
+    {
+        return config('blueprint.models_namespace')
+            ? config('blueprint.namespace') . '\\' . config('blueprint.models_namespace')
+            : config('blueprint.namespace');
     }
 
     private function registerModels(array $tree)
