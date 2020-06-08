@@ -2,8 +2,8 @@
 
 namespace Fidum\BlueprintPestAddon\Builders\Statements;
 
-use Fidum\BlueprintPestAddon\Enums\Coverage;
 use Fidum\BlueprintPestAddon\Builders\PendingOutput;
+use Fidum\BlueprintPestAddon\Enums\Coverage;
 use Illuminate\Support\Str;
 
 class RedirectStatementBuilder extends StatementBuilder

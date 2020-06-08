@@ -4,7 +4,7 @@ namespace Fidum\BlueprintPestAddon\Contracts;
 
 use Fidum\BlueprintPestAddon\Builders\PendingOutput;
 
-interface StatementBuilder {
-
+interface StatementBuilder
+{
     public function execute(): PendingOutput;
 }

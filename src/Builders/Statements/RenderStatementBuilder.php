@@ -3,8 +3,8 @@
 namespace Fidum\BlueprintPestAddon\Builders\Statements;
 
 use Blueprint\Models\Statements\RenderStatement;
-use Fidum\BlueprintPestAddon\Enums\Coverage;
 use Fidum\BlueprintPestAddon\Builders\PendingOutput;
+use Fidum\BlueprintPestAddon\Enums\Coverage;
 
 class RenderStatementBuilder extends StatementBuilder
 {

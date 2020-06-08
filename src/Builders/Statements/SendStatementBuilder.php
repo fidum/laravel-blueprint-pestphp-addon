@@ -7,8 +7,7 @@ use Fidum\BlueprintPestAddon\Builders\PendingOutput;
 use Illuminate\Support\Str;
 
 /**
- * Class SendStatementGenerator
- * @package Fidum\BlueprintPestAddon\Builders\Statements
+ * Class SendStatementGenerator.
  * @property
  */
 class SendStatementBuilder extends StatementBuilder

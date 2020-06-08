@@ -5,8 +5,8 @@ namespace Fidum\BlueprintPestAddon\Builders\Statements;
 use Blueprint\Generators\FactoryGenerator;
 use Blueprint\Models\Controller;
 use Blueprint\Models\Statements\ValidateStatement;
-use Fidum\BlueprintPestAddon\Contracts\TestCaseBuilder;
 use Fidum\BlueprintPestAddon\Builders\PendingOutput;
+use Fidum\BlueprintPestAddon\Contracts\TestCaseBuilder;
 use Fidum\BlueprintPestAddon\Traits\PopulatesTestStub;
 use Illuminate\Support\Str;
 
