@@ -44,7 +44,7 @@ class HttpTestBuilder
 
     private $imports = [];
 
-    private $generators = [
+    private $builders = [
         SendStatement::class => SendStatementBuilder::class,
         ValidateStatement::class => ValidateStatementBuilder::class,
         DispatchStatement::class => DispatchStatementBuilder::class,
@@ -87,7 +87,7 @@ class HttpTestBuilder
             (new InitialStatementBuilder($controller, $name, $output, $this->models))->execute();
 
             foreach ($statements as $statement) {
-                $class = $this->generators[get_class($statement)] ?? null;
+                $class = $this->builders[get_class($statement)] ?? null;
 
                 if (! $class) {
                     continue;
