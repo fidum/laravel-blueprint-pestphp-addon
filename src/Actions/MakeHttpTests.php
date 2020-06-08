@@ -4,6 +4,7 @@ namespace Fidum\BlueprintPestAddon\Actions;
 
 use Blueprint\Blueprint;
 use Blueprint\Models\Controller;
+use Fidum\BlueprintPestAddon\Builders\HttpTestBuilder;
 use Fidum\BlueprintPestAddon\Contracts\Action;
 use Fidum\BlueprintPestAddon\Traits\HasOutput;
 use Fidum\BlueprintPestAddon\Traits\HasStubFile;
