@@ -2,12 +2,16 @@
 
 namespace Fidum\BlueprintPestAddon\Builders\Statements;
 
+use Blueprint\Models\Statements\RedirectStatement;
 use Fidum\BlueprintPestAddon\Builders\PendingOutput;
 use Fidum\BlueprintPestAddon\Enums\Coverage;
 use Illuminate\Support\Str;
 
 class RedirectStatementBuilder extends StatementBuilder
 {
+    /** @var RedirectStatement */
+    protected $statement;
+
     public function execute(): PendingOutput
     {
         $this->output->addCoverage(Coverage::REDIRECT);

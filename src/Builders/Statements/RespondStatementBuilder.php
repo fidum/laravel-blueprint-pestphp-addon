@@ -2,11 +2,15 @@
 
 namespace Fidum\BlueprintPestAddon\Builders\Statements;
 
+use Blueprint\Models\Statements\RespondStatement;
 use Fidum\BlueprintPestAddon\Builders\PendingOutput;
 use Fidum\BlueprintPestAddon\Enums\Coverage;
 
 class RespondStatementBuilder extends StatementBuilder
 {
+    /** @var RespondStatement */
+    protected $statement;
+
     public function execute(): PendingOutput
     {
         $this->output->addCoverage(Coverage::RESPONDS);

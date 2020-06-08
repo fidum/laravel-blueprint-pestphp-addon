@@ -2,10 +2,14 @@
 
 namespace Fidum\BlueprintPestAddon\Builders\Statements;
 
+use Blueprint\Models\Statements\SessionStatement;
 use Fidum\BlueprintPestAddon\Builders\PendingOutput;
 
 class SessionStatementBuilder extends StatementBuilder
 {
+    /** @var SessionStatement */
+    protected $statement;
+
     public function execute(): PendingOutput
     {
         return $this->output->addAssertion('response', sprintf(

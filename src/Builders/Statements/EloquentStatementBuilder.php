@@ -2,12 +2,16 @@
 
 namespace Fidum\BlueprintPestAddon\Builders\Statements;
 
+use Blueprint\Models\Statements\EloquentStatement;
 use Fidum\BlueprintPestAddon\Builders\PendingOutput;
 use Fidum\BlueprintPestAddon\Enums\Coverage;
 use Illuminate\Support\Str;
 
 class EloquentStatementBuilder extends ModelStatementBuilder
 {
+    /** @var EloquentStatement */
+    protected $statement;
+
     public function execute(): PendingOutput
     {
         $model = $this->determineModel($this->controller->prefix(), $this->statement->reference());

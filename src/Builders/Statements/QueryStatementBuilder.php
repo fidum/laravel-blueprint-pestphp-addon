@@ -2,11 +2,15 @@
 
 namespace Fidum\BlueprintPestAddon\Builders\Statements;
 
+use Blueprint\Models\Statements\QueryStatement;
 use Fidum\BlueprintPestAddon\Builders\PendingOutput;
 use Illuminate\Support\Str;
 
 class QueryStatementBuilder extends ModelStatementBuilder
 {
+    /** @var QueryStatement */
+    protected $statement;
+
     public function execute(): PendingOutput
     {
         $model = $this->controller->prefix();
