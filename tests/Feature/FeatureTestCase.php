@@ -19,7 +19,7 @@ class FeatureTestCase extends TestCase
     /** @var MockInterface */
     protected $files;
 
-    /** @var PestGenerator */
+    /** @var \Fidum\BlueprintPestAddon\Builders\\Fidum\BlueprintPestAddon\PestGenerator */
     protected $subject;
 
     protected $pestGlobalFile = 'tests/Pest.php';
