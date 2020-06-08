@@ -2,6 +2,12 @@
 
 All notable changes to `fidum/laravel-blueprint-pestphp-addon` will be documented in this file
 
+
+## 0.2.0 - 2020-06-08
+
+**Changed**
+- refactored statements into separate builder classes ([#12](https://github.com/fidum/laravel-blueprint-pestphp-addon/pull/12))
+
 ## 0.1.0 - 2020-05-30
 
 **Fixed**
