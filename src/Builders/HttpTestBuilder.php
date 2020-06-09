@@ -89,16 +89,14 @@ class HttpTestBuilder
             foreach ($statements as $statement) {
                 $class = $this->builders[get_class($statement)] ?? null;
 
-                if (! $class) {
-                    continue;
-                }
+                if ($class) {
+                    /** @var StatementBuilder $builder */
+                    $builder = new $class($controller, $name, $statement, $output, $this->models);
+                    $builder->execute();
 
-                /** @var StatementBuilder $builder */
-                $builder = new $class($controller, $name, $statement, $output, $this->models);
-                $builder->execute();
-
-                if ($builder instanceof TestCaseBuilder) {
-                    $testCases .= PHP_EOL.$builder->testCase($hocCaseStub).PHP_EOL;
+                    if ($builder instanceof TestCaseBuilder) {
+                        $testCases .= PHP_EOL.$builder->testCase($hocCaseStub).PHP_EOL;
+                    }
                 }
             }
 
@@ -158,27 +156,27 @@ class HttpTestBuilder
         return str_pad(' ', 4).implode(PHP_EOL.str_pad(' ', 4), $lines);
     }
 
-    private function buildTestCaseName(string $name, int $tested_bits)
+    private function buildTestCaseName(string $name, int $coverage)
     {
         $verifications = [];
 
-        if ($tested_bits & Coverage::SAVE) {
+        if ($coverage & Coverage::SAVE) {
             $verifications[] = 'saves';
         }
 
-        if ($tested_bits & Coverage::DELETE) {
+        if ($coverage & Coverage::DELETE) {
             $verifications[] = 'deletes';
         }
 
-        if ($tested_bits & Coverage::VIEW) {
+        if ($coverage & Coverage::VIEW) {
             $verifications[] = 'displays view';
         }
 
-        if ($tested_bits & Coverage::REDIRECT) {
+        if ($coverage & Coverage::REDIRECT) {
             $verifications[] = 'redirects';
         }
 
-        if ($tested_bits & Coverage::RESPONDS) {
+        if ($coverage & Coverage::RESPONDS) {
             $verifications[] = 'responds with';
         }
 
