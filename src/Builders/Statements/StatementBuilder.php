@@ -43,7 +43,7 @@ abstract class StatementBuilder implements StatementBuilderContract
         $this->output = $output;
         $this->statement = $statement;
 
-        $this->context = Str::singular($this->controller->prefix());
+        $this->context = PendingOutput::context($this->controller);
         $this->variable = Str::camel($this->context);
     }
 }

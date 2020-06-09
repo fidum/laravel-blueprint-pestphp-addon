@@ -2,6 +2,9 @@
 
 namespace Fidum\BlueprintPestAddon\Builders;
 
+use Blueprint\Models\Controller;
+use Illuminate\Support\Str;
+
 class PendingOutput
 {
     protected $assertions = [
@@ -99,5 +102,10 @@ class PendingOutput
     public function coverage(): int
     {
         return $this->coverage;
+    }
+
+    public static function context(Controller $controller)
+    {
+        return Str::singular($controller->prefix());
     }
 }

@@ -101,7 +101,7 @@ class HttpTestBuilder
             }
 
             $cName = $controller->name();
-            $context = Str::singular($controller->prefix());
+            $context = PendingOutput::context($controller);
 
             $this->imports[$cName] = array_merge($this->imports[$cName] ?? [], $output->imports());
             $assertions = $output->assertions();
