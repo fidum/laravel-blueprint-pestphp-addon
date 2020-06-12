@@ -12,9 +12,9 @@ controllers:
       render: post.index with:posts
 
     store:
-      validate: title, content
+      validate: title, content, user_id
       save: post
-      send: ReviewNotification to:post.user with:post
+      send: ReviewPost to:post.user.email with:post
       dispatch: SyncMedia with:post
       fire: NewPost with:post
       flash: post.title
