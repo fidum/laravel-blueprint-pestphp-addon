@@ -21,7 +21,7 @@ it('uses form request validation on store')
     );
 
 it('responds with on store', function () {
-    $total = $this->faker->randomNumber();
+    $total = $this->faker->numberBetween(-10000, 10000);
 
     $response = $this->post(route('invoice.store'), [
         'total' => $total,
