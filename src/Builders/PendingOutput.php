@@ -51,7 +51,7 @@ class PendingOutput
         return $this;
     }
 
-    public function addImport($class): self
+    public function addImport(string $class): self
     {
         $this->imports[] = $class;
 

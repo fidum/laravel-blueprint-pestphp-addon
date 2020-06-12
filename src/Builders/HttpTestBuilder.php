@@ -144,7 +144,6 @@ class HttpTestBuilder
 
             if ($testCase) {
                 $testCases .= PHP_EOL.$testCase.PHP_EOL;
-                $testCase = null;
             }
         }
 
@@ -193,7 +192,7 @@ class HttpTestBuilder
         return implode(' ', $verifications).' and '.$final_verification;
     }
 
-    private function httpMethodForAction($action)
+    private function httpMethodForAction(string $action)
     {
         switch ($action) {
             case 'store':

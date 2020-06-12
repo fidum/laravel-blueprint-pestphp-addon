@@ -6,10 +6,6 @@ use Blueprint\Models\Statements\SendStatement;
 use Fidum\BlueprintPestAddon\Builders\PendingOutput;
 use Illuminate\Support\Str;
 
-/**
- * Class SendStatementGenerator.
- * @property
- */
 class SendStatementBuilder extends StatementBuilder
 {
     /** @var SendStatement */
@@ -39,7 +35,7 @@ class SendStatementBuilder extends StatementBuilder
                 } else {
                     [$model, $property] = explode('.', $data);
                     $variables[] .= '$'.$model;
-                    $conditions[] .= sprintf('$mail->%s == $%s', $property ?? $model,
+                    $conditions[] .= sprintf('$mail->%s == $%s', $property ?: $model,
                         str_replace('.', '->', $data()));
                 }
             }

@@ -30,7 +30,9 @@
         "mockery/mockery": "^1.4",
         "nunomaduro/collision": "^5.0",
         "pestphp/pest": "^0.1.5",
-        "phpunit/phpunit": "^9.0"
+        "phpunit/phpunit": "^9.0",
+        "psalm/plugin-laravel": "^1.2",
+        "vimeo/psalm": "^3.11"
     },
     "autoload": {
         "psr-4": {
@@ -43,6 +45,7 @@
         }
     },
     "scripts": {
+        "psalm": "vendor/bin/psalm",
         "test": "vendor/bin/pest"
     },
     "config": {
