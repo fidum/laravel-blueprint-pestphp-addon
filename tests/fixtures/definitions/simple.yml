@@ -3,7 +3,7 @@ models:
     title: string:400
     content: longtext
     published_at: nullable timestamp
-    user_id: id
+    author_id: id:user
 
 controllers:
   Post:
@@ -12,9 +12,9 @@ controllers:
       render: post.index with:posts
 
     store:
-      validate: title, content, user_id
+      validate: title, content, author_id
       save: post
-      send: ReviewPost to:post.user.email with:post
+      send: ReviewPost to:post.author.email with:post
       dispatch: SyncMedia with:post
       fire: NewPost with:post
       flash: post.title

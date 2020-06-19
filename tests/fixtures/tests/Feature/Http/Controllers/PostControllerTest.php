@@ -30,7 +30,7 @@ it('uses form request validation on store')
 it('saves and redirects on store', function () {
     $title = $this->faker->sentence(4);
     $content = $this->faker->paragraphs(3, true);
-    $user_id = $this->faker->randomDigitNotNull;
+    $author_id = $this->faker->randomDigitNotNull;
 
     Mail::fake();
     Queue::fake();
@@ -39,13 +39,13 @@ it('saves and redirects on store', function () {
     $response = $this->post(route('post.store'), [
         'title' => $title,
         'content' => $content,
-        'user_id' => $user_id,
+        'author_id' => $author_id,
     ]);
 
     $posts = Post::query()
         ->where('title', $title)
         ->where('content', $content)
-        ->where('user_id', $user_id)
+        ->where('author_id', $author_id)
         ->get();
     assertCount(1, $posts);
     $post = $posts->first();
@@ -54,7 +54,7 @@ it('saves and redirects on store', function () {
     $response->assertSessionHas('post.title', $post->title);
 
     Mail::assertSent(ReviewPost::class, function ($mail) use ($post) {
-        return $mail->hasTo($post->user->email) && $mail->post->is($post);
+        return $mail->hasTo($post->author->email) && $mail->post->is($post);
     });
     Queue::assertPushed(SyncMedia::class, function ($job) use ($post) {
         return $job->post->is($post);
