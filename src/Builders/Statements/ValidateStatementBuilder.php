@@ -35,7 +35,7 @@ class ValidateStatementBuilder extends ModelStatementBuilder implements TestCase
                 /** @var Model $localModel */
                 $localModel = $this->modelForContext($qualifier);
 
-                if (!is_null($localModel) && $localModel->hasColumn($column)) {
+                if (! is_null($localModel) && $localModel->hasColumn($column)) {
                     $localColumn = $localModel->column($column);
                     if (
                         ($localColumn->dataType() === 'id' || $localColumn->dataType() === 'uuid')
@@ -55,7 +55,7 @@ class ValidateStatementBuilder extends ModelStatementBuilder implements TestCase
                             Str::studly($reference)
                         );
 
-                        $this->output->addImport($modelNamespace . '\\' . Str::studly($reference));
+                        $this->output->addImport($modelNamespace.'\\'.Str::studly($reference));
                     } else {
                         $faker = sprintf(
                             '$%s = $this->faker->%s;',
