@@ -4,6 +4,7 @@ namespace Fidum\BlueprintPestAddon\Builders\Statements;
 
 use Blueprint\Generators\FactoryGenerator;
 use Blueprint\Models\Controller;
+use Blueprint\Models\Model;
 use Blueprint\Models\Statements\ValidateStatement;
 use Fidum\BlueprintPestAddon\Builders\PendingOutput;
 use Fidum\BlueprintPestAddon\Contracts\TestCaseBuilder;
@@ -19,25 +20,56 @@ class ValidateStatementBuilder extends ModelStatementBuilder implements TestCase
 
     public function execute(): PendingOutput
     {
+        $modelNamespace = $this->modelNamespace();
+
         if ($this->statement->data()) {
-            foreach ($this->statement->data() as $field) {
-                [$qualifier, $column] = $this->splitField($field);
+            foreach ($this->statement->data() as $data) {
+                [$qualifier, $column] = $this->splitField($data);
 
                 if (is_null($qualifier)) {
                     $qualifier = $this->context;
                 }
 
-                /** @var \Blueprint\Models\Model $model */
-                $model = $this->modelForContext($qualifier);
-                if (! is_null($model) && $model->hasColumn($column)) {
-                    $faker = FactoryGenerator::fakerData($model->column($column)->name())
-                        ?? FactoryGenerator::fakerDataType($model->column($column)->dataType());
+                $variableName = $data;
+
+                /** @var Model $localModel */
+                $localModel = $this->modelForContext($qualifier);
+
+                if (!is_null($localModel) && $localModel->hasColumn($column)) {
+                    $localColumn = $localModel->column($column);
+                    if (
+                        ($localColumn->dataType() === 'id' || $localColumn->dataType() === 'uuid')
+                        && ($localColumn->attributes() && Str::endsWith($localColumn->name(), '_id'))
+                    ) {
+                        $variableName = Str::beforeLast($localColumn->name(), '_id');
+                        $reference = $variableName;
+
+                        if ($localColumn->attributes()) {
+                            $reference = $localColumn->attributes()[0];
+                            $variableName .= '->id';
+                        }
+
+                        $faker = sprintf(
+                            '$%s = factory(%s::class)->create();',
+                            Str::beforeLast($localColumn->name(), '_id'),
+                            Str::studly($reference)
+                        );
+
+                        $this->output->addImport($modelNamespace . '\\' . Str::studly($reference));
+                    } else {
+                        $faker = sprintf(
+                            '$%s = $this->faker->%s;',
+                            $data,
+                            FactoryGenerator::fakerData($localColumn->name())
+                                ?? FactoryGenerator::fakerDataType($localModel->column($column)->dataType())
+                        );
+                    }
                 } else {
-                    $faker = 'word';
+                    $faker = sprintf('$%s = $this->faker->word;', $data);
                 }
 
-                $this->output->addSetUp('data', sprintf('$%s = $this->faker->%s;', $field, $faker))
-                    ->addRequestData($field);
+                $this->output->addSetUp('data', $faker)
+                    ->addRequestData($variableName, $data);
             }
         }
 
@@ -48,12 +80,16 @@ class ValidateStatementBuilder extends ModelStatementBuilder implements TestCase
     {
         $ns = config('blueprint.namespace').'\\Http\\Requests\\';
         $class = $this->buildFormRequestName($this->controller, $this->methodName);
+        $requestClassName = Str::afterLast($class, '\\');
+
+        $this->output->addImport($this->controller->fullyQualifiedClassName())
+            ->addImport($ns.$class);
 
         $assertion = <<<END
 ->assertActionUsesFormRequest(
-        \\{$this->controller->fullyQualifiedClassName()}::class,
+        {$this->controller->className()}::class,
         '{$this->methodName}',
-        \\{$ns}{$class}::class
+        {$requestClassName}::class
     )
 END;
 

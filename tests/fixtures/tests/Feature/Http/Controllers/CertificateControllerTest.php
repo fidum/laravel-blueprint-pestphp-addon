@@ -2,6 +2,9 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Http\Controllers\CertificateController;
+use App\Http\Requests\CertificateStoreRequest;
+use App\Http\Requests\CertificateUpdateRequest;
 use App\Models\Certificate;
 
 it('index behaves as expected', function () {
@@ -12,9 +15,9 @@ it('index behaves as expected', function () {
 
 it('uses form request validation on store')
     ->assertActionUsesFormRequest(
-        \App\Http\Controllers\CertificateController::class,
+        CertificateController::class,
         'store',
-        \App\Http\Requests\CertificateStoreRequest::class
+        CertificateStoreRequest::class
     );
 
 it('saves on store', function () {
@@ -39,9 +42,9 @@ it('show behaves as expected', function () {
 
 it('uses form request validation on update')
     ->assertActionUsesFormRequest(
-        \App\Http\Controllers\CertificateController::class,
+        CertificateController::class,
         'update',
-        \App\Http\Requests\CertificateUpdateRequest::class
+        CertificateUpdateRequest::class
     );
 
 it('update behaves as expected', function () {

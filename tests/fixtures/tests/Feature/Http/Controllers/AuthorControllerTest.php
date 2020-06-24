@@ -3,6 +3,9 @@
 namespace Tests\Feature\Http\Controllers;
 
 use App\Author;
+use App\Http\Controllers\AuthorController;
+use App\Http\Requests\AuthorStoreRequest;
+use App\Http\Requests\AuthorUpdateRequest;
 
 it('displays view on index', function () {
     $authors = factory(Author::class, 3)->create();
@@ -23,9 +26,9 @@ it('displays view on create', function () {
 
 it('uses form request validation on store')
     ->assertActionUsesFormRequest(
-        \App\Http\Controllers\AuthorController::class,
+        AuthorController::class,
         'store',
-        \App\Http\Requests\AuthorStoreRequest::class
+        AuthorStoreRequest::class
     );
 
 it('saves and redirects on store', function () {
@@ -67,9 +70,9 @@ it('displays view on edit', function () {
 
 it('uses form request validation on update')
     ->assertActionUsesFormRequest(
-        \App\Http\Controllers\AuthorController::class,
+        AuthorController::class,
         'update',
-        \App\Http\Requests\AuthorUpdateRequest::class
+        AuthorUpdateRequest::class
     );
 
 it('redirects on update', function () {

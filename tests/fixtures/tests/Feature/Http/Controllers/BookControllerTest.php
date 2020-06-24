@@ -6,6 +6,9 @@ use App\Book;
 use App\Events\DeletedBook;
 use App\Events\NewBook;
 use App\Events\UpdatedBook;
+use App\Http\Controllers\BookController;
+use App\Http\Requests\BookStoreRequest;
+use App\Http\Requests\BookUpdateRequest;
 use App\Jobs\SyncMedia;
 use App\Mail\ReviewNotification;
 use Illuminate\Support\Facades\Event;
@@ -24,9 +27,9 @@ it('displays view on index', function () {
 
 it('uses form request validation on store')
     ->assertActionUsesFormRequest(
-        \App\Http\Controllers\BookController::class,
+        BookController::class,
         'store',
-        \App\Http\Requests\BookStoreRequest::class
+        BookStoreRequest::class
     );
 
 it('saves and redirects on store', function () {
@@ -68,9 +71,9 @@ it('saves and redirects on store', function () {
 
 it('uses form request validation on update')
     ->assertActionUsesFormRequest(
-        \App\Http\Controllers\BookController::class,
+        BookController::class,
         'update',
-        \App\Http\Requests\BookUpdateRequest::class
+        BookUpdateRequest::class
     );
 
 it('redirects on update', function () {

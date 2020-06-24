@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Http\Controllers\Api;
 
+use App\Http\Controllers\Api\InvoiceController;
+use App\Http\Requests\Api\InvoiceStoreRequest;
 use App\Invoice;
 
 it('responds with on index', function () {
@@ -15,9 +17,9 @@ it('responds with on index', function () {
 
 it('uses form request validation on store')
     ->assertActionUsesFormRequest(
-        \App\Http\Controllers\Api\InvoiceController::class,
+        InvoiceController::class,
         'store',
-        \App\Http\Requests\Api\InvoiceStoreRequest::class
+        InvoiceStoreRequest::class
     );
 
 it('responds with on store', function () {

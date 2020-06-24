@@ -58,9 +58,9 @@ class PendingOutput
         return $this;
     }
 
-    public function addRequestData(string $field): self
+    public function addRequestData(string $field, string $key = null): self
     {
-        $this->requestData[$field] = '$'.$field;
+        $this->requestData[$key ?? $field] = '$'.$field;
 
         return $this;
     }
