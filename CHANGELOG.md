@@ -2,6 +2,13 @@
 
 All notable changes to `fidum/laravel-blueprint-pestphp-addon` will be documented in this file
 
+## 0.3.0 - 2020-06-24
+
+**Changed**
+- generated `assertActionUsesFormRequest` tests now imports controller and request classes ([commit](https://github.com/fidum/laravel-blueprint-pestphp-addon/commit/1a70ee94dead15d2a7cef2c70b66c0cf77b6c68f))
+
+**Fixed**
+- generate related models using factories ([commit](https://github.com/fidum/laravel-blueprint-pestphp-addon/commit/1a70ee94dead15d2a7cef2c70b66c0cf77b6c68f))
 
 ## 0.2.0 - 2020-06-08
 
