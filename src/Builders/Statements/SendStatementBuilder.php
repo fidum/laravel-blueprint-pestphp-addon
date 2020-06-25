@@ -23,7 +23,7 @@ class SendStatementBuilder extends StatementBuilder
     private function buildNotificationAssertion(): void
     {
         $this->output->addImport('Illuminate\\Support\\Facades\\Notification')
-            ->addImport(config('blueprint.namespace') . '\\Notification\\' . $this->statement->mail())
+            ->addImport(config('blueprint.namespace').'\\Notification\\'.$this->statement->mail())
             ->addSetUp('mock', 'Notification::fake();');
 
         $assertion = sprintf(
@@ -39,23 +39,23 @@ class SendStatementBuilder extends StatementBuilder
 
             foreach ($this->statement->data() as $data) {
                 if (Str::studly(Str::singular($data)) === $this->context) {
-                    $variables[] .= '$' . $data;
+                    $variables[] .= '$'.$data;
                     $conditions[] .= sprintf('$notification->%s->is($%s)', $data, $data);
                 } else {
                     [$model, $property] = explode('.', $data);
-                    $variables[] .= '$' . $model;
+                    $variables[] .= '$'.$model;
                     $conditions[] .= sprintf('$notification->%s == $%s', $property ?? $model, str_replace('.', '->', $data()));
                 }
             }
 
             if ($variables) {
-                $assertion .= ' use (' . implode(', ', array_unique($variables)) . ')';
+                $assertion .= ' use ('.implode(', ', array_unique($variables)).')';
             }
 
-            $assertion .= ' {' . PHP_EOL;
+            $assertion .= ' {'.PHP_EOL;
             $assertion .= str_pad(' ', 8);
-            $assertion .= 'return ' . implode(' && ', $conditions) . ';';
-            $assertion .= PHP_EOL . str_pad(' ', 4) . '}';
+            $assertion .= 'return '.implode(' && ', $conditions).';';
+            $assertion .= PHP_EOL.str_pad(' ', 4).'}';
         }
 
         $assertion .= ');';
