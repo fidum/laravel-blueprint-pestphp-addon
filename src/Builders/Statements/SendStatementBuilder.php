@@ -44,14 +44,11 @@ class SendStatementBuilder extends StatementBuilder
                 } else {
                     [$model, $property] = explode('.', $data);
                     $variables[] .= '$'.$model;
-                    $conditions[] .= sprintf('$notification->%s == $%s', $property ?? $model, str_replace('.', '->', $data()));
+                    $conditions[] .= sprintf('$notification->%s == $%s', $property ?: $model, str_replace('.', '->', $data()));
                 }
             }
 
-            if ($variables) {
-                $assertion .= ' use ('.implode(', ', array_unique($variables)).')';
-            }
-
+            $assertion .= ' use ('.implode(', ', array_unique($variables)).')';
             $assertion .= ' {'.PHP_EOL;
             $assertion .= str_pad(' ', 8);
             $assertion .= 'return '.implode(' && ', $conditions).';';
