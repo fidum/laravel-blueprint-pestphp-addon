@@ -28,7 +28,7 @@ controllers:
     update:
       validate: title, email, content
       update: book
-      send: ReviewNotification to:book.author with:book
+      notify: book.author ReviewNotification with:book
       dispatch: SyncMedia with:book
       fire: UpdatedBook with:book
       flash: book.title

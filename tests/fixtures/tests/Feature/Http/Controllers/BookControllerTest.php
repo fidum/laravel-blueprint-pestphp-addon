@@ -10,9 +10,9 @@ use App\Http\Controllers\BookController;
 use App\Http\Requests\BookStoreRequest;
 use App\Http\Requests\BookUpdateRequest;
 use App\Jobs\SyncMedia;
-use App\Mail\ReviewNotification;
+use App\Notification\ReviewNotification;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Queue;
 
 it('displays view on index', function () {
@@ -37,7 +37,7 @@ it('saves and redirects on store', function () {
     $email = $this->faker->safeEmail;
     $content = $this->faker->paragraphs(3, true);
 
-    Mail::fake();
+    Notification::fake();
     Queue::fake();
     Event::fake();
 
@@ -58,8 +58,8 @@ it('saves and redirects on store', function () {
     $response->assertRedirect(route('book.index'));
     $response->assertSessionHas('book.title', $book->title);
 
-    Mail::assertSent(ReviewNotification::class, function ($mail) use ($book) {
-        return $mail->hasTo($book->author) && $mail->book->is($book);
+    Notification::assertSentTo($book->author, ReviewNotification::class, function ($notification) use ($book) {
+        return $notification->book->is($book);
     });
     Queue::assertPushed(SyncMedia::class, function ($job) use ($book) {
         return $job->book->is($book);
@@ -82,7 +82,7 @@ it('redirects on update', function () {
     $email = $this->faker->safeEmail;
     $content = $this->faker->paragraphs(3, true);
 
-    Mail::fake();
+    Notification::fake();
     Queue::fake();
     Event::fake();
 
@@ -95,8 +95,8 @@ it('redirects on update', function () {
     $response->assertRedirect(route('book.index'));
     $response->assertSessionHas('book.title', $book->title);
 
-    Mail::assertSent(ReviewNotification::class, function ($mail) use ($book) {
-        return $mail->hasTo($book->author) && $mail->book->is($book);
+    Notification::assertSentTo($book->author, ReviewNotification::class, function ($notification) use ($book) {
+        return $notification->book->is($book);
     });
     Queue::assertPushed(SyncMedia::class, function ($job) use ($book) {
         return $job->book->is($book);
@@ -109,7 +109,7 @@ it('redirects on update', function () {
 it('deletes and redirects on destroy', function () {
     $book = factory(Book::class)->create();
 
-    Mail::fake();
+    Notification::fake();
     Queue::fake();
     Event::fake();
 
@@ -119,8 +119,8 @@ it('deletes and redirects on destroy', function () {
 
     $this->assertDeleted($book);
 
-    Mail::assertSent(ReviewNotification::class, function ($mail) use ($book) {
-        return $mail->hasTo($book) && $mail->book->is($book);
+    Notification::assertSentTo($book, ReviewNotification::class, function ($notification) use ($book) {
+        return $notification->book->is($book);
     });
     Queue::assertPushed(SyncMedia::class, function ($job) use ($book) {
         return $job->book->is($book);
