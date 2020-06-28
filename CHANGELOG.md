@@ -2,6 +2,11 @@
 
 All notable changes to `fidum/laravel-blueprint-pestphp-addon` will be documented in this file
 
+## 0.4.0 - 2020-06-28
+
+**Added**
+- Add Notifications testing support (#13)
+
 ## 0.3.0 - 2020-06-24
 
 **Changed**
