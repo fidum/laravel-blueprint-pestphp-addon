@@ -2,6 +2,11 @@
 
 All notable changes to `fidum/laravel-blueprint-pestphp-addon` will be documented in this file
 
+## 0.4.1 - 2020-06-30
+
+**Added**
+- Add types method to support next blueprint release ([#14](https://github.com/fidum/laravel-blueprint-pestphp-addon/pull/14))
+
 ## 0.4.0 - 2020-06-28
 
 **Added**
