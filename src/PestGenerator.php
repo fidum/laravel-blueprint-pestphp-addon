@@ -39,4 +39,10 @@ class PestGenerator implements Generator
 
         return $output;
     }
+    
+    public function types(): array
+    {
+        return ['controllers', 'tests'];
+    }
+
 }
