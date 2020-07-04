@@ -6,7 +6,7 @@ All notable changes to `fidum/laravel-blueprint-pestphp-addon` will be documente
 ## 0.4.2 - 2020-07-04
 
 **Fixed**
-- Fix test setup for validation shorthand([#14](https://github.com/fidum/laravel-blueprint-pestphp-addon/pull/16))
+- Fix test setup for validation shorthand ([#16](https://github.com/fidum/laravel-blueprint-pestphp-addon/pull/16))
 
 ## 0.4.1 - 2020-06-30
 
