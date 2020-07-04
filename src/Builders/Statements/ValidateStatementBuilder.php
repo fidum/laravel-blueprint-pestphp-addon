@@ -21,8 +21,6 @@ class ValidateStatementBuilder extends ModelStatementBuilder implements TestCase
 
     public function execute(): PendingOutput
     {
-        $modelNamespace = $this->modelNamespace();
-
         if ($this->statement->data()) {
             foreach ($this->statement->data() as $data) {
                 [$qualifier, $column] = $this->splitField($data);
