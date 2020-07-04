@@ -3,6 +3,7 @@
 namespace Fidum\BlueprintPestAddon\Builders\Statements;
 
 use Blueprint\Generators\FactoryGenerator;
+use Blueprint\Models\Column;
 use Blueprint\Models\Controller;
 use Blueprint\Models\Model;
 use Blueprint\Models\Statements\ValidateStatement;
@@ -37,39 +38,40 @@ class ValidateStatementBuilder extends ModelStatementBuilder implements TestCase
 
                 if (! is_null($localModel) && $localModel->hasColumn($column)) {
                     $localColumn = $localModel->column($column);
-                    if (
-                        ($localColumn->dataType() === 'id' || $localColumn->dataType() === 'uuid')
-                        && ($localColumn->attributes() && Str::endsWith($localColumn->name(), '_id'))
-                    ) {
-                        $variableName = Str::beforeLast($localColumn->name(), '_id');
-                        $reference = $variableName;
-
-                        if ($localColumn->attributes()) {
-                            $reference = $localColumn->attributes()[0];
-                            $variableName .= '->id';
-                        }
-
-                        $faker = sprintf(
-                            '$%s = factory(%s::class)->create();',
-                            Str::beforeLast($localColumn->name(), '_id'),
-                            Str::studly($reference)
-                        );
-
-                        $this->output->addImport($modelNamespace.'\\'.Str::studly($reference));
-                    } else {
+                    if (! $this->generateRelationFactory($localColumn)) {
                         $faker = sprintf(
                             '$%s = $this->faker->%s;',
                             $data,
                             FactoryGenerator::fakerData($localColumn->name())
                                 ?? FactoryGenerator::fakerDataType($localModel->column($column)->dataType())
                         );
+
+                        $this->output->addSetUp('data', $faker)->addRequestData($variableName, $data);
                     }
                 } else {
-                    $faker = sprintf('$%s = $this->faker->word;', $data);
-                }
+                    foreach ($localModel->columns() as $localColumn) {
+                        if ($localColumn->name() === 'id') {
+                            continue;
+                        }
 
-                $this->output->addSetUp('data', $faker)
-                    ->addRequestData($variableName, $data);
+                        if (in_array('nullable', $localColumn->modifiers())) {
+                            continue;
+                        }
+
+                        if ($this->generateRelationFactory($localColumn)) {
+                            continue;
+                        }
+
+                        $faker = sprintf(
+                            '$%s = $this->faker->%s;',
+                            $localColumn->name(),
+                            FactoryGenerator::fakerData($localColumn->name())
+                                ?? FactoryGenerator::fakerDataType($localColumn->dataType())
+                        );
+
+                        $this->output->addSetUp('data', $faker)->addRequestData($localColumn->name());
+                    }
+                }
             }
         }
 
@@ -103,6 +105,36 @@ END;
         }
 
         return $controller->namespace().'\\'.$controller->name().Str::studly($name).'Request';
+    }
+
+    private function generateRelationFactory(Column $column): bool
+    {
+        if (
+            ($column->dataType() === 'id' || $column->dataType() === 'uuid')
+            && ($column->attributes() && Str::endsWith($column->name(), '_id'))
+        ) {
+            $variableName = Str::beforeLast($column->name(), '_id');
+            $reference = $variableName;
+
+            if ($column->attributes()) {
+                $reference = $column->attributes()[0];
+                $variableName .= '->id';
+            }
+
+            $faker = sprintf(
+                '$%s = factory(%s::class)->create();',
+                Str::beforeLast($column->name(), '_id'),
+                Str::studly($reference)
+            );
+
+            $this->output->addImport($this->modelNamespace().'\\'.Str::studly($reference))
+                ->addSetUp('data', $faker)
+                ->addRequestData($variableName, $column->name());
+
+            return true;
+        }
+
+        return false;
     }
 
     private function splitField($field)

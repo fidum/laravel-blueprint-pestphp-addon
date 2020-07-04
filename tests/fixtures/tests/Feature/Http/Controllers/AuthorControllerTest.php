@@ -32,14 +32,17 @@ it('uses form request validation on store')
     );
 
 it('saves and redirects on store', function () {
-    $author = $this->faker->word;
+    $name = $this->faker->name;
+    $email = $this->faker->safeEmail;
 
     $response = $this->post(route('author.store'), [
-        'author' => $author,
+        'name' => $name,
+        'email' => $email,
     ]);
 
     $authors = Author::query()
-        ->where('author', $author)
+        ->where('name', $name)
+        ->where('email', $email)
         ->get();
     assertCount(1, $authors);
     $author = $authors->first();
@@ -77,10 +80,12 @@ it('uses form request validation on update')
 
 it('redirects on update', function () {
     $author = factory(Author::class)->create();
-    $author = $this->faker->word;
+    $name = $this->faker->name;
+    $email = $this->faker->safeEmail;
 
     $response = $this->put(route('author.update', $author), [
-        'author' => $author,
+        'name' => $name,
+        'email' => $email,
     ]);
 
     $response->assertRedirect(route('author.index'));

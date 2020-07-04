@@ -6,6 +6,7 @@ use App\Http\Controllers\CertificateController;
 use App\Http\Requests\CertificateStoreRequest;
 use App\Http\Requests\CertificateUpdateRequest;
 use App\Models\Certificate;
+use App\Models\CertificateType;
 
 it('index behaves as expected', function () {
     $certificates = factory(Certificate::class, 3)->create();
@@ -21,14 +22,26 @@ it('uses form request validation on store')
     );
 
 it('saves on store', function () {
-    $certificate = $this->faker->word;
+    $name = $this->faker->name;
+    $certificate_type = factory(CertificateType::class)->create();
+    $reference = $this->faker->word;
+    $document = $this->faker->word;
+    $expiry_date = $this->faker->date();
 
     $response = $this->post(route('certificate.store'), [
-        'certificate' => $certificate,
+        'name' => $name,
+        'certificate_type_id' => $certificate_type->id,
+        'reference' => $reference,
+        'document' => $document,
+        'expiry_date' => $expiry_date,
     ]);
 
     $certificates = Certificate::query()
-        ->where('certificate', $certificate)
+        ->where('name', $name)
+        ->where('certificate_type_id', $certificate_type->id)
+        ->where('reference', $reference)
+        ->where('document', $document)
+        ->where('expiry_date', $expiry_date)
         ->get();
     assertCount(1, $certificates);
     $certificate = $certificates->first();
@@ -49,10 +62,18 @@ it('uses form request validation on update')
 
 it('update behaves as expected', function () {
     $certificate = factory(Certificate::class)->create();
-    $certificate = $this->faker->word;
+    $name = $this->faker->name;
+    $certificate_type = factory(CertificateType::class)->create();
+    $reference = $this->faker->word;
+    $document = $this->faker->word;
+    $expiry_date = $this->faker->date();
 
     $response = $this->put(route('certificate.update', $certificate), [
-        'certificate' => $certificate,
+        'name' => $name,
+        'certificate_type_id' => $certificate_type->id,
+        'reference' => $reference,
+        'document' => $document,
+        'expiry_date' => $expiry_date,
     ]);
 });
 
