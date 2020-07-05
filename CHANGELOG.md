@@ -3,6 +3,11 @@
 All notable changes to `fidum/laravel-blueprint-pestphp-addon` will be documented in this file
 
 
+## 0.4.3 - 2020-07-05
+
+**Fixed**
+- Use factory for referenced relationships in validation statements ([#18](https://github.com/fidum/laravel-blueprint-pestphp-addon/pull/18))
+
 ## 0.4.2 - 2020-07-04
 
 **Fixed**
