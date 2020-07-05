@@ -108,13 +108,13 @@ END;
     private function generateReferenceFactory(Column $column): bool
     {
         if (! in_array($column->dataType(), ['id', 'uuid'])
-            && !($column->attributes() && Str::endsWith($column->name(), '_id'))
+            && ! ($column->attributes() && Str::endsWith($column->name(), '_id'))
         ) {
             return false;
         }
 
         $reference = Str::beforeLast($column->name(), '_id');
-        $variableName = $reference . '->id';
+        $variableName = $reference.'->id';
 
         if ($column->attributes()) {
             $reference = $column->attributes()[0];
