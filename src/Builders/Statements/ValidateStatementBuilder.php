@@ -36,7 +36,7 @@ class ValidateStatementBuilder extends ModelStatementBuilder implements TestCase
 
                 if (! is_null($localModel) && $localModel->hasColumn($column)) {
                     $localColumn = $localModel->column($column);
-                    if (! $this->generateRelationFactory($localColumn)) {
+                    if (! $this->generateReferenceFactory($localColumn)) {
                         $faker = sprintf(
                             '$%s = $this->faker->%s;',
                             $data,
@@ -56,7 +56,7 @@ class ValidateStatementBuilder extends ModelStatementBuilder implements TestCase
                             continue;
                         }
 
-                        if ($this->generateRelationFactory($localColumn)) {
+                        if ($this->generateReferenceFactory($localColumn)) {
                             continue;
                         }
 
@@ -105,34 +105,28 @@ END;
         return $controller->namespace().'\\'.$controller->name().Str::studly($name).'Request';
     }
 
-    private function generateRelationFactory(Column $column): bool
+    private function generateReferenceFactory(Column $column): bool
     {
-        if (
-            ($column->dataType() === 'id' || $column->dataType() === 'uuid')
-            && ($column->attributes() && Str::endsWith($column->name(), '_id'))
+        if (! in_array($column->dataType(), ['id', 'uuid'])
+            && ! ($column->attributes() && Str::endsWith($column->name(), '_id'))
         ) {
-            $variableName = Str::beforeLast($column->name(), '_id');
-            $reference = $variableName;
-
-            if ($column->attributes()) {
-                $reference = $column->attributes()[0];
-                $variableName .= '->id';
-            }
-
-            $faker = sprintf(
-                '$%s = factory(%s::class)->create();',
-                Str::beforeLast($column->name(), '_id'),
-                Str::studly($reference)
-            );
-
-            $this->output->addImport($this->modelNamespace().'\\'.Str::studly($reference))
-                ->addSetUp('data', $faker)
-                ->addRequestData($variableName, $column->name());
-
-            return true;
+            return false;
         }
 
-        return false;
+        $reference = Str::beforeLast($column->name(), '_id');
+        $variableName = $reference.'->id';
+
+        if ($column->attributes()) {
+            $reference = $column->attributes()[0];
+        }
+
+        $faker = sprintf('$%s = factory(%s::class)->create();', Str::beforeLast($column->name(), '_id'), Str::studly($reference));
+
+        $this->output->addImport($this->modelNamespace().'\\'.Str::studly($reference))
+            ->addSetUp('data', $faker)
+            ->addRequestData($variableName, $column->name());
+
+        return true;
     }
 
     private function splitField($field)
