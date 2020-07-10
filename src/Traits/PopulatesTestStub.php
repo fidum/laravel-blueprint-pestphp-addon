@@ -13,7 +13,7 @@ trait PopulatesTestStub
         return str_replace('// test cases...', $testCases, $stub);
     }
 
-    private function populateTestCaseStub(string $stub, string $description, string $content)
+    private function populateTestCaseStub(string $stub, string $description, string $content): string
     {
         $stub = str_replace('dummy_test_case', $description, $stub);
 

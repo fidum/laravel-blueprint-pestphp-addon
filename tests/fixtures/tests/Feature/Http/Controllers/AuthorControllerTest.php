@@ -88,8 +88,13 @@ it('redirects on update', function () {
         'email' => $email,
     ]);
 
+    $author->refresh();
+
     $response->assertRedirect(route('author.index'));
     $response->assertSessionHas('author.id', $author->id);
+
+    assertSame($name, $author->name);
+    assertSame($email, $author->email);
 });
 
 it('deletes and redirects on destroy', function () {

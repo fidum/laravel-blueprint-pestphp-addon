@@ -46,6 +46,16 @@ class EloquentStatementBuilder extends ModelStatementBuilder
             $this->output->addCoverage(Coverage::DELETE)
                 ->addSetUp('data', sprintf('$%s = factory(%s::class)->create();', $this->variable, $model))
                 ->addAssertion('generic', sprintf('$this->assertDeleted($%s);', $this->variable));
+        } elseif ($this->statement->operation() === 'update') {
+            $this->output->addAssertion('sanity', sprintf('$%s->refresh();', $this->variable));
+            $requestData = $this->output->requestData();
+
+            if ($requestData) {
+                foreach ($requestData as $key => $datum) {
+                    $assertion = sprintf('assertSame(%s, $%s->%s);', $datum, $this->variable, $key);
+                    $this->output->addAssertion('generic', $assertion);
+                }
+            }
         }
 
         return $this->output;

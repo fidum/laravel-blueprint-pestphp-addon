@@ -42,12 +42,12 @@ class MakeHttpTests implements Action
         return $this;
     }
 
-    private function getNamespace(Controller $controller)
+    private function getNamespace(Controller $controller): string
     {
         return 'Tests\\Feature\\'.Blueprint::relativeNamespace($controller->fullyQualifiedNamespace());
     }
 
-    private function getPath(Controller $controller)
+    private function getPath(Controller $controller): string
     {
         $path = str_replace('\\', '/', Blueprint::relativeNamespace($controller->fullyQualifiedClassName()));
 

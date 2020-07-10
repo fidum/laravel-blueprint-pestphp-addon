@@ -14,6 +14,7 @@ class PestGenerator implements Generator
     /** @var \Illuminate\Contracts\Filesystem\Filesystem */
     private $files;
 
+    /** @param \Illuminate\Contracts\Filesystem\Filesystem $files */
     public function __construct($files)
     {
         $this->files = $files;
