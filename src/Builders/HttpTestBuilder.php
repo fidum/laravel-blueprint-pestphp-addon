@@ -38,7 +38,7 @@ class HttpTestBuilder
     use HasStubFile;
     use PopulatesTestStub;
 
-    /** @var \Illuminate\Contracts\Filesystem\Filesystem|\Illuminate\Filesystem\Filesystem  */
+    /** @var \Illuminate\Contracts\Filesystem\Filesystem|\Illuminate\Filesystem\Filesystem */
     private $files;
 
     /** @var array */

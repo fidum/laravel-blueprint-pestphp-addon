@@ -10,8 +10,8 @@ class TestCase extends BaseTestCase
 {
     public function assertArrayContainsInstanceOfClass(string $expectedClass, array $array)
     {
-        foreach($array as $item) {
-            if($item instanceof $expectedClass) {
+        foreach ($array as $item) {
+            if ($item instanceof $expectedClass) {
                 return true;
             }
         }

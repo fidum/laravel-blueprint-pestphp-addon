@@ -46,7 +46,7 @@ class ValidateStatementBuilder extends ModelStatementBuilder implements TestCase
 
                         $this->output->addSetUp('data', $faker)->addRequestData($variableName, $data);
                     }
-                } else if (! is_null($localModel)) {
+                } elseif (! is_null($localModel)) {
                     foreach ($localModel->columns() as $localColumn) {
                         if ($localColumn->name() === 'id') {
                             continue;

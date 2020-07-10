@@ -7,7 +7,7 @@ use Blueprint\Contracts\Generator;
 use Blueprint\Generators\TestGenerator;
 use Fidum\BlueprintPestAddon\PestGenerator;
 
-it ('swaps the TestGenerator for PestGenerator', function () {
+it('swaps the TestGenerator for PestGenerator', function () {
     $blueprint = app(Blueprint::class);
 
     $reflectionBlueprint = new \ReflectionObject($blueprint);
