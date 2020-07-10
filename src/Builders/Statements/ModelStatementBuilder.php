@@ -6,7 +6,7 @@ use Illuminate\Support\Str;
 
 abstract class ModelStatementBuilder extends StatementBuilder
 {
-    protected function determineModel(string $prefix, ?string $reference)
+    protected function determineModel(string $prefix, ?string $reference): string
     {
         if (empty($reference) || $reference === 'id') {
             return Str::studly(Str::singular($prefix));
@@ -19,6 +19,7 @@ abstract class ModelStatementBuilder extends StatementBuilder
         return Str::studly($reference);
     }
 
+    /** @return string|object|null */
     protected function modelForContext(string $context)
     {
         if (isset($this->models[Str::studly($context)])) {

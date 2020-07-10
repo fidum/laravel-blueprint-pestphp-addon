@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 
 class PendingOutput
 {
+    /** @var array[] */
     protected $assertions = [
         'sanity' => [],
         'response' => [],
@@ -14,10 +15,13 @@ class PendingOutput
         'mock' => [],
     ];
 
+    /** @var array */
     protected $imports = [];
 
+    /** @var array */
     protected $requestData = [];
 
+    /** @var array[] */
     protected $setUp = [
         'data' => [],
         'mock' => [],
@@ -104,7 +108,7 @@ class PendingOutput
         return $this->coverage;
     }
 
-    public static function context(Controller $controller)
+    public static function context(Controller $controller): string
     {
         return Str::singular($controller->prefix());
     }

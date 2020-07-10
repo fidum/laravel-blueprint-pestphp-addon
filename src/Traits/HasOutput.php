@@ -7,7 +7,7 @@ trait HasOutput
     /** @var array */
     private $output = [];
 
-    private function created(string $filePath)
+    private function created(string $filePath): void
     {
         $this->addOutput($filePath, false);
     }

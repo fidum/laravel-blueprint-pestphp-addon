@@ -16,7 +16,11 @@ class RespondStatementBuilder extends StatementBuilder
         $this->output->addCoverage(Coverage::RESPONDS);
 
         if ($this->statement->content()) {
-            $this->output->addAssertion('response', '$response->assertJson($'.$this->statement->content().');', true);
+            $this->output->addAssertion(
+                'response',
+                '$response->assertJson($'.($this->statement->content() ?? '').');',
+                true
+            );
         }
 
         if ($this->statement->status() === 200) {

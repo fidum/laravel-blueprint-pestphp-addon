@@ -92,8 +92,14 @@ it('redirects on update', function () {
         'content' => $content,
     ]);
 
+    $book->refresh();
+
     $response->assertRedirect(route('book.index'));
     $response->assertSessionHas('book.title', $book->title);
+
+    assertSame($title, $book->title);
+    assertSame($email, $book->email);
+    assertSame($content, $book->content);
 
     Notification::assertSentTo($book->author, ReviewNotification::class, function ($notification) use ($book) {
         return $notification->book->is($book);

@@ -31,7 +31,7 @@ class ValidateStatementBuilder extends ModelStatementBuilder implements TestCase
 
                 $variableName = $data;
 
-                /** @var Model $localModel */
+                /** @var Model|null $localModel */
                 $localModel = $this->modelForContext($qualifier);
 
                 if (! is_null($localModel) && $localModel->hasColumn($column)) {
@@ -46,7 +46,7 @@ class ValidateStatementBuilder extends ModelStatementBuilder implements TestCase
 
                         $this->output->addSetUp('data', $faker)->addRequestData($variableName, $data);
                     }
-                } else {
+                } elseif (! is_null($localModel)) {
                     foreach ($localModel->columns() as $localColumn) {
                         if ($localColumn->name() === 'id') {
                             continue;
@@ -96,7 +96,7 @@ END;
         return $this->populateTestCaseStub($stub, "uses form request validation on {$this->methodName}", $assertion);
     }
 
-    private function buildFormRequestName(Controller $controller, string $name)
+    private function buildFormRequestName(Controller $controller, string $name): string
     {
         if (empty($controller->namespace())) {
             return $controller->name().Str::studly($name).'Request';
@@ -129,7 +129,7 @@ END;
         return true;
     }
 
-    private function splitField($field)
+    private function splitField(string $field): array
     {
         if (Str::contains($field, '.')) {
             return explode('.', $field, 2);
