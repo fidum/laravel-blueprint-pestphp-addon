@@ -10,7 +10,6 @@ class BlueprintPestAddonServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        /** @param array $app */
         $this->app->extend(Blueprint::class, function (Blueprint $blueprint, Container $app) {
             $blueprint->swapGenerator(
                 \Blueprint\Generators\TestGenerator::class,
