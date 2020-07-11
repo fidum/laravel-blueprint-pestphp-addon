@@ -2,12 +2,12 @@
 
 namespace Fidum\BlueprintPestAddon\Builders\Statements;
 
-use Blueprint\Models\Statements\RespondStatement;
+use Blueprint\Models\Statements\ResourceStatement;
 use Fidum\BlueprintPestAddon\Builders\PendingOutput;
 
 class ResourceStatementBuilder extends StatementBuilder
 {
-    /** @var RespondStatement */
+    /** @var ResourceStatement */
     protected $statement;
 
     public function execute(): PendingOutput
