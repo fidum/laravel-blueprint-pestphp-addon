@@ -2,6 +2,11 @@
 
 All notable changes to `fidum/laravel-blueprint-pestphp-addon` will be documented in this file
 
+## 0.4.5 - 2020-07-16
+
+**Changed**
+- Use assertCreated for new Resource responses
+
 ## 0.4.4 - 2020-07-10
 
 **Added**
