@@ -12,7 +12,11 @@ class ResourceStatementBuilder extends StatementBuilder
 
     public function execute(): PendingOutput
     {
-        return $this->output->addAssertion('response', '$response->assertOK();')
+        $assertion = $this->methodName === 'store'
+            ? '$response->assertCreated();'
+            : '$response->assertOK();';
+
+        return $this->output->addAssertion('response', $assertion)
             ->addAssertion('response', '$response->assertJsonStructure([]);');
     }
 }

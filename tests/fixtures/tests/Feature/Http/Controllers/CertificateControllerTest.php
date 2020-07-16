@@ -49,7 +49,7 @@ it('saves on store', function () {
     assertCount(1, $certificates);
     $certificate = $certificates->first();
 
-    $response->assertOK();
+    $response->assertCreated();
     $response->assertJsonStructure([]);
 });
 
