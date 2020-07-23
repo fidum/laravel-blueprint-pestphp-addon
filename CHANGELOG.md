@@ -2,6 +2,11 @@
 
 All notable changes to `fidum/laravel-blueprint-pestphp-addon` will be documented in this file
 
+## 0.4.6 - 2020-07-23
+
+**Changed**
+- Requires specifically 1.15.2 of Blueprint as the next release has breaking changes. I will create a new release soon with support for 1.15.3.
+
 ## 0.4.5 - 2020-07-16
 
 **Changed**
