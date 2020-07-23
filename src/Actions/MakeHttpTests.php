@@ -4,6 +4,7 @@ namespace Fidum\BlueprintPestAddon\Actions;
 
 use Blueprint\Blueprint;
 use Blueprint\Models\Controller;
+use Blueprint\Tree;
 use Fidum\BlueprintPestAddon\Builders\HttpTestBuilder;
 use Fidum\BlueprintPestAddon\Contracts\Action;
 use Fidum\BlueprintPestAddon\Traits\HasOutput;
@@ -16,13 +17,13 @@ class MakeHttpTests implements Action
     use HasStubFile;
     use PopulatesTestStub;
 
-    public function execute($files, array $tree): Action
+    public function execute($files, Tree $tree): Action
     {
         $stub = $this->stubFileContent('test.stub');
 
         $builder = new HttpTestBuilder($files, $tree);
 
-        foreach ($tree['controllers'] as $controller) {
+        foreach ($tree->controllers() as $controller) {
             $path = $this->getPath($controller);
 
             if (! $files->exists(dirname($path))) {

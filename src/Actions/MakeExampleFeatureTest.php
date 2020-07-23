@@ -2,6 +2,7 @@
 
 namespace Fidum\BlueprintPestAddon\Actions;
 
+use Blueprint\Tree;
 use Fidum\BlueprintPestAddon\Contracts\Action;
 use Fidum\BlueprintPestAddon\Traits\HasOutput;
 use Fidum\BlueprintPestAddon\Traits\HasStubFile;
@@ -16,7 +17,7 @@ class MakeExampleFeatureTest implements Action
     /** @var string */
     private $outputFilePath = 'tests/Feature/ExampleTest.php';
 
-    public function execute($files, array $tree): Action
+    public function execute($files, Tree $tree): Action
     {
         if ($files->exists($this->outputFilePath)) {
             $stub = $this->stubFileContent('test.stub');

@@ -14,6 +14,7 @@ use Blueprint\Models\Statements\RespondStatement;
 use Blueprint\Models\Statements\SendStatement;
 use Blueprint\Models\Statements\SessionStatement;
 use Blueprint\Models\Statements\ValidateStatement;
+use Blueprint\Tree;
 use Fidum\BlueprintPestAddon\Builders\Statements\DispatchStatementBuilder;
 use Fidum\BlueprintPestAddon\Builders\Statements\EloquentStatementBuilder;
 use Fidum\BlueprintPestAddon\Builders\Statements\FireStatementBuilder;
@@ -42,9 +43,6 @@ class HttpTestBuilder
     private $files;
 
     /** @var array */
-    private $models = [];
-
-    /** @var array */
     private $imports = [];
 
     /** @var array */
@@ -62,11 +60,14 @@ class HttpTestBuilder
         QueryStatement::class => QueryStatementBuilder::class,
     ];
 
+    /** @var Tree */
+    private $tree;
+
     /** @param \Illuminate\Contracts\Filesystem\Filesystem|\Illuminate\Filesystem\Filesystem  $files */
-    public function __construct($files, array $tree)
+    public function __construct($files, Tree $tree)
     {
         $this->files = $files;
-        $this->registerModels($tree);
+        $this->tree = $tree;
     }
 
     public function imports(Controller $controller): string
@@ -90,14 +91,14 @@ class HttpTestBuilder
         foreach ($controller->methods() as $name => $statements) {
             $output = new PendingOutput();
 
-            (new InitialStatementBuilder($controller, $name, $output, $this->models))->execute();
+            (new InitialStatementBuilder($controller, $name, $output, $this->tree))->execute();
 
             foreach ($statements as $statement) {
                 $class = $this->builders[get_class($statement)] ?? null;
 
                 if ($class) {
                     /** @var StatementBuilder $builder */
-                    $builder = new $class($controller, $name, $statement, $output, $this->models);
+                    $builder = new $class($controller, $name, $statement, $output, $this->tree);
                     $builder->execute();
 
                     if ($builder instanceof TestCaseBuilder) {
@@ -210,11 +211,6 @@ class HttpTestBuilder
             default:
                 return 'get';
         }
-    }
-
-    private function registerModels(array $tree): void
-    {
-        $this->models = array_merge($tree['cache'] ?? [], $tree['models'] ?? []);
     }
 
     private function uniqueSetupLines(array $setup): array
