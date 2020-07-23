@@ -3,6 +3,7 @@
 namespace Fidum\BlueprintPestAddon;
 
 use Blueprint\Contracts\Generator;
+use Blueprint\Tree;
 use Fidum\BlueprintPestAddon\Actions\MakeExampleFeatureTest;
 use Fidum\BlueprintPestAddon\Actions\MakeExampleUnitTest;
 use Fidum\BlueprintPestAddon\Actions\MakeHttpTests;
@@ -20,9 +21,9 @@ class PestGenerator implements Generator
         $this->files = $files;
     }
 
-    public function output(array $tree): array
+    public function output(Tree $tree): array
     {
-        if (empty($tree['controllers'])) {
+        if (empty($tree->controllers())) {
             return [];
         }
 

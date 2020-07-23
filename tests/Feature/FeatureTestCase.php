@@ -6,6 +6,7 @@ use Blueprint\Blueprint;
 use Blueprint\Lexers\ControllerLexer;
 use Blueprint\Lexers\ModelLexer;
 use Blueprint\Models\Controller;
+use Blueprint\Tree;
 use Fidum\BlueprintPestAddon\PestGenerator;
 use Fidum\BlueprintPestAddon\Tests\TestCase;
 use Illuminate\Contracts\Filesystem\Filesystem;
@@ -74,9 +75,9 @@ class FeatureTestCase extends TestCase
         return $output;
     }
 
-    protected function getHttpTestsOutput(array $tree, string $path): array
+    protected function getHttpTestsOutput(Tree $tree, string $path): array
     {
-        $controllers = $tree['controllers'];
+        $controllers = $tree->controllers();
 
         $this->files->expects('exists')
             ->times(count($controllers))

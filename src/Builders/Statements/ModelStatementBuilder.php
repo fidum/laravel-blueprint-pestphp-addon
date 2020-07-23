@@ -19,24 +19,6 @@ abstract class ModelStatementBuilder extends StatementBuilder
         return Str::studly($reference);
     }
 
-    /** @return string|object|null */
-    protected function modelForContext(string $context)
-    {
-        if (isset($this->models[Str::studly($context)])) {
-            return $this->models[Str::studly($context)];
-        }
-
-        $matches = array_filter(array_keys($this->models), function ($key) use ($context) {
-            return Str::endsWith($key, '/'.Str::studly($context));
-        });
-
-        if (count($matches) === 1) {
-            return $this->models[$matches[0]];
-        }
-
-        return null;
-    }
-
     protected function modelNamespace(): string
     {
         return config('blueprint.models_namespace')

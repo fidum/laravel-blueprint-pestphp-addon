@@ -2,6 +2,7 @@
 
 namespace Fidum\BlueprintPestAddon\Actions;
 
+use Blueprint\Tree;
 use Fidum\BlueprintPestAddon\Contracts\Action;
 use Fidum\BlueprintPestAddon\Traits\HasOutput;
 use Fidum\BlueprintPestAddon\Traits\HasStubFile;
@@ -14,7 +15,7 @@ class MakePestGlobalFile implements Action
     /** @var string */
     private $outputFilePath = 'tests/Pest.php';
 
-    public function execute($files, array $tree): Action
+    public function execute($files, Tree $tree): Action
     {
         $updated = $files->exists($this->outputFilePath);
 

@@ -4,6 +4,7 @@ namespace Fidum\BlueprintPestAddon\Builders\Statements;
 
 use Blueprint\Models\Controller;
 use Blueprint\Models\Statements\SessionStatement;
+use Blueprint\Tree;
 use Fidum\BlueprintPestAddon\Builders\PendingOutput;
 
 class InitialStatementBuilder extends StatementBuilder
@@ -12,9 +13,9 @@ class InitialStatementBuilder extends StatementBuilder
         Controller $controller,
         string $methodName,
         PendingOutput $output,
-        array $models = []
+        Tree $tree
     ) {
-        parent::__construct($controller, $methodName, new SessionStatement('', ''), $output, $models);
+        parent::__construct($controller, $methodName, new SessionStatement('', ''), $output, $tree);
     }
 
     public function execute(): PendingOutput

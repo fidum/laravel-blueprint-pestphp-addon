@@ -3,6 +3,7 @@
 namespace Fidum\BlueprintPestAddon\Builders\Statements;
 
 use Blueprint\Models\Controller;
+use Blueprint\Tree;
 use Fidum\BlueprintPestAddon\Builders\PendingOutput;
 use Fidum\BlueprintPestAddon\Contracts\StatementBuilder as StatementBuilderContract;
 use Illuminate\Support\Str;
@@ -18,14 +19,14 @@ abstract class StatementBuilder implements StatementBuilderContract
     /** @var string */
     protected $methodName;
 
-    /** @var array */
-    protected $models;
-
     /** @var PendingOutput */
     protected $output;
 
     /** @var object */
     protected $statement;
+
+    /** @var Tree */
+    protected $tree;
 
     /** @var string */
     protected $variable;
@@ -35,14 +36,13 @@ abstract class StatementBuilder implements StatementBuilderContract
         string $methodName,
         object $statement,
         PendingOutput $output,
-        array $models = []
+        Tree $tree
     ) {
         $this->controller = $controller;
         $this->methodName = $methodName;
-        $this->models = $models;
         $this->output = $output;
         $this->statement = $statement;
-
+        $this->tree = $tree;
         $this->context = PendingOutput::context($this->controller);
         $this->variable = Str::camel($this->context);
     }

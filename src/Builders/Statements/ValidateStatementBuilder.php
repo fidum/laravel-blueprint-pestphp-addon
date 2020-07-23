@@ -2,7 +2,6 @@
 
 namespace Fidum\BlueprintPestAddon\Builders\Statements;
 
-use Blueprint\Generators\FactoryGenerator;
 use Blueprint\Models\Column;
 use Blueprint\Models\Controller;
 use Blueprint\Models\Model;
@@ -11,6 +10,7 @@ use Fidum\BlueprintPestAddon\Builders\PendingOutput;
 use Fidum\BlueprintPestAddon\Contracts\TestCaseBuilder;
 use Fidum\BlueprintPestAddon\Traits\PopulatesTestStub;
 use Illuminate\Support\Str;
+use Shift\Faker\Registry as FakerRegistry;
 
 class ValidateStatementBuilder extends ModelStatementBuilder implements TestCaseBuilder
 {
@@ -32,7 +32,7 @@ class ValidateStatementBuilder extends ModelStatementBuilder implements TestCase
                 $variableName = $data;
 
                 /** @var Model|null $localModel */
-                $localModel = $this->modelForContext($qualifier);
+                $localModel = $this->tree->modelForContext($qualifier);
 
                 if (! is_null($localModel) && $localModel->hasColumn($column)) {
                     $localColumn = $localModel->column($column);
@@ -40,8 +40,8 @@ class ValidateStatementBuilder extends ModelStatementBuilder implements TestCase
                         $faker = sprintf(
                             '$%s = $this->faker->%s;',
                             $data,
-                            FactoryGenerator::fakerData($localColumn->name())
-                                ?? FactoryGenerator::fakerDataType($localModel->column($column)->dataType())
+                            FakerRegistry::fakerData($localColumn->name())
+                                ?? FakerRegistry::fakerDataType($localModel->column($column)->dataType())
                         );
 
                         $this->output->addSetUp('data', $faker)->addRequestData($variableName, $data);
@@ -63,8 +63,8 @@ class ValidateStatementBuilder extends ModelStatementBuilder implements TestCase
                         $faker = sprintf(
                             '$%s = $this->faker->%s;',
                             $localColumn->name(),
-                            FactoryGenerator::fakerData($localColumn->name())
-                                ?? FactoryGenerator::fakerDataType($localColumn->dataType())
+                            FakerRegistry::fakerData($localColumn->name())
+                                ?? FakerRegistry::fakerDataType($localColumn->dataType())
                         );
 
                         $this->output->addSetUp('data', $faker)->addRequestData($localColumn->name());

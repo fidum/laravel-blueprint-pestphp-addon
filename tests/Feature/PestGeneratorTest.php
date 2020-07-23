@@ -2,16 +2,10 @@
 
 namespace Fidum\BlueprintPestAddon\Tests\Feature;
 
+use Blueprint\Tree;
+
 it('should return expected types', function () {
     assertSame(['controllers', 'tests'], $this->subject->types());
-});
-
-it('expects nothing to be generated when tree is empty', function () {
-    /** @var FeatureTestCase $this */
-    $this->files->expects('exists')->never();
-    $this->files->expects('put')->never();
-
-    assertSame([], $this->subject->output([]));
 });
 
 it('expects nothing to be generated when no controllers were created', function () {
@@ -19,7 +13,7 @@ it('expects nothing to be generated when no controllers were created', function 
     $this->files->expects('exists')->never();
     $this->files->expects('put')->never();
 
-    assertSame([], $this->subject->output(['controllers' => []]));
+    assertSame([], $this->subject->output(new Tree(['controllers' => []])));
 });
 
 it('generates the expected output', function (
