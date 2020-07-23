@@ -3,11 +3,14 @@
 namespace Fidum\BlueprintPestAddon\Builders\Statements;
 
 use Blueprint\Models\Statements\QueryStatement;
+use Fidum\BlueprintPestAddon\Builders\Concerns\ModelStatementHelper;
 use Fidum\BlueprintPestAddon\Builders\PendingOutput;
 use Illuminate\Support\Str;
 
-class QueryStatementBuilder extends ModelStatementBuilder
+class QueryStatementBuilder extends StatementBuilder
 {
+    use ModelStatementHelper;
+
     /** @var QueryStatement */
     protected $statement;
 

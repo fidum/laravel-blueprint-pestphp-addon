@@ -1,12 +1,12 @@
 <?php
 
-namespace Fidum\BlueprintPestAddon\Builders\Statements;
+namespace Fidum\BlueprintPestAddon\Builders\Concerns;
 
 use Illuminate\Support\Str;
 
-abstract class ModelStatementBuilder extends StatementBuilder
+trait ModelStatementHelper
 {
-    protected function determineModel(string $prefix, ?string $reference): string
+    private function determineModel(string $prefix, ?string $reference): string
     {
         if (empty($reference) || $reference === 'id') {
             return Str::studly(Str::singular($prefix));
@@ -19,7 +19,7 @@ abstract class ModelStatementBuilder extends StatementBuilder
         return Str::studly($reference);
     }
 
-    protected function modelNamespace(): string
+    private function modelNamespace(): string
     {
         return config('blueprint.models_namespace')
             ? config('blueprint.namespace').'\\'.config('blueprint.models_namespace')
