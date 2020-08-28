@@ -102,7 +102,7 @@ it('deletes and responds with on destroy', function () {
 
     $response = $this->delete(route('certificate.destroy', $certificate));
 
-    $response->assertOk();
+    $response->assertNoContent();
 
     $this->assertDeleted($certificate);
 });
