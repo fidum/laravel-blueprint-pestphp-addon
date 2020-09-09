@@ -50,7 +50,7 @@ it('saves and redirects on store', function () {
         ->where('content', $content)
         ->where('author_id', $author->id)
         ->get();
-    assertCount(1, $posts);
+    expect($posts)->toHaveCount(1);
     $post = $posts->first();
 
     $response->assertRedirect(route('post.index'));
