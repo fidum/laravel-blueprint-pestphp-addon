@@ -2,6 +2,15 @@
 
 All notable changes to `fidum/laravel-blueprint-pestphp-addon` will be documented in this file
 
+## 0.6.0 - 2020-09-09
+
+**Added**
+- Cleaned up dependencies to support Laravel 8 ([#23](https://github.com/fidum/laravel-blueprint-pestphp-addon/pull/23))
+
+**Changed**
+- Changed `assertCount` to use the new `expect()->toHaveCount()` pest expectation API.
+- Changed `assertSame` to use the new `expect()->toBe()` pest expectation API.
+
 ## 0.5.1 - 2020-08-28
 
 **Changed**
