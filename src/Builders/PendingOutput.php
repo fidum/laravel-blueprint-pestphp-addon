@@ -62,6 +62,11 @@ class PendingOutput
         return $this;
     }
 
+    public function addPHPUnitGlobalFunctionImport(string $functionName): void
+    {
+        $this->addImport("function PHPUnit\\Framework\\$functionName");
+    }
+
     public function addRequestData(string $field, string $key = null): self
     {
         $this->requestData[$key ?? $field] = '$'.$field;

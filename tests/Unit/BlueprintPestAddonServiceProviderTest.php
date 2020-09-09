@@ -20,6 +20,6 @@ it('swaps the default TestGenerator with our PestGenerator', function () {
             return get_class($generator);
         })->toArray();
 
-    assertContains(PestGenerator::class, $generators);
-    assertNotContains(TestGenerator::class, $generators);
+    expect($generators)->toContain(PestGenerator::class);
+    expect($generators)->not()->toContain(TestGenerator::class);
 });

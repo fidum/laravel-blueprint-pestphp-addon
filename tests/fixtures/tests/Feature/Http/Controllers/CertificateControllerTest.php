@@ -46,7 +46,7 @@ it('saves on store', function () {
         ->where('document', $document)
         ->where('expiry_date', $expiry_date)
         ->get();
-    assertCount(1, $certificates);
+    expect($certificates)->toHaveCount(1);
     $certificate = $certificates->first();
 
     $response->assertCreated();
@@ -90,11 +90,11 @@ it('update behaves as expected', function () {
     $response->assertOK();
     $response->assertJsonStructure([]);
 
-    assertSame($name, $certificate->name);
-    assertSame($certificate_type->id, $certificate->certificate_type_id);
-    assertSame($reference, $certificate->reference);
-    assertSame($document, $certificate->document);
-    assertSame($expiry_date, $certificate->expiry_date);
+    expect($certificate->name)->toBe($name);
+    expect($certificate->certificate_type_id)->toBe($certificate_type->id);
+    expect($certificate->reference)->toBe($reference);
+    expect($certificate->document)->toBe($document);
+    expect($certificate->expiry_date)->toBe($expiry_date);
 });
 
 it('deletes and responds with on destroy', function () {

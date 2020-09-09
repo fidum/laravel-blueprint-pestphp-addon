@@ -35,7 +35,7 @@ class EloquentStatementBuilder extends StatementBuilder
                 $assertion .= PHP_EOL.$indent.'->get();';
 
                 $this->output->addAssertion('sanity', $assertion)
-                    ->addAssertion('sanity', 'assertCount(1, $'.$plural.');')
+                    ->addAssertion('sanity', 'expect($'.$plural.')->toHaveCount(1);')
                     ->addAssertion('sanity', sprintf('$%s = $%s->first();', $this->variable, $plural));
             } else {
                 $this->output->addAssertion(
@@ -55,7 +55,7 @@ class EloquentStatementBuilder extends StatementBuilder
 
             if ($requestData) {
                 foreach ($requestData as $key => $datum) {
-                    $assertion = sprintf('assertSame(%s, $%s->%s);', $datum, $this->variable, $key);
+                    $assertion = sprintf('expect($%s->%s)->toBe(%s);', $this->variable, $key, $datum);
                     $this->output->addAssertion('generic', $assertion);
                 }
             }

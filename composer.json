@@ -21,17 +21,13 @@
     ],
     "require": {
         "php": "^7.3",
-        "illuminate/support": "^7.0|^8.0",
         "jasonmccreary/laravel-test-assertions": "^1.0",
         "laravel-shift/blueprint": ">=1.17.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^5.0",
-        "mockery/mockery": "^1.4",
-        "nunomaduro/collision": "^5.0",
-        "pestphp/pest": "^0.1.5",
-        "phpunit/phpunit": "9.2.0",
-        "psalm/plugin-laravel": "^1.2",
+        "orchestra/testbench": "^5.0|^6.0",
+        "pestphp/pest": "^0.3.1",
+        "phpunit/phpunit": "^9.3",
         "vimeo/psalm": "^3.11"
     },
     "autoload": {

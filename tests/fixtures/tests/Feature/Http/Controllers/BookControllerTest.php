@@ -52,7 +52,7 @@ it('saves and redirects on store', function () {
         ->where('email', $email)
         ->where('content', $content)
         ->get();
-    assertCount(1, $books);
+    expect($books)->toHaveCount(1);
     $book = $books->first();
 
     $response->assertRedirect(route('book.index'));
@@ -97,9 +97,9 @@ it('redirects on update', function () {
     $response->assertRedirect(route('book.index'));
     $response->assertSessionHas('book.title', $book->title);
 
-    assertSame($title, $book->title);
-    assertSame($email, $book->email);
-    assertSame($content, $book->content);
+    expect($book->title)->toBe($title);
+    expect($book->email)->toBe($email);
+    expect($book->content)->toBe($content);
 
     Notification::assertSentTo($book->author, ReviewNotification::class, function ($notification) use ($book) {
         return $notification->book->is($book);

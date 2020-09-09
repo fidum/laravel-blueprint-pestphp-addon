@@ -44,7 +44,7 @@ it('saves and redirects on store', function () {
         ->where('name', $name)
         ->where('email', $email)
         ->get();
-    assertCount(1, $authors);
+    expect($authors)->toHaveCount(1);
     $author = $authors->first();
 
     $response->assertRedirect(route('author.index'));
@@ -93,8 +93,8 @@ it('redirects on update', function () {
     $response->assertRedirect(route('author.index'));
     $response->assertSessionHas('author.id', $author->id);
 
-    assertSame($name, $author->name);
-    assertSame($email, $author->email);
+    expect($author->name)->toBe($name);
+    expect($author->email)->toBe($email);
 });
 
 it('deletes and redirects on destroy', function () {

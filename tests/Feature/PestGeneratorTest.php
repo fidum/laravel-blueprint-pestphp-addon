@@ -5,15 +5,17 @@ namespace Fidum\BlueprintPestAddon\Tests\Feature;
 use Blueprint\Tree;
 
 it('should return expected types', function () {
-    assertSame(['controllers', 'tests'], $this->subject->types());
+    /** @var FeatureTestCase $this */
+    expect($this->subject->types())->toBe(['controllers', 'tests']);
 });
 
 it('expects nothing to be generated when no controllers were created', function () {
     /** @var FeatureTestCase $this */
     $this->files->expects('exists')->never();
     $this->files->expects('put')->never();
+    $files = $this->subject->output(new Tree(['controllers' => []]));
 
-    assertSame([], $this->subject->output(new Tree(['controllers' => []])));
+    expect($files)->toBeArray()->toBeEmpty();
 });
 
 it('generates the expected output', function (
@@ -39,9 +41,9 @@ it('generates the expected output', function (
 
     $expectedOutput = array_merge_recursive($pestGlobalFileOutput, $exampleFileOutput, $httpTestsOutput);
 
-    assertCount($createdCount, $expectedOutput['created'] ?? [], 'created count incorrect');
-    assertCount($updatedCount, $expectedOutput['updated'] ?? [], 'updated count incorrect');
-    assertSame($expectedOutput, $this->subject->output($tree));
+    expect($expectedOutput['created'] ?? [])->toHaveCount($createdCount);
+    expect($expectedOutput['updated'] ?? [])->toHaveCount($updatedCount);
+    expect($this->subject->output($tree))->toBe($expectedOutput);
 })->with([
     'basic http tests' => ['simple.yml', false, 2],
     'basic http test where pest global file exists' => ['simple.yml', true, 1, 1],
