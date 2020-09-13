@@ -7,9 +7,9 @@ use Blueprint\Models\Controller;
 use Blueprint\Tree;
 use Fidum\BlueprintPestAddon\Builders\HttpTestBuilder;
 use Fidum\BlueprintPestAddon\Contracts\Action;
-use Fidum\BlueprintPestAddon\Traits\HasOutput;
-use Fidum\BlueprintPestAddon\Traits\HasStubFile;
-use Fidum\BlueprintPestAddon\Traits\PopulatesTestStub;
+use Fidum\BlueprintPestAddon\Concerns\HasOutput;
+use Fidum\BlueprintPestAddon\Concerns\HasStubFile;
+use Fidum\BlueprintPestAddon\Concerns\PopulatesTestStub;
 
 class MakeHttpTests implements Action
 {

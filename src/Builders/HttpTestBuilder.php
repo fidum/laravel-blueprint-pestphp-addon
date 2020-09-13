@@ -30,8 +30,8 @@ use Fidum\BlueprintPestAddon\Builders\Statements\ValidateStatementBuilder;
 use Fidum\BlueprintPestAddon\Contracts\StatementBuilder;
 use Fidum\BlueprintPestAddon\Contracts\TestCaseBuilder;
 use Fidum\BlueprintPestAddon\Enums\Coverage;
-use Fidum\BlueprintPestAddon\Traits\HasStubFile;
-use Fidum\BlueprintPestAddon\Traits\PopulatesTestStub;
+use Fidum\BlueprintPestAddon\Concerns\HasStubFile;
+use Fidum\BlueprintPestAddon\Concerns\PopulatesTestStub;
 use Illuminate\Support\Str;
 
 class HttpTestBuilder

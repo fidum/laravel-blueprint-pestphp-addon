@@ -1,6 +1,6 @@
 <?php
 
-namespace Fidum\BlueprintPestAddon\Traits;
+namespace Fidum\BlueprintPestAddon\Concerns;
 
 trait HasOutput
 {
