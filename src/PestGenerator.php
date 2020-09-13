@@ -9,13 +9,13 @@ use Fidum\BlueprintPestAddon\Actions\MakeExampleUnitTest;
 use Fidum\BlueprintPestAddon\Actions\MakeHttpTests;
 use Fidum\BlueprintPestAddon\Actions\MakePestGlobalFile;
 use Fidum\BlueprintPestAddon\Contracts\Action as ActionContract;
+use Illuminate\Contracts\Filesystem\Filesystem;
 
 class PestGenerator implements Generator
 {
-    /** @var \Illuminate\Contracts\Filesystem\Filesystem */
+    /** @var Filesystem */
     private $files;
 
-    /** @param \Illuminate\Contracts\Filesystem\Filesystem $files */
     public function __construct($files)
     {
         $this->files = $files;
