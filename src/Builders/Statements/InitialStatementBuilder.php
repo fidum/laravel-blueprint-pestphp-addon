@@ -23,7 +23,7 @@ class InitialStatementBuilder extends StatementBuilder
         if (in_array($this->methodName, ['edit', 'update', 'show', 'destroy'])) {
             $model = $this->controller->prefix();
 
-            $this->output->addSetUp('data', sprintf('$%s = factory(%s::class)->create();', $this->variable, $model));
+            $this->output->addFactory($this->variable, $model);
         }
 
         return $this->output;

@@ -4,6 +4,7 @@ namespace Fidum\BlueprintPestAddon\Tests;
 
 use Blueprint\BlueprintServiceProvider;
 use Fidum\BlueprintPestAddon\BlueprintPestAddonServiceProvider;
+use Illuminate\Support\Facades\App;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
@@ -22,5 +23,15 @@ class TestCase extends BaseTestCase
             BlueprintServiceProvider::class,
             BlueprintPestAddonServiceProvider::class,
         ];
+    }
+
+    protected function useLaravelVersion(string $version)
+    {
+        $appMock = \Mockery::mock($this->app);
+        $appMock->shouldReceive('version')
+            ->withNoArgs()
+            ->andReturn($version);
+
+        App::swap($appMock);
     }
 }

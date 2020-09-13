@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Queue;
 
 it('displays view on index', function () {
-    $posts = Post::factory()->times(3)->create();
+    $posts = factory(Post::class, 3)->create();
 
     $response = $this->get(route('post.index'));
 
@@ -33,7 +33,7 @@ it('uses form request validation on store')
 it('saves and redirects on store', function () {
     $title = $this->faker->sentence(4);
     $content = $this->faker->paragraphs(3, true);
-    $author = User::factory()->create();
+    $author = factory(User::class)->create();
 
     Mail::fake();
     Queue::fake();

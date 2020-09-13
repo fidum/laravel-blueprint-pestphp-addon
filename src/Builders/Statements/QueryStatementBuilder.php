@@ -3,13 +3,13 @@
 namespace Fidum\BlueprintPestAddon\Builders\Statements;
 
 use Blueprint\Models\Statements\QueryStatement;
-use Fidum\BlueprintPestAddon\Builders\Concerns\ModelStatementHelper;
+use Fidum\BlueprintPestAddon\Builders\Concerns\DeterminesModels;
 use Fidum\BlueprintPestAddon\Builders\PendingOutput;
 use Illuminate\Support\Str;
 
 class QueryStatementBuilder extends StatementBuilder
 {
-    use ModelStatementHelper;
+    use DeterminesModels;
 
     /** @var QueryStatement */
     protected $statement;
@@ -19,11 +19,7 @@ class QueryStatementBuilder extends StatementBuilder
         $model = $this->controller->prefix();
 
         return $this->output
-            ->addSetUp('data', sprintf(
-                '$%s = factory(%s::class, 3)->create();',
-                Str::plural($this->variable),
-                $model
-            ))
+            ->addFactory(Str::plural($this->variable), $model, 3)
             ->addImport($this->modelNamespace().'\\'.$this->determineModel($model, $this->statement->model()));
     }
 }

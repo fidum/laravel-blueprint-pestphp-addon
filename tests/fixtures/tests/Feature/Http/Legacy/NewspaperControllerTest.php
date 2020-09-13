@@ -5,7 +5,7 @@ namespace Tests\Feature\Http\Controllers;
 use App\Newspaper;
 
 it('displays view on index', function () {
-    $newspapers = Newspaper::factory()->times(3)->create();
+    $newspapers = factory(Newspaper::class, 3)->create();
 
     $response = $this->get(route('newspaper.index'));
 
@@ -15,7 +15,7 @@ it('displays view on index', function () {
 });
 
 it('displays view on edit', function () {
-    $newspaper = Newspaper::factory()->create();
+    $newspaper = factory(Newspaper::class)->create();
 
     $response = $this->get(route('newspaper.edit', $newspaper));
 
@@ -25,8 +25,8 @@ it('displays view on edit', function () {
 });
 
 it('saves and redirects on update', function () {
-    $newspaper = Newspaper::factory()->create();
-    $newspapers = Newspaper::factory()->times(3)->create();
+    $newspaper = factory(Newspaper::class)->create();
+    $newspapers = factory(Newspaper::class, 3)->create();
 
     $response = $this->put(route('newspaper.update', $newspaper));
 

@@ -3,14 +3,14 @@
 namespace Fidum\BlueprintPestAddon\Builders\Statements;
 
 use Blueprint\Models\Statements\EloquentStatement;
-use Fidum\BlueprintPestAddon\Builders\Concerns\ModelStatementHelper;
+use Fidum\BlueprintPestAddon\Builders\Concerns\DeterminesModels;
 use Fidum\BlueprintPestAddon\Builders\PendingOutput;
 use Fidum\BlueprintPestAddon\Enums\Coverage;
 use Illuminate\Support\Str;
 
 class EloquentStatementBuilder extends StatementBuilder
 {
-    use ModelStatementHelper;
+    use DeterminesModels;
 
     /** @var EloquentStatement */
     protected $statement;
@@ -44,10 +44,10 @@ class EloquentStatementBuilder extends StatementBuilder
                 );
             }
         } elseif ($this->statement->operation() === 'find') {
-            $this->output->addSetUp('data', sprintf('$%s = factory(%s::class)->create();', $this->variable, $model));
+            $this->output->addFactory($this->variable, $model);
         } elseif ($this->statement->operation() === 'delete') {
             $this->output->addCoverage(Coverage::DELETE)
-                ->addSetUp('data', sprintf('$%s = factory(%s::class)->create();', $this->variable, $model))
+                ->addFactory($this->variable, $model)
                 ->addAssertion('generic', sprintf('$this->assertDeleted($%s);', $this->variable));
         } elseif ($this->statement->operation() === 'update') {
             $this->output->addAssertion('sanity', sprintf('$%s->refresh();', $this->variable));

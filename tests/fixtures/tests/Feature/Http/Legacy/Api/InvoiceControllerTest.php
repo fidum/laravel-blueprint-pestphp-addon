@@ -7,7 +7,7 @@ use App\Http\Requests\Api\InvoiceStoreRequest;
 use App\Invoice;
 
 it('responds with on index', function () {
-    $invoices = Invoice::factory()->times(3)->create();
+    $invoices = factory(Invoice::class, 3)->create();
 
     $response = $this->get(route('invoice.index'));
 

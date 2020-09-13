@@ -10,6 +10,7 @@ use Blueprint\Tree;
 use Fidum\BlueprintPestAddon\PestGenerator;
 use Fidum\BlueprintPestAddon\Tests\TestCase;
 use Illuminate\Contracts\Filesystem\Filesystem;
+use Illuminate\Support\Str;
 use Mockery\MockInterface;
 
 class FeatureTestCase extends TestCase
@@ -75,27 +76,43 @@ class FeatureTestCase extends TestCase
         return $output;
     }
 
-    protected function getHttpTestsOutput(Tree $tree, string $path): array
+    protected function getHttpTestsOutput(Tree $tree, string $controllerPath, string $fixturePath = null): array
     {
         $controllers = $tree->controllers();
 
         $this->files->expects('exists')
             ->times(count($controllers))
-            ->with($path)
+            ->withArgs(function (string $path) use ($controllerPath) {
+                $this->assertSame($controllerPath, $path);
+
+                return true;
+            })
             ->andReturnFalse();
 
         $this->files->expects('makeDirectory')
             ->times(count($controllers))
-            ->with($path, 0755, true);
+            ->with($controllerPath, 0755, true);
 
         $output = [];
 
         /** @var Controller $controller */
         foreach ($controllers as $controller) {
             $ns = str_replace('\\', '/', Blueprint::relativeNamespace($controller->fullyQualifiedClassName()));
-            $path = 'tests/Feature/'.$ns.'Test.php';
-            $this->files->expects('put')->with($path, $this->fixture($path));
-            $output['created'][] = $path;
+            $controllerPath = 'tests/Feature/'.$ns.'Test.php';
+
+            $fixtureControllerPath = $fixturePath
+                ? Str::finish($fixturePath, '/').$controller->className().'Test.php'
+                : $controllerPath;
+
+            $this->files->expects('put')
+                ->withArgs(function ($pathArg, $output) use ($controllerPath, $fixtureControllerPath) {
+                    $this->assertSame($controllerPath, $pathArg);
+                    $this->assertSame($this->fixture($fixtureControllerPath), $output);
+
+                    return true;
+                });
+
+            $output['created'][] = $controllerPath;
         }
 
         return $output;
