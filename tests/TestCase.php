@@ -4,6 +4,7 @@ namespace Fidum\BlueprintPestAddon\Tests;
 
 use Blueprint\BlueprintServiceProvider;
 use Fidum\BlueprintPestAddon\BlueprintPestAddonServiceProvider;
+use Illuminate\Support\Facades\App;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
@@ -31,6 +32,6 @@ class TestCase extends BaseTestCase
             ->withNoArgs()
             ->andReturn($version);
 
-        \App::swap($appMock);
+        App::swap($appMock);
     }
 }
