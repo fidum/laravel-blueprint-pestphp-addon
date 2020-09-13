@@ -7,15 +7,15 @@ use Blueprint\Models\Controller;
 use Blueprint\Tree;
 use Fidum\BlueprintPestAddon\Builders\HttpTestBuilder;
 use Fidum\BlueprintPestAddon\Contracts\Action;
-use Fidum\BlueprintPestAddon\Concerns\HasOutput;
-use Fidum\BlueprintPestAddon\Concerns\HasStubFile;
+use Fidum\BlueprintPestAddon\Concerns\TracksFileOutput;
+use Fidum\BlueprintPestAddon\Concerns\ReadsStubFiles;
 use Fidum\BlueprintPestAddon\Concerns\PopulatesTestStub;
 
 class MakeHttpTests implements Action
 {
-    use HasOutput;
-    use HasStubFile;
     use PopulatesTestStub;
+    use ReadsStubFiles;
+    use TracksFileOutput;
 
     public function execute($files, Tree $tree): Action
     {

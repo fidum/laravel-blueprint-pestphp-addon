@@ -4,15 +4,15 @@ namespace Fidum\BlueprintPestAddon\Actions;
 
 use Blueprint\Tree;
 use Fidum\BlueprintPestAddon\Contracts\Action;
-use Fidum\BlueprintPestAddon\Concerns\HasOutput;
-use Fidum\BlueprintPestAddon\Concerns\HasStubFile;
+use Fidum\BlueprintPestAddon\Concerns\TracksFileOutput;
+use Fidum\BlueprintPestAddon\Concerns\ReadsStubFiles;
 use Fidum\BlueprintPestAddon\Concerns\PopulatesTestStub;
 
 class MakeExampleFeatureTest implements Action
 {
-    use HasOutput;
-    use HasStubFile;
     use PopulatesTestStub;
+    use ReadsStubFiles;
+    use TracksFileOutput;
 
     /** @var string */
     private $outputFilePath = 'tests/Feature/ExampleTest.php';

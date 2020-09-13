@@ -4,13 +4,13 @@ namespace Fidum\BlueprintPestAddon\Actions;
 
 use Blueprint\Tree;
 use Fidum\BlueprintPestAddon\Contracts\Action;
-use Fidum\BlueprintPestAddon\Concerns\HasOutput;
-use Fidum\BlueprintPestAddon\Concerns\HasStubFile;
+use Fidum\BlueprintPestAddon\Concerns\TracksFileOutput;
+use Fidum\BlueprintPestAddon\Concerns\ReadsStubFiles;
 
 class MakePestGlobalFile implements Action
 {
-    use HasOutput;
-    use HasStubFile;
+    use ReadsStubFiles;
+    use TracksFileOutput;
 
     /** @var string */
     private $outputFilePath = 'tests/Pest.php';

@@ -2,7 +2,7 @@
 
 namespace Fidum\BlueprintPestAddon\Concerns;
 
-trait HasOutput
+trait TracksFileOutput
 {
     /** @var array */
     private $output = [];

@@ -2,7 +2,7 @@
 
 namespace Fidum\BlueprintPestAddon\Concerns;
 
-trait HasStubFile
+trait ReadsStubFiles
 {
     protected function stubFilePath(string $fileName): string
     {
