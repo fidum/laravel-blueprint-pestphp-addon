@@ -18,9 +18,9 @@ it('expects nothing to be generated when no controllers were created', function 
     expect($files)->toBeArray()->toBeEmpty();
 });
 
-it('generates the expected output', pestGeneratorTest('8.0.0'))->with('pest');
+it('generates tests using class factories', pestGeneratorTest('8.0.0'))->with('pest');
 
-it('legacy: generates the expected output', pestGeneratorTest('7.0.0', true))->with('pest');
+it('generates tests using legacy factories', pestGeneratorTest('7.0.0', true))->with('pest');
 
 function pestGeneratorTest($version, bool $legacy = false): callable
 {
