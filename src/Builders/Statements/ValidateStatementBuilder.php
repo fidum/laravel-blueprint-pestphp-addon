@@ -8,8 +8,8 @@ use Blueprint\Models\Model;
 use Blueprint\Models\Statements\ValidateStatement;
 use Fidum\BlueprintPestAddon\Builders\Concerns\DeterminesModels;
 use Fidum\BlueprintPestAddon\Builders\PendingOutput;
-use Fidum\BlueprintPestAddon\Contracts\TestCaseBuilder;
 use Fidum\BlueprintPestAddon\Concerns\PopulatesTestStub;
+use Fidum\BlueprintPestAddon\Contracts\TestCaseBuilder;
 use Illuminate\Support\Str;
 use Shift\Faker\Registry as FakerRegistry;
 

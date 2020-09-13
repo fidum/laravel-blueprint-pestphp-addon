@@ -27,11 +27,11 @@ use Fidum\BlueprintPestAddon\Builders\Statements\RespondStatementBuilder;
 use Fidum\BlueprintPestAddon\Builders\Statements\SendStatementBuilder;
 use Fidum\BlueprintPestAddon\Builders\Statements\SessionStatementBuilder;
 use Fidum\BlueprintPestAddon\Builders\Statements\ValidateStatementBuilder;
+use Fidum\BlueprintPestAddon\Concerns\PopulatesTestStub;
+use Fidum\BlueprintPestAddon\Concerns\ReadsStubFiles;
 use Fidum\BlueprintPestAddon\Contracts\StatementBuilder;
 use Fidum\BlueprintPestAddon\Contracts\TestCaseBuilder;
 use Fidum\BlueprintPestAddon\Enums\Coverage;
-use Fidum\BlueprintPestAddon\Concerns\ReadsStubFiles;
-use Fidum\BlueprintPestAddon\Concerns\PopulatesTestStub;
 use Illuminate\Support\Str;
 
 class HttpTestBuilder

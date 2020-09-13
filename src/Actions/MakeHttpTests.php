@@ -6,10 +6,10 @@ use Blueprint\Blueprint;
 use Blueprint\Models\Controller;
 use Blueprint\Tree;
 use Fidum\BlueprintPestAddon\Builders\HttpTestBuilder;
-use Fidum\BlueprintPestAddon\Contracts\Action;
 use Fidum\BlueprintPestAddon\Concerns\TracksFileOutput;
 use Fidum\BlueprintPestAddon\Concerns\ReadsStubFiles;
 use Fidum\BlueprintPestAddon\Concerns\PopulatesTestStub;
+use Fidum\BlueprintPestAddon\Contracts\Action;
 
 class MakeHttpTests implements Action
 {
