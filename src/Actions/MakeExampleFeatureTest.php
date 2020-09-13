@@ -3,10 +3,10 @@
 namespace Fidum\BlueprintPestAddon\Actions;
 
 use Blueprint\Tree;
-use Fidum\BlueprintPestAddon\Contracts\Action;
 use Fidum\BlueprintPestAddon\Concerns\HasOutput;
 use Fidum\BlueprintPestAddon\Concerns\HasStubFile;
 use Fidum\BlueprintPestAddon\Concerns\PopulatesTestStub;
+use Fidum\BlueprintPestAddon\Contracts\Action;
 
 class MakeExampleFeatureTest implements Action
 {
