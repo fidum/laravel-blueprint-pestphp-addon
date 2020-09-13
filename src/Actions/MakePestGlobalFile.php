@@ -3,8 +3,8 @@
 namespace Fidum\BlueprintPestAddon\Actions;
 
 use Blueprint\Tree;
-use Fidum\BlueprintPestAddon\Concerns\TracksFileOutput;
 use Fidum\BlueprintPestAddon\Concerns\ReadsStubFiles;
+use Fidum\BlueprintPestAddon\Concerns\TracksFileOutput;
 use Fidum\BlueprintPestAddon\Contracts\Action;
 
 class MakePestGlobalFile implements Action

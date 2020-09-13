@@ -3,9 +3,9 @@
 namespace Fidum\BlueprintPestAddon\Actions;
 
 use Blueprint\Tree;
-use Fidum\BlueprintPestAddon\Concerns\TracksFileOutput;
-use Fidum\BlueprintPestAddon\Concerns\ReadsStubFiles;
 use Fidum\BlueprintPestAddon\Concerns\PopulatesTestStub;
+use Fidum\BlueprintPestAddon\Concerns\ReadsStubFiles;
+use Fidum\BlueprintPestAddon\Concerns\TracksFileOutput;
 use Fidum\BlueprintPestAddon\Contracts\Action;
 
 class MakeExampleUnitTest implements Action
