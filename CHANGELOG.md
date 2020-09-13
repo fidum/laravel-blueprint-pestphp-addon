@@ -2,6 +2,11 @@
 
 All notable changes to `fidum/laravel-blueprint-pestphp-addon` will be documented in this file
 
+## 0.6.1 - 2020-09-13
+
+**Changed**
+- Generate tests using class factories when on Laravel 8 ([#24](https://github.com/fidum/laravel-blueprint-pestphp-addon/pull/24))
+
 ## 0.6.0 - 2020-09-09
 
 **Added**
