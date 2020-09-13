@@ -3,10 +3,16 @@
 namespace Fidum\BlueprintPestAddon\Builders;
 
 use Blueprint\Models\Controller;
+use Fidum\BlueprintPestAddon\Builders\Concerns\BuildsFactoryStatements;
+use Fidum\BlueprintPestAddon\Builders\Concerns\DeterminesLaravelVersion;
+use Fidum\BlueprintPestAddon\Builders\Concerns\ModelStatementHelper;
 use Illuminate\Support\Str;
 
 class PendingOutput
 {
+    use BuildsFactoryStatements;
+    use DeterminesLaravelVersion;
+
     /** @var array[] */
     protected $assertions = [
         'sanity' => [],
@@ -55,16 +61,20 @@ class PendingOutput
         return $this;
     }
 
+    public function addFactory(string $variable, string $model, int $count = 1): self
+    {
+        $statement =  static::isLaravel8OrHigher()
+            ? $this->classFactory($variable, $model, $count)
+            : $this->legacyFactory($variable, $model, $count);
+
+        return $this->addSetUp('data', $statement);
+    }
+
     public function addImport(string $class): self
     {
         $this->imports[] = $class;
 
         return $this;
-    }
-
-    public function addPHPUnitGlobalFunctionImport(string $functionName): void
-    {
-        $this->addImport("function PHPUnit\\Framework\\$functionName");
     }
 
     public function addRequestData(string $field, string $key = null): self

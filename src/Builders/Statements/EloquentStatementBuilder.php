@@ -44,10 +44,10 @@ class EloquentStatementBuilder extends StatementBuilder
                 );
             }
         } elseif ($this->statement->operation() === 'find') {
-            $this->output->addSetUp('data', sprintf('$%s = factory(%s::class)->create();', $this->variable, $model));
+            $this->output->addFactory($this->variable, $model);
         } elseif ($this->statement->operation() === 'delete') {
             $this->output->addCoverage(Coverage::DELETE)
-                ->addSetUp('data', sprintf('$%s = factory(%s::class)->create();', $this->variable, $model))
+                ->addFactory($this->variable, $model)
                 ->addAssertion('generic', sprintf('$this->assertDeleted($%s);', $this->variable));
         } elseif ($this->statement->operation() === 'update') {
             $this->output->addAssertion('sanity', sprintf('$%s->refresh();', $this->variable));

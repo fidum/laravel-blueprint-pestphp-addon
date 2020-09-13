@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Queue;
 
 it('displays view on index', function () {
-    $books = Book::factory()->times(3)->create();
+    $books = factory(Book::class, 3)->create();
 
     $response = $this->get(route('book.index'));
 
@@ -77,7 +77,7 @@ it('uses form request validation on update')
     );
 
 it('redirects on update', function () {
-    $book = Book::factory()->create();
+    $book = factory(Book::class)->create();
     $title = $this->faker->sentence(4);
     $email = $this->faker->safeEmail;
     $content = $this->faker->paragraphs(3, true);
@@ -113,7 +113,7 @@ it('redirects on update', function () {
 });
 
 it('deletes and redirects on destroy', function () {
-    $book = Book::factory()->create();
+    $book = factory(Book::class)->create();
 
     Notification::fake();
     Queue::fake();

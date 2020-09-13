@@ -9,7 +9,7 @@ use App\Models\Certificate;
 use App\Models\CertificateType;
 
 it('index behaves as expected', function () {
-    $certificates = Certificate::factory()->times(3)->create();
+    $certificates = factory(Certificate::class, 3)->create();
 
     $response = $this->get(route('certificate.index'));
 
@@ -26,7 +26,7 @@ it('uses form request validation on store')
 
 it('saves on store', function () {
     $name = $this->faker->name;
-    $certificate_type = CertificateType::factory()->create();
+    $certificate_type = factory(CertificateType::class)->create();
     $reference = $this->faker->word;
     $document = $this->faker->word;
     $expiry_date = $this->faker->date();
@@ -54,7 +54,7 @@ it('saves on store', function () {
 });
 
 it('show behaves as expected', function () {
-    $certificate = Certificate::factory()->create();
+    $certificate = factory(Certificate::class)->create();
 
     $response = $this->get(route('certificate.show', $certificate));
 
@@ -70,9 +70,9 @@ it('uses form request validation on update')
     );
 
 it('update behaves as expected', function () {
-    $certificate = Certificate::factory()->create();
+    $certificate = factory(Certificate::class)->create();
     $name = $this->faker->name;
-    $certificate_type = CertificateType::factory()->create();
+    $certificate_type = factory(CertificateType::class)->create();
     $reference = $this->faker->word;
     $document = $this->faker->word;
     $expiry_date = $this->faker->date();
@@ -98,7 +98,7 @@ it('update behaves as expected', function () {
 });
 
 it('deletes and responds with on destroy', function () {
-    $certificate = Certificate::factory()->create();
+    $certificate = factory(Certificate::class)->create();
 
     $response = $this->delete(route('certificate.destroy', $certificate));
 

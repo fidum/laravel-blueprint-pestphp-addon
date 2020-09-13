@@ -122,10 +122,10 @@ END;
             $reference = $column->attributes()[0];
         }
 
-        $faker = sprintf('$%s = factory(%s::class)->create();', Str::beforeLast($column->name(), '_id'), Str::studly($reference));
+        $model = Str::studly($reference);
 
-        $this->output->addImport($this->modelNamespace().'\\'.Str::studly($reference))
-            ->addSetUp('data', $faker)
+        $this->output->addImport($this->modelNamespace().'\\'. $model)
+            ->addFactory(Str::beforeLast($column->name(), '_id'), $model)
             ->addRequestData($variableName, $column->name());
 
         return true;

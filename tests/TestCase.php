@@ -23,4 +23,14 @@ class TestCase extends BaseTestCase
             BlueprintPestAddonServiceProvider::class,
         ];
     }
+
+    protected function useLaravelVersion(string $version)
+    {
+        $appMock = \Mockery::mock($this->app);
+        $appMock->shouldReceive('version')
+            ->withNoArgs()
+            ->andReturn($version);
+
+        \App::swap($appMock);
+    }
 }

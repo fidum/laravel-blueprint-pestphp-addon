@@ -6,6 +6,7 @@ use Blueprint\Models\Controller;
 use Blueprint\Tree;
 use Fidum\BlueprintPestAddon\Builders\PendingOutput;
 use Fidum\BlueprintPestAddon\Contracts\StatementBuilder as StatementBuilderContract;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 
 abstract class StatementBuilder implements StatementBuilderContract
@@ -45,5 +46,10 @@ abstract class StatementBuilder implements StatementBuilderContract
         $this->tree = $tree;
         $this->context = PendingOutput::context($this->controller);
         $this->variable = Str::camel($this->context);
+    }
+
+    protected static function isLaravel8OrHigher()
+    {
+        return version_compare(App::version(), '8.0.0', '>=');
     }
 }

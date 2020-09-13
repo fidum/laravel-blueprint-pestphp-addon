@@ -8,7 +8,7 @@ use App\Http\Requests\AuthorStoreRequest;
 use App\Http\Requests\AuthorUpdateRequest;
 
 it('displays view on index', function () {
-    $authors = Author::factory()->times(3)->create();
+    $authors = factory(Author::class, 3)->create();
 
     $response = $this->get(route('author.index'));
 
@@ -52,7 +52,7 @@ it('saves and redirects on store', function () {
 });
 
 it('displays view on show', function () {
-    $author = Author::factory()->create();
+    $author = factory(Author::class)->create();
 
     $response = $this->get(route('author.show', $author));
 
@@ -62,7 +62,7 @@ it('displays view on show', function () {
 });
 
 it('displays view on edit', function () {
-    $author = Author::factory()->create();
+    $author = factory(Author::class)->create();
 
     $response = $this->get(route('author.edit', $author));
 
@@ -79,7 +79,7 @@ it('uses form request validation on update')
     );
 
 it('redirects on update', function () {
-    $author = Author::factory()->create();
+    $author = factory(Author::class)->create();
     $name = $this->faker->name;
     $email = $this->faker->safeEmail;
 
@@ -98,7 +98,7 @@ it('redirects on update', function () {
 });
 
 it('deletes and redirects on destroy', function () {
-    $author = Author::factory()->create();
+    $author = factory(Author::class)->create();
 
     $response = $this->delete(route('author.destroy', $author));
 
