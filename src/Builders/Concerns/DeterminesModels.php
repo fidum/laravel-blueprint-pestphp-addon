@@ -4,7 +4,7 @@ namespace Fidum\BlueprintPestAddon\Builders\Concerns;
 
 use Illuminate\Support\Str;
 
-trait ModelStatementHelper
+trait DeterminesModels
 {
     private function determineModel(string $prefix, ?string $reference): string
     {

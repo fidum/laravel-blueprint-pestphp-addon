@@ -3,14 +3,14 @@
 namespace Fidum\BlueprintPestAddon\Builders\Statements;
 
 use Blueprint\Models\Statements\EloquentStatement;
-use Fidum\BlueprintPestAddon\Builders\Concerns\ModelStatementHelper;
+use Fidum\BlueprintPestAddon\Builders\Concerns\DeterminesModels;
 use Fidum\BlueprintPestAddon\Builders\PendingOutput;
 use Fidum\BlueprintPestAddon\Enums\Coverage;
 use Illuminate\Support\Str;
 
 class EloquentStatementBuilder extends StatementBuilder
 {
-    use ModelStatementHelper;
+    use DeterminesModels;
 
     /** @var EloquentStatement */
     protected $statement;

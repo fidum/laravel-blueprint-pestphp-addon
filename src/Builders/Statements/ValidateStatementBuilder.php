@@ -6,7 +6,7 @@ use Blueprint\Models\Column;
 use Blueprint\Models\Controller;
 use Blueprint\Models\Model;
 use Blueprint\Models\Statements\ValidateStatement;
-use Fidum\BlueprintPestAddon\Builders\Concerns\ModelStatementHelper;
+use Fidum\BlueprintPestAddon\Builders\Concerns\DeterminesModels;
 use Fidum\BlueprintPestAddon\Builders\PendingOutput;
 use Fidum\BlueprintPestAddon\Contracts\TestCaseBuilder;
 use Fidum\BlueprintPestAddon\Traits\PopulatesTestStub;
@@ -15,7 +15,7 @@ use Shift\Faker\Registry as FakerRegistry;
 
 class ValidateStatementBuilder extends StatementBuilder implements TestCaseBuilder
 {
-    use ModelStatementHelper;
+    use DeterminesModels;
     use PopulatesTestStub;
 
     /** @var ValidateStatement */
