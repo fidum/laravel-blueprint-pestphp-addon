@@ -84,6 +84,7 @@ class FeatureTestCase extends TestCase
             ->times(count($controllers))
             ->withArgs(function (string $path) use ($controllerPath) {
                 $this->assertSame($controllerPath, $path);
+
                 return true;
             })
             ->andReturnFalse();
@@ -107,6 +108,7 @@ class FeatureTestCase extends TestCase
                 ->withArgs(function ($pathArg, $output) use ($controllerPath, $fixtureControllerPath) {
                     $this->assertSame($controllerPath, $pathArg);
                     $this->assertSame($this->fixture($fixtureControllerPath), $output);
+
                     return true;
                 });
 

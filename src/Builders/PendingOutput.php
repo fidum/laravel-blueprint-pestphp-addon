@@ -5,7 +5,6 @@ namespace Fidum\BlueprintPestAddon\Builders;
 use Blueprint\Models\Controller;
 use Fidum\BlueprintPestAddon\Builders\Concerns\BuildsFactoryStatements;
 use Fidum\BlueprintPestAddon\Builders\Concerns\DeterminesLaravelVersion;
-use Fidum\BlueprintPestAddon\Builders\Concerns\ModelStatementHelper;
 use Illuminate\Support\Str;
 
 class PendingOutput
@@ -63,7 +62,7 @@ class PendingOutput
 
     public function addFactory(string $variable, string $model, int $count = 1): self
     {
-        $statement =  static::isLaravel8OrHigher()
+        $statement = static::isLaravel8OrHigher()
             ? $this->classFactory($variable, $model, $count)
             : $this->legacyFactory($variable, $model, $count);
 

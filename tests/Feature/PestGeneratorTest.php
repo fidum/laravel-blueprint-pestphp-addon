@@ -22,7 +22,8 @@ it('generates the expected output', pestGeneratorTest('8.0.0'))->with('pest');
 
 it('legacy: generates the expected output', pestGeneratorTest('7.0.0', true))->with('pest');
 
-function pestGeneratorTest($version, bool $legacy = false): callable {
+function pestGeneratorTest($version, bool $legacy = false): callable
+{
     return function (
         string $definition,
         bool $pestGlobalFileExists,
@@ -45,7 +46,7 @@ function pestGeneratorTest($version, bool $legacy = false): callable {
         $exampleFileOutput = $this->getExampleTestsOutput($exampleFeature, $exampleUnit);
         $pestGlobalFileOutput = $this->getPestGlobalFileOutput($pestGlobalFileExists);
         $httpTestsOutput = $this->getHttpTestsOutput($tree,
-            'tests/Feature/Http/Controllers'. ($folder ? '/'.$folder : ''),
+            'tests/Feature/Http/Controllers'.($folder ? '/'.$folder : ''),
             $legacy ? 'tests/Feature/Http/Legacy/'.$folder : null,
         );
 
