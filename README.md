@@ -27,6 +27,11 @@ composer require --dev laravel-shift/blueprint fidum/laravel-blueprint-pestphp-a
 
 3. Read [Pest's Writing Tests](https://pestphp.com/docs/writing-tests/) to help understand the generated test output. 
 
+## Examples
+We use fixture files in our tests to make sure this package generates the files we expect. Feel free to browse them at the link below as examples of what output you should expect. 
+
+[Click here to view the files](https://github.com/fidum/laravel-blueprint-pestphp-addon/tree/master/tests/fixtures/tests)
+
 ## Testing
 ```bash
 composer test
