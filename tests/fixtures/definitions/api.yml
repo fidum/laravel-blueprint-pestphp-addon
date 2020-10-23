@@ -6,6 +6,7 @@ models:
     document: string
     expiry_date: date
     remarks: nullable text
+    softDeletes
   CertificateType:
     name: string
     relationships:

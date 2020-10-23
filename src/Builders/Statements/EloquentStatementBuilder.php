@@ -2,6 +2,7 @@
 
 namespace Fidum\BlueprintPestAddon\Builders\Statements;
 
+use Blueprint\Models\Model;
 use Blueprint\Models\Statements\EloquentStatement;
 use Fidum\BlueprintPestAddon\Builders\Concerns\DeterminesModels;
 use Fidum\BlueprintPestAddon\Builders\PendingOutput;
@@ -18,6 +19,8 @@ class EloquentStatementBuilder extends StatementBuilder
     public function execute(): PendingOutput
     {
         $model = $this->determineModel($this->controller->prefix(), $this->statement->reference());
+        /** @var Model $modelContext */
+        $modelContext = $this->tree->modelForContext($model) ?? new Model($model);
         $this->output->addImport($this->modelNamespace().'\\'.$model);
 
         if ($this->statement->operation() === 'save') {
@@ -48,14 +51,22 @@ class EloquentStatementBuilder extends StatementBuilder
         } elseif ($this->statement->operation() === 'delete') {
             $this->output->addCoverage(Coverage::DELETE)
                 ->addFactory($this->variable, $model)
-                ->addAssertion('generic', sprintf('$this->assertDeleted($%s);', $this->variable));
+                ->addAssertion('generic', $modelContext->usesSoftDeletes()
+                    ? sprintf('$this->assertSoftDeleted($%s);', $this->variable)
+                    : sprintf('$this->assertDeleted($%s);', $this->variable));
         } elseif ($this->statement->operation() === 'update') {
             $this->output->addAssertion('sanity', sprintf('$%s->refresh();', $this->variable));
             $requestData = $this->output->requestData();
 
             if ($requestData) {
                 foreach ($requestData as $key => $datum) {
-                    $assertion = sprintf('expect($%s->%s)->toBe(%s);', $this->variable, $key, $datum);
+                    if ($modelContext->hasColumn($key) && $modelContext->column($key)->dataType() === 'date') {
+                        $this->output->addImport('Carbon\\Carbon');
+                        $assertion = sprintf('expect($%s->%s)->toEqual(Carbon::parse(%s));', $this->variable, $key, $datum);
+                    } else {
+                        $assertion = sprintf('expect($%s->%s)->toBe(%s);', $this->variable, $key, $datum);
+                    }
+
                     $this->output->addAssertion('generic', $assertion);
                 }
             }

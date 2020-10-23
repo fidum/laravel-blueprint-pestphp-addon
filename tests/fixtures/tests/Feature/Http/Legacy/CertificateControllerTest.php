@@ -7,6 +7,7 @@ use App\Http\Requests\CertificateStoreRequest;
 use App\Http\Requests\CertificateUpdateRequest;
 use App\Models\Certificate;
 use App\Models\CertificateType;
+use Carbon\Carbon;
 
 it('index behaves as expected', function () {
     $certificates = factory(Certificate::class, 3)->create();
@@ -94,7 +95,7 @@ it('update behaves as expected', function () {
     expect($certificate->certificate_type_id)->toBe($certificate_type->id);
     expect($certificate->reference)->toBe($reference);
     expect($certificate->document)->toBe($document);
-    expect($certificate->expiry_date)->toBe($expiry_date);
+    expect($certificate->expiry_date)->toEqual(Carbon::parse($expiry_date));
 });
 
 it('deletes and responds with on destroy', function () {
@@ -104,5 +105,5 @@ it('deletes and responds with on destroy', function () {
 
     $response->assertNoContent();
 
-    $this->assertDeleted($certificate);
+    $this->assertSoftDeleted($certificate);
 });
