@@ -2,6 +2,11 @@
 
 All notable changes to `fidum/laravel-blueprint-pestphp-addon` will be documented in this file
 
+## 0.6.2 - 2020-10-23
+
+**Changed**
+- Use assertSoftDeletes when needed and parse timestamps ([2b732ad](https://github.com/fidum/laravel-blueprint-pestphp-addon/commit/2b732adbd71455b9bb2d023cfa03f7b303bff4f3))
+
 ## 0.6.1 - 2020-09-13
 
 **Changed**
