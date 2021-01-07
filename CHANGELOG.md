@@ -2,6 +2,13 @@
 
 All notable changes to `fidum/laravel-blueprint-pestphp-addon` will be documented in this file
 
+## 1.0.0 - 2020-09-13
+
+Stable release to coincide with Pest version. 
+
+**Added**
+- Add PHP 8 support ([#25](https://github.com/fidum/laravel-blueprint-pestphp-addon/pull/25))
+
 ## 0.6.2 - 2020-10-23
 
 **Changed**
