@@ -25,6 +25,7 @@
         "laravel-shift/blueprint": ">=1.17.0"
     },
     "require-dev": {
+        "mockery/mockery": "^1.4",
         "orchestra/testbench": "^5.0|^6.0",
         "pestphp/pest": "^1.0",
         "phpunit/phpunit": "^9.3",
