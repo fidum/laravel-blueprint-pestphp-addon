@@ -2,7 +2,6 @@
 
 namespace Fidum\BlueprintPestAddon\Builders\Statements;
 
-use Blueprint\Models\Model;
 use Blueprint\Models\Statements\QueryStatement;
 use Fidum\BlueprintPestAddon\Builders\Concerns\DeterminesModels;
 use Fidum\BlueprintPestAddon\Builders\PendingOutput;

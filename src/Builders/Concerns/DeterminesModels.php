@@ -31,6 +31,7 @@ trait DeterminesModels
     {
         /** @var Model $modelContext */
         $modelContext = $this->tree->modelForContext($name) ?? new Model($name);
+
         return $modelContext->fullyQualifiedClassName();
     }
 }
