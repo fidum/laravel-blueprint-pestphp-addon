@@ -2,6 +2,13 @@
 
 All notable changes to `fidum/laravel-blueprint-pestphp-addon` will be documented in this file
 
+## 1.1.0 - 2021-03-20
+
+**Added**
+- Add nested models support ([#25](https://github.com/fidum/laravel-blueprint-pestphp-addon/pull/25))
+
+This release only supports Blueprint >= v1.23.0.
+
 ## 1.0.0 - 2021-01-07
 
 Stable release to coincide with Pest version. 
