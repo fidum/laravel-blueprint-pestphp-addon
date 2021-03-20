@@ -19,9 +19,8 @@ class EloquentStatementBuilder extends StatementBuilder
     public function execute(): PendingOutput
     {
         $model = $this->determineModel($this->controller->prefix(), $this->statement->reference());
-        /** @var Model $modelContext */
         $modelContext = $this->tree->modelForContext($model) ?? new Model($model);
-        $this->output->addImport($this->modelNamespace().'\\'.$model);
+        $this->output->addImport($this->fullyQualifiedModelClassName($model));
 
         if ($this->statement->operation() === 'save') {
             $this->output->addCoverage(Coverage::SAVE);

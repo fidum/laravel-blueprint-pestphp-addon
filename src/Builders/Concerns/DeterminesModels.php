@@ -2,6 +2,7 @@
 
 namespace Fidum\BlueprintPestAddon\Builders\Concerns;
 
+use Blueprint\Models\Model;
 use Illuminate\Support\Str;
 
 trait DeterminesModels
@@ -24,5 +25,12 @@ trait DeterminesModels
         return config('blueprint.models_namespace')
             ? config('blueprint.namespace').'\\'.config('blueprint.models_namespace')
             : config('blueprint.namespace');
+    }
+
+    private function fullyQualifiedModelClassName(string $name): string
+    {
+        /** @var Model $modelContext */
+        $modelContext = $this->tree->modelForContext($name) ?? new Model($name);
+        return $modelContext->fullyQualifiedClassName();
     }
 }

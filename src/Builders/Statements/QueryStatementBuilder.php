@@ -2,6 +2,7 @@
 
 namespace Fidum\BlueprintPestAddon\Builders\Statements;
 
+use Blueprint\Models\Model;
 use Blueprint\Models\Statements\QueryStatement;
 use Fidum\BlueprintPestAddon\Builders\Concerns\DeterminesModels;
 use Fidum\BlueprintPestAddon\Builders\PendingOutput;
@@ -20,6 +21,6 @@ class QueryStatementBuilder extends StatementBuilder
 
         return $this->output
             ->addFactory(Str::plural($this->variable), $model, 3)
-            ->addImport($this->modelNamespace().'\\'.$this->determineModel($model, $this->statement->model()));
+            ->addImport($this->fullyQualifiedModelClassName($model));
     }
 }
