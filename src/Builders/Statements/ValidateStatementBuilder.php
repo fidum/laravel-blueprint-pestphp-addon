@@ -124,7 +124,7 @@ END;
 
         $model = Str::studly($reference);
 
-        $this->output->addImport($this->modelNamespace().'\\'.$model)
+        $this->output->addImport($this->fullyQualifiedModelClassName($model))
             ->addFactory(Str::beforeLast($column->name(), '_id'), $model)
             ->addRequestData($variableName, $column->name());
 

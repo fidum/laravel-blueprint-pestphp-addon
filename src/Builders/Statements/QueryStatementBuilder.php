@@ -20,6 +20,6 @@ class QueryStatementBuilder extends StatementBuilder
 
         return $this->output
             ->addFactory(Str::plural($this->variable), $model, 3)
-            ->addImport($this->modelNamespace().'\\'.$this->determineModel($model, $this->statement->model()));
+            ->addImport($this->fullyQualifiedModelClassName($model));
     }
 }
