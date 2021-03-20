@@ -22,7 +22,7 @@
     "require": {
         "php": "^7.3",
         "jasonmccreary/laravel-test-assertions": "^1.0",
-        "laravel-shift/blueprint": ">=1.17.0"
+        "laravel-shift/blueprint": ">=1.23.0"
     },
     "require-dev": {
         "orchestra/testbench": "^5.0|^6.0",
