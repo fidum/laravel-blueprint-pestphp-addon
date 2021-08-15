@@ -4,7 +4,6 @@ namespace Fidum\BlueprintPestAddon\Builders;
 
 use Blueprint\Models\Controller;
 use Fidum\BlueprintPestAddon\Builders\Concerns\BuildsFactoryStatements;
-use Fidum\BlueprintPestAddon\Builders\Concerns\DeterminesLaravelVersion;
 use Illuminate\Support\Str;
 
 class PendingOutput
