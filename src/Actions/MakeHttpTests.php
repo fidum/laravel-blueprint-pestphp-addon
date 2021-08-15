@@ -21,7 +21,7 @@ class MakeHttpTests implements Action
     {
         $stub = $this->stubFileContent('test.stub');
 
-        $builder = new HttpTestBuilder($files, $tree);
+        $builder = new HttpTestBuilder($tree);
 
         foreach ($tree->controllers() as $controller) {
             $path = $this->getPath($controller);
