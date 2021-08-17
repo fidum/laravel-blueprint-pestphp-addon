@@ -2,6 +2,15 @@
 
 All notable changes to `fidum/laravel-blueprint-pestphp-addon` will be documented in this file
 
+## 2.0.0 - 2021-08-17
+
+**Added**
+- Only support latest stable Laravel version ([#28](https://github.com/fidum/laravel-blueprint-pestphp-addon/pull/28))
+
+This release only supports Blueprint >= v2.0.0
+
+Version 2.x is a superficial major release to reflect Blueprint's new [Support Policy](https://github.com/laravel-shift/blueprint#support-policy).
+
 ## 1.1.0 - 2021-03-20
 
 **Added**
