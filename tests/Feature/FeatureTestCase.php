@@ -5,12 +5,12 @@ namespace Fidum\BlueprintPestAddon\Tests\Feature;
 use Blueprint\Blueprint;
 use Blueprint\Lexers\ControllerLexer;
 use Blueprint\Lexers\ModelLexer;
+use Blueprint\Lexers\StatementLexer;
 use Blueprint\Models\Controller;
 use Blueprint\Tree;
 use Fidum\BlueprintPestAddon\PestGenerator;
 use Fidum\BlueprintPestAddon\Tests\TestCase;
 use Illuminate\Contracts\Filesystem\Filesystem;
-use Illuminate\Support\Str;
 use Mockery\MockInterface;
 
 class FeatureTestCase extends TestCase
@@ -40,7 +40,7 @@ class FeatureTestCase extends TestCase
 
         $this->blueprint = new Blueprint();
         $this->blueprint->registerLexer(new ModelLexer());
-        $this->blueprint->registerLexer(new ControllerLexer(new \Blueprint\Lexers\StatementLexer()));
+        $this->blueprint->registerLexer(new ControllerLexer(new StatementLexer()));
         $this->blueprint->registerGenerator($this->subject);
     }
 
@@ -76,7 +76,7 @@ class FeatureTestCase extends TestCase
         return $output;
     }
 
-    protected function getHttpTestsOutput(Tree $tree, string $controllerPath, string $fixturePath = null): array
+    protected function getHttpTestsOutput(Tree $tree, string $controllerPath): array
     {
         $controllers = $tree->controllers();
 
@@ -100,14 +100,10 @@ class FeatureTestCase extends TestCase
             $ns = str_replace('\\', '/', Blueprint::relativeNamespace($controller->fullyQualifiedClassName()));
             $controllerPath = 'tests/Feature/'.$ns.'Test.php';
 
-            $fixtureControllerPath = $fixturePath
-                ? Str::finish($fixturePath, '/').$controller->className().'Test.php'
-                : $controllerPath;
-
             $this->files->expects('put')
-                ->withArgs(function ($pathArg, $output) use ($controllerPath, $fixtureControllerPath) {
+                ->withArgs(function ($pathArg, $output) use ($controllerPath) {
                     $this->assertSame($controllerPath, $pathArg);
-                    $this->assertSame($this->fixture($fixtureControllerPath), $output);
+                    $this->assertSame($this->fixture($controllerPath), $output);
 
                     return true;
                 });

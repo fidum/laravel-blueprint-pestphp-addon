@@ -14,17 +14,17 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         php: [7.3, 7.4, 8.0]
-        laravel: [7.*, 8.*]
+        laravel: [8.*]
         dependency-version: [prefer-lowest, prefer-stable]
         include:
           - os: macos-latest
             php: 7.4
-            laravel: 7.*
+            laravel: 8.*
             dependency-version: prefer-stable
 
           - os: windows-latest
             php: 7.4
-            laravel: 7.*
+            laravel: 8.*
             dependency-version: prefer-stable
 
     name: P${{ matrix.php }} - ${{ matrix.os }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
@@ -51,7 +51,7 @@ jobs:
       - name: Install dependencies
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" --no-interaction --no-update
-          composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
+          composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
 
       - name: Execute tests
         run: vendor/bin/pest

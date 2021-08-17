@@ -39,9 +39,6 @@ class HttpTestBuilder
     use ReadsStubFiles;
     use PopulatesTestStub;
 
-    /** @var \Illuminate\Contracts\Filesystem\Filesystem|\Illuminate\Filesystem\Filesystem */
-    private $files;
-
     /** @var array */
     private $imports = [];
 
@@ -63,10 +60,8 @@ class HttpTestBuilder
     /** @var Tree */
     private $tree;
 
-    /** @param \Illuminate\Contracts\Filesystem\Filesystem|\Illuminate\Filesystem\Filesystem  $files */
-    public function __construct($files, Tree $tree)
+    public function __construct(Tree $tree)
     {
-        $this->files = $files;
         $this->tree = $tree;
     }
 
