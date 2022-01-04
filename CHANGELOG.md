@@ -2,6 +2,13 @@
 
 All notable changes to `fidum/laravel-blueprint-pestphp-addon` will be documented in this file
 
+## 2.0.1 - 2022-01-04
+
+**Added**
+* Run actions on PHP 8.1 by @dmason30 in https://github.com/fidum/laravel-blueprint-pestphp-addon/pull/29
+
+**Full Changelog**: https://github.com/fidum/laravel-blueprint-pestphp-addon/compare/2.0.0...2.0.1
+
 ## 2.0.0 - 2021-08-17
 
 **Added**
