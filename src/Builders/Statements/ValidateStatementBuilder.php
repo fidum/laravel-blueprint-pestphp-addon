@@ -50,7 +50,7 @@ class ValidateStatementBuilder extends StatementBuilder implements TestCaseBuild
                     }
                 } elseif (! is_null($localModel)) {
                     foreach ($localModel->columns() as $localColumn) {
-                        if ($localColumn->name() === 'id') {
+                        if (in_array($localColumn->name(), ['id', 'softdeletes', 'softdeletestz'])) {
                             continue;
                         }
 
