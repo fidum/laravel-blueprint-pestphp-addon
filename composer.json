@@ -20,16 +20,15 @@
         }
     ],
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^8.0",
         "jasonmccreary/laravel-test-assertions": "^2.1",
-        "laravel-shift/blueprint": "^2.2"
+        "laravel-shift/blueprint": "^2.3"
     },
     "require-dev": {
-        "mockery/mockery": "^1.4",
-        "orchestra/testbench": "^5.0|^6.23|^7.0",
-        "pestphp/pest": "^1.0",
+        "mockery/mockery": "^1.4.4",
+        "orchestra/testbench": "^7.0",
+        "pestphp/pest": "^1.21.1",
         "phpunit/phpunit": "^9.3",
-        "psalm/plugin-laravel": "^1.4",
         "vimeo/psalm": "^4.0"
     },
     "autoload": {
