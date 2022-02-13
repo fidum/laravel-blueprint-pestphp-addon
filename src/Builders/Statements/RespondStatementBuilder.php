@@ -9,7 +9,7 @@ use Fidum\BlueprintPestAddon\Enums\Coverage;
 class RespondStatementBuilder extends StatementBuilder
 {
     /** @var RespondStatement */
-    protected $statement;
+    protected object $statement;
 
     public function execute(): PendingOutput
     {

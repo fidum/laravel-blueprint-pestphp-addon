@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 class RedirectStatementBuilder extends StatementBuilder
 {
     /** @var RedirectStatement */
-    protected $statement;
+    protected object $statement;
 
     public function execute(): PendingOutput
     {

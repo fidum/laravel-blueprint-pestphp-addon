@@ -12,8 +12,7 @@ class MakePestGlobalFile implements Action
     use ReadsStubFiles;
     use TracksFileOutput;
 
-    /** @var string */
-    private $outputFilePath = 'tests/Pest.php';
+    private string $outputFilePath = 'tests/Pest.php';
 
     public function execute($files, Tree $tree): Action
     {

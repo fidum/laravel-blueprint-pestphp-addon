@@ -11,31 +11,25 @@ class PendingOutput
     use BuildsFactoryStatements;
 
     /** @var array[] */
-    protected $assertions = [
+    protected array $assertions = [
         'sanity' => [],
         'response' => [],
         'generic' => [],
         'mock' => [],
     ];
 
-    /** @var array */
-    protected $imports = [];
+    protected array $imports = [];
 
-    /** @var array */
-    protected $requestData = [];
+    protected array $requestData = [];
 
     /** @var array[] */
-    protected $setUp = [
+    protected array $setUp = [
         'data' => [],
         'mock' => [],
     ];
 
-    /** @var int */
-    private $coverage;
-
-    public function __construct(int $coverage = 0)
+    public function __construct(private int $coverage = 0)
     {
-        $this->coverage = $coverage;
     }
 
     public function addAssertion(string $type, string $content, bool $unshift = false): self

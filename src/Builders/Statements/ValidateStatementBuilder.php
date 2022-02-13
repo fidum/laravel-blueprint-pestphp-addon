@@ -19,7 +19,7 @@ class ValidateStatementBuilder extends StatementBuilder implements TestCaseBuild
     use PopulatesTestStub;
 
     /** @var ValidateStatement */
-    protected $statement;
+    protected object $statement;
 
     public function execute(): PendingOutput
     {

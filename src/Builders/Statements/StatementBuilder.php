@@ -10,39 +10,17 @@ use Illuminate\Support\Str;
 
 abstract class StatementBuilder implements StatementBuilderContract
 {
-    /** @var string */
-    protected $context;
+    protected string $context;
 
-    /** @var Controller */
-    protected $controller;
-
-    /** @var string */
-    protected $methodName;
-
-    /** @var PendingOutput */
-    protected $output;
-
-    /** @var object */
-    protected $statement;
-
-    /** @var Tree */
-    protected $tree;
-
-    /** @var string */
-    protected $variable;
+    protected string $variable;
 
     public function __construct(
-        Controller $controller,
-        string $methodName,
-        object $statement,
-        PendingOutput $output,
-        Tree $tree
+        protected Controller $controller,
+        protected string $methodName,
+        protected object $statement,
+        protected PendingOutput $output,
+        protected Tree $tree
     ) {
-        $this->controller = $controller;
-        $this->methodName = $methodName;
-        $this->output = $output;
-        $this->statement = $statement;
-        $this->tree = $tree;
         $this->context = PendingOutput::context($this->controller);
         $this->variable = Str::camel($this->context);
     }

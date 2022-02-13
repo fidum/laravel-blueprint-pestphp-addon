@@ -4,21 +4,18 @@ namespace Fidum\BlueprintPestAddon;
 
 use Blueprint\Contracts\Generator;
 use Blueprint\Tree;
+use Faker\Core\File;
 use Fidum\BlueprintPestAddon\Actions\MakeExampleFeatureTest;
 use Fidum\BlueprintPestAddon\Actions\MakeExampleUnitTest;
 use Fidum\BlueprintPestAddon\Actions\MakeHttpTests;
 use Fidum\BlueprintPestAddon\Actions\MakePestGlobalFile;
 use Fidum\BlueprintPestAddon\Contracts\Action as ActionContract;
-use Illuminate\Contracts\Filesystem\Filesystem;
+use Illuminate\Filesystem\Filesystem;
 
 class PestGenerator implements Generator
 {
-    /** @var Filesystem */
-    private $files;
-
-    public function __construct($files)
+    public function __construct(private Filesystem $files)
     {
-        $this->files = $files;
     }
 
     public function output(Tree $tree): array

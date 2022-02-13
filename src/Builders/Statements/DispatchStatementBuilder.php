@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 class DispatchStatementBuilder extends StatementBuilder
 {
     /** @var DispatchStatement */
-    protected $statement;
+    protected object $statement;
 
     public function execute(): PendingOutput
     {
