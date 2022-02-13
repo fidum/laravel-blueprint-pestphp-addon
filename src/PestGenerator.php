@@ -4,7 +4,6 @@ namespace Fidum\BlueprintPestAddon;
 
 use Blueprint\Contracts\Generator;
 use Blueprint\Tree;
-use Faker\Core\File;
 use Fidum\BlueprintPestAddon\Actions\MakeExampleFeatureTest;
 use Fidum\BlueprintPestAddon\Actions\MakeExampleUnitTest;
 use Fidum\BlueprintPestAddon\Actions\MakeHttpTests;
