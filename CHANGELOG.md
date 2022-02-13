@@ -2,6 +2,14 @@
 
 All notable changes to `fidum/laravel-blueprint-pestphp-addon` will be documented in this file
 
+## 2.2.0 - 2022-02-13
+
+## What's Changed
+
+- Laravel 9 Compatibility by @dmason30 in https://github.com/fidum/laravel-blueprint-pestphp-addon/pull/31
+
+**Full Changelog**: https://github.com/fidum/laravel-blueprint-pestphp-addon/compare/2.1.0...2.2.0
+
 ## 2.1.0 - 2022-02-09
 
 ## Whats Changed?
