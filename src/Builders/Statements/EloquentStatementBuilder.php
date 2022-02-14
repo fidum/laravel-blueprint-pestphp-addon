@@ -14,7 +14,7 @@ class EloquentStatementBuilder extends StatementBuilder
     use DeterminesModels;
 
     /** @var EloquentStatement */
-    protected $statement;
+    protected object $statement;
 
     public function execute(): PendingOutput
     {

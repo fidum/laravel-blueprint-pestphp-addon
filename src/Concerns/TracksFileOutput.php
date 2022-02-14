@@ -4,8 +4,7 @@ namespace Fidum\BlueprintPestAddon\Concerns;
 
 trait TracksFileOutput
 {
-    /** @var array */
-    private $output = [];
+    private array $output = [];
 
     private function created(string $filePath): void
     {

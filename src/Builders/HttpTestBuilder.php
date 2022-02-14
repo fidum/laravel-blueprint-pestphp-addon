@@ -39,11 +39,9 @@ class HttpTestBuilder
     use ReadsStubFiles;
     use PopulatesTestStub;
 
-    /** @var array */
-    private $imports = [];
+    private array $imports = [];
 
-    /** @var array */
-    private $builders = [
+    private array $builders = [
         SendStatement::class => SendStatementBuilder::class,
         ValidateStatement::class => ValidateStatementBuilder::class,
         DispatchStatement::class => DispatchStatementBuilder::class,
@@ -57,12 +55,8 @@ class HttpTestBuilder
         QueryStatement::class => QueryStatementBuilder::class,
     ];
 
-    /** @var Tree */
-    private $tree;
-
-    public function __construct(Tree $tree)
+    public function __construct(private Tree $tree)
     {
-        $this->tree = $tree;
     }
 
     public function imports(Controller $controller): string

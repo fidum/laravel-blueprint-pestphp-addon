@@ -10,25 +10,22 @@ use Blueprint\Models\Controller;
 use Blueprint\Tree;
 use Fidum\BlueprintPestAddon\PestGenerator;
 use Fidum\BlueprintPestAddon\Tests\TestCase;
-use Illuminate\Contracts\Filesystem\Filesystem;
+use Illuminate\Filesystem\Filesystem;
 use Mockery\MockInterface;
 
 class FeatureTestCase extends TestCase
 {
-    /** @var Blueprint */
-    protected $blueprint;
+    protected Blueprint $blueprint;
 
-    /** @var MockInterface */
-    protected $files;
+    protected MockInterface $files;
 
-    /** @var \Fidum\BlueprintPestAddon\Builders\\Fidum\BlueprintPestAddon\PestGenerator */
-    protected $subject;
+    protected PestGenerator $subject;
 
-    protected $pestGlobalFile = 'tests/Pest.php';
+    protected string $pestGlobalFile = 'tests/Pest.php';
 
-    protected $exampleFeatureFile = 'tests/Feature/ExampleTest.php';
+    protected string $exampleFeatureFile = 'tests/Feature/ExampleTest.php';
 
-    protected $exampleUnitFile = 'tests/Unit/ExampleTest.php';
+    protected string $exampleUnitFile = 'tests/Unit/ExampleTest.php';
 
     protected function setUp(): void
     {

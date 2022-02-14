@@ -8,7 +8,7 @@ use Fidum\BlueprintPestAddon\Builders\PendingOutput;
 class SessionStatementBuilder extends StatementBuilder
 {
     /** @var SessionStatement */
-    protected $statement;
+    protected object $statement;
 
     public function execute(): PendingOutput
     {

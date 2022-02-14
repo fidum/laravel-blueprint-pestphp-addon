@@ -12,7 +12,7 @@ class QueryStatementBuilder extends StatementBuilder
     use DeterminesModels;
 
     /** @var QueryStatement */
-    protected $statement;
+    protected object $statement;
 
     public function execute(): PendingOutput
     {

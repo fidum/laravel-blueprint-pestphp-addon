@@ -10,10 +10,10 @@ use Fidum\BlueprintPestAddon\Builders\PendingOutput;
 class InitialStatementBuilder extends StatementBuilder
 {
     public function __construct(
-        Controller $controller,
-        string $methodName,
-        PendingOutput $output,
-        Tree $tree
+        protected Controller $controller,
+        protected string $methodName,
+        protected PendingOutput $output,
+        protected Tree $tree
     ) {
         parent::__construct($controller, $methodName, new SessionStatement('', ''), $output, $tree);
     }

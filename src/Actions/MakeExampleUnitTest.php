@@ -14,8 +14,7 @@ class MakeExampleUnitTest implements Action
     use ReadsStubFiles;
     use TracksFileOutput;
 
-    /** @var string */
-    private $outputFilePath = 'tests/Unit/ExampleTest.php';
+    private string $outputFilePath = 'tests/Unit/ExampleTest.php';
 
     public function execute($files, Tree $tree): Action
     {

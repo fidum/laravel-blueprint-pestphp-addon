@@ -8,7 +8,7 @@ use Fidum\BlueprintPestAddon\Builders\PendingOutput;
 class ResourceStatementBuilder extends StatementBuilder
 {
     /** @var ResourceStatement */
-    protected $statement;
+    protected object $statement;
 
     public function execute(): PendingOutput
     {
