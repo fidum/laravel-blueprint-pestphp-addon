@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Queue;
 
 it('displays view on __invoke', function () {
     Queue::fake();
-    Notification::fake();
 
     $response = $this->get(route('report.__invoke'));
 
