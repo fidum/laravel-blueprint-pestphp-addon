@@ -1,0 +1,9 @@
+controllers:
+    Report:
+      invokable:
+        dispatch: GenerateReport with:event
+        render: report
+    Transaction:
+      __invoke:
+        notify: auth.user ReportGenerated with:transaction
+        render: transaction

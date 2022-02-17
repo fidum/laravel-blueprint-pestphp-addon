@@ -25,7 +25,7 @@ class DispatchStatementBuilder extends StatementBuilder
             $assertion .= ', function ($job)';
 
             foreach ($this->statement->data() as $data) {
-                if (Str::studly(Str::singular($data)) === $this->context) {
+                if (Str::studly(Str::singular($data)) === $this->context || ! Str::contains($data, '.')) {
                     $variables[] .= '$'.$data;
                     $conditions[] .= sprintf('$job->%s->is($%s)', $data, $data);
                 } else {
