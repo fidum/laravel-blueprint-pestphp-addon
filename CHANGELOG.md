@@ -2,6 +2,14 @@
 
 All notable changes to `fidum/laravel-blueprint-pestphp-addon` will be documented in this file
 
+## 2.2.2 - 2022-02-18
+
+## What's Changed
+
+- Fix job test when property name different to context by @dmason30 in https://github.com/fidum/laravel-blueprint-pestphp-addon/pull/34
+
+**Full Changelog**: https://github.com/fidum/laravel-blueprint-pestphp-addon/compare/2.2.1...2.2.2
+
 ## 2.2.1 - 2022-02-14
 
 ## What's Changed
