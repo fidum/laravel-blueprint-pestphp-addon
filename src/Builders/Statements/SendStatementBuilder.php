@@ -38,7 +38,7 @@ class SendStatementBuilder extends StatementBuilder
             $assertion .= ', function ($notification)';
 
             foreach ($this->statement->data() as $data) {
-                if (Str::studly(Str::singular($data)) === $this->context) {
+                if (Str::studly(Str::singular($data)) === $this->context || ! Str::contains($data, '.')) {
                     $variables[] .= '$'.$data;
                     $conditions[] .= sprintf('$notification->%s->is($%s)', $data, $data);
                 } else {
@@ -78,7 +78,7 @@ class SendStatementBuilder extends StatementBuilder
             }
 
             foreach ($this->statement->data() as $data) {
-                if (Str::studly(Str::singular($data)) === $this->context) {
+                if (Str::studly(Str::singular($data)) === $this->context || ! Str::contains($data, '.')) {
                     $variables[] .= '$'.$data;
                     $conditions[] .= sprintf('$mail->%s->is($%s)', $data, $data);
                 } else {

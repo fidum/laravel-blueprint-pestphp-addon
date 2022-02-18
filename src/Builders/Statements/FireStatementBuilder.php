@@ -31,7 +31,7 @@ class FireStatementBuilder extends StatementBuilder
             $assertion .= ', function ($event)';
 
             foreach ($this->statement->data() as $data) {
-                if (Str::studly(Str::singular($data)) === $this->context) {
+                if (Str::studly(Str::singular($data)) === $this->context || ! Str::contains($data, '.')) {
                     $variables[] .= '$'.$data;
                     $conditions[] .= sprintf('$event->%s->is($%s)', $data, $data);
                 } else {
