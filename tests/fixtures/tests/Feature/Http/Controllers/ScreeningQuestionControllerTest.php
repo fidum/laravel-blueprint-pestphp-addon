@@ -113,5 +113,5 @@ it('deletes and redirects on destroy', function () {
 
     $response->assertRedirect(route('screeningQuestion.index'));
 
-    $this->assertDeleted($screeningQuestion);
+    $this->assertModelMissing($screeningQuestion);
 });
