@@ -104,5 +104,5 @@ it('deletes and redirects on destroy', function () {
 
     $response->assertRedirect(route('author.index'));
 
-    $this->assertDeleted($author);
+    $this->assertModelMissing($author);
 });

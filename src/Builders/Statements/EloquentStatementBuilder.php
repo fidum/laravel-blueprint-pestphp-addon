@@ -52,7 +52,7 @@ class EloquentStatementBuilder extends StatementBuilder
                 ->addFactory($this->variable, $model)
                 ->addAssertion('generic', $modelContext->usesSoftDeletes()
                     ? sprintf('$this->assertSoftDeleted($%s);', $this->variable)
-                    : sprintf('$this->assertDeleted($%s);', $this->variable));
+                    : sprintf('$this->assertModelMissing($%s);', $this->variable));
         } elseif ($this->statement->operation() === 'update') {
             $this->output->addAssertion('sanity', sprintf('$%s->refresh();', $this->variable));
             $requestData = $this->output->requestData();

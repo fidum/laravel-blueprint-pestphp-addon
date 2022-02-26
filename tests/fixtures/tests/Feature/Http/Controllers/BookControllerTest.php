@@ -123,7 +123,7 @@ it('deletes and redirects on destroy', function () {
 
     $response->assertRedirect(route('book.index'));
 
-    $this->assertDeleted($book);
+    $this->assertModelMissing($book);
 
     Notification::assertSentTo($book, ReviewNotification::class, function ($notification) use ($book) {
         return $notification->book->is($book);
