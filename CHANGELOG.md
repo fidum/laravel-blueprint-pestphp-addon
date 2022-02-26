@@ -2,6 +2,14 @@
 
 All notable changes to `fidum/laravel-blueprint-pestphp-addon` will be documented in this file
 
+## 2.2.3 - 2022-02-26
+
+## What's Changed
+
+- Replace assertDeleted with assertModelMissing by @dmason30 in https://github.com/fidum/laravel-blueprint-pestphp-addon/pull/35
+
+**Full Changelog**: https://github.com/fidum/laravel-blueprint-pestphp-addon/compare/2.2.2...2.2.3
+
 ## 2.2.2 - 2022-02-18
 
 ## What's Changed
