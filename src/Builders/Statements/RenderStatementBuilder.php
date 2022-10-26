@@ -20,7 +20,6 @@ class RenderStatementBuilder extends StatementBuilder
         $viewAssertions[] = sprintf('$response->assertViewIs(\'%s\');', $this->statement->view());
 
         foreach ($this->statement->data() as $data) {
-            // TODO: if data references locally scoped var, strengthen assertion...
             $viewAssertions[] = sprintf('$response->assertViewHas(\'%s\');', $data);
         }
 
