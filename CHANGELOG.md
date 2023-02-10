@@ -2,6 +2,14 @@
 
 All notable changes to `fidum/laravel-blueprint-pestphp-addon` will be documented in this file
 
+## 2.2.4 - 2023-02-10
+
+### What's Changed
+
+- Fixing missing model import in generated tests for show-only controllers by @dmason30 in https://github.com/fidum/laravel-blueprint-pestphp-addon/pull/37
+
+**Full Changelog**: https://github.com/fidum/laravel-blueprint-pestphp-addon/compare/2.2.3...2.2.4
+
 ## 2.2.3 - 2022-02-26
 
 ## What's Changed
