@@ -32,5 +32,5 @@ it('saves and redirects on update', function () {
 
     $response->assertRedirect(route('newspaper.edit', ['newspaper' => $newspaper]));
 
-    $this->assertDatabaseHas('newspapers', [/* ... */]);
+    $this->assertDatabaseHas('newspapers', [ /* ... */ ]);
 });
