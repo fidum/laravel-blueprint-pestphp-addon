@@ -12,3 +12,5 @@
 /.php.cs            export-ignore
 /.github            export-ignore
 
+# Declare files that will always have LF line endings on checkout.
+/tests/__snapshots__/*.php text eol=lf
