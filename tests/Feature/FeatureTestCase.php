@@ -9,11 +9,9 @@ use Blueprint\Lexers\StatementLexer;
 use Blueprint\Models\Controller;
 use Blueprint\Tree;
 use Fidum\BlueprintPestAddon\PestGenerator;
-use Fidum\BlueprintPestAddon\Tests\PHPDriver;
 use Fidum\BlueprintPestAddon\Tests\TestCase;
 use Illuminate\Filesystem\Filesystem;
 use Mockery\MockInterface;
-use function Spatie\Snapshots\assertMatchesSnapshot;
 
 class FeatureTestCase extends TestCase
 {
