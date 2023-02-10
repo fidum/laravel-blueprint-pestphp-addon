@@ -1,0 +1,10 @@
+models:
+  Entry:
+    slug: string:400
+    title: string:400
+    intro: longtext
+
+controllers:
+  Entry:
+    show:
+      render: entry.show with:entry

@@ -2,4 +2,5 @@ preset: laravel
 
 finder:
   exclude:
+    - "tests/__snapshots__"
     - "tests/fixtures"

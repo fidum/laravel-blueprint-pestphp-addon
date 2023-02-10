@@ -61,12 +61,24 @@ class FeatureTestCase extends TestCase
         $output = [];
 
         if ($featureExists) {
-            $this->files->expects('put')->with($this->exampleFeatureFile, $this->fixture($this->exampleFeatureFile));
+            $this->files->expects('put')->withArgs(function ($file, $content) {
+                $this->assertSame($this->exampleFeatureFile, $file);
+                $this->assertMatchesPHPSnapshot($content);
+
+                return true;
+            });
+
             $output['updated'][] = $this->exampleFeatureFile;
         }
 
         if ($unitExists) {
-            $this->files->expects('put')->with($this->exampleUnitFile, $this->fixture($this->exampleUnitFile));
+            $this->files->expects('put')->withArgs(function ($file, $content) {
+                $this->assertSame($this->exampleUnitFile, $file);
+                $this->assertMatchesPHPSnapshot($content);
+
+                return true;
+            });
+
             $output['updated'][] = $this->exampleUnitFile;
         }
 
@@ -100,7 +112,7 @@ class FeatureTestCase extends TestCase
             $this->files->expects('put')
                 ->withArgs(function ($pathArg, $output) use ($controllerPath) {
                     $this->assertSame($controllerPath, $pathArg);
-                    $this->assertSame($this->fixture($controllerPath), $output);
+                    $this->assertMatchesPHPSnapshot($output);
 
                     return true;
                 });
@@ -114,7 +126,12 @@ class FeatureTestCase extends TestCase
     protected function getPestGlobalFileOutput(bool $updated): array
     {
         $this->files->expects('exists')->with($this->pestGlobalFile)->andReturn($updated);
-        $this->files->expects('put')->with($this->pestGlobalFile, $this->fixture($this->pestGlobalFile));
+        $this->files->expects('put')->withArgs(function ($file, $output) {
+            $this->assertSame($this->pestGlobalFile, $file);
+            $this->assertMatchesPHPSnapshot($output);
+
+            return true;
+        });
 
         $key = $updated ? 'updated' : 'created';
 
