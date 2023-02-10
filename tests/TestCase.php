@@ -5,9 +5,15 @@ namespace Fidum\BlueprintPestAddon\Tests;
 use Blueprint\BlueprintServiceProvider;
 use Fidum\BlueprintPestAddon\BlueprintPestAddonServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
+use function Spatie\Snapshots\assertMatchesSnapshot;
 
 class TestCase extends BaseTestCase
 {
+    public function assertMatchesPHPSnapshot(string $content)
+    {
+        assertMatchesSnapshot(str_replace("\r", '', $content), new PHPDriver());
+    }
+
     protected function getEnvironmentSetUp($app): void
     {
         // blueprint config

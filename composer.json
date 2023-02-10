@@ -25,11 +25,12 @@
         "laravel-shift/blueprint": "^2.3"
     },
     "require-dev": {
-        "mockery/mockery": "^1.4.4",
-        "orchestra/testbench": "^7.0|^8.0",
-        "pestphp/pest": "^1.21.1",
-        "phpunit/phpunit": "^9.3",
-        "vimeo/psalm": "^4.0"
+        "mockery/mockery": "^1.5.1",
+        "orchestra/testbench": "^7.22|^8.0",
+        "pestphp/pest": "^1.22.4",
+        "phpunit/phpunit": "^9.6.3",
+        "spatie/pest-plugin-snapshots": "^1.1",
+        "vimeo/psalm": "^4.30"
     },
     "autoload": {
         "psr-4": {
