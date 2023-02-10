@@ -3,7 +3,6 @@
 namespace Fidum\BlueprintPestAddon\Tests\Feature;
 
 use Blueprint\Tree;
-use function Spatie\Snapshots\assertMatchesJsonSnapshot;
 
 it('should return expected types', function () {
     /** @var FeatureTestCase $this */

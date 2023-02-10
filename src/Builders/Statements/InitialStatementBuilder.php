@@ -3,7 +3,6 @@
 namespace Fidum\BlueprintPestAddon\Builders\Statements;
 
 use Blueprint\Models\Controller;
-use Blueprint\Models\Model;
 use Blueprint\Models\Statements\SessionStatement;
 use Blueprint\Tree;
 use Fidum\BlueprintPestAddon\Builders\Concerns\DeterminesModels;
