@@ -15,4 +15,5 @@ dataset('pest', [
     'custom queries defined on controller routes' => ['query.yml', false, 2],
     'controller test created in specified subfolder' => ['subfolder.yml', false, 2, 0, [], false, false, 'Api'],
     'controller test created in specified subfolder with nested models' => ['subfolder_nested.yml', false, 2, 0, ['models_namespace' => 'Models'], false, false, 'Screening'],
+    'controller with single action' => ['single_action_controller.yml', true, 1, 1],
 ]);

@@ -3,6 +3,7 @@
 namespace Fidum\BlueprintPestAddon\Tests\Feature;
 
 use Blueprint\Tree;
+use function Spatie\Snapshots\assertMatchesJsonSnapshot;
 
 it('should return expected types', function () {
     /** @var FeatureTestCase $this */
@@ -35,8 +36,8 @@ it('generates tests using class factories', function (
     $tokens = $this->blueprint->parse($this->definition($definition));
     $tree = $this->blueprint->analyze($tokens);
 
-    $exampleFileOutput = $this->getExampleTestsOutput($exampleFeature, $exampleUnit);
     $pestGlobalFileOutput = $this->getPestGlobalFileOutput($pestGlobalFileExists);
+    $exampleFileOutput = $this->getExampleTestsOutput($exampleFeature, $exampleUnit);
     $httpTestsOutput = $this->getHttpTestsOutput(
         $tree,
         'tests/Feature/Http/Controllers'.($folder ? '/'.$folder : ''),
@@ -44,7 +45,7 @@ it('generates tests using class factories', function (
 
     $expectedOutput = array_merge_recursive($pestGlobalFileOutput, $exampleFileOutput, $httpTestsOutput);
 
-    expect($expectedOutput['created'] ?? [])->toHaveCount($createdCount);
-    expect($expectedOutput['updated'] ?? [])->toHaveCount($updatedCount);
-    expect($this->subject->output($tree))->toBe($expectedOutput);
+    expect($expectedOutput['created'] ?? [])->toHaveCount($createdCount)
+        ->and($expectedOutput['updated'] ?? [])->toHaveCount($updatedCount)
+        ->and($this->subject->output($tree))->toBe($expectedOutput);
 })->with('pest');
