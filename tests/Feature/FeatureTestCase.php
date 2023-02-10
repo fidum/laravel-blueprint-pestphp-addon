@@ -43,11 +43,6 @@ class FeatureTestCase extends TestCase
         $this->blueprint->registerGenerator($this->subject);
     }
 
-    public function assertMatchesPHPSnapshot(string $content)
-    {
-        assertMatchesSnapshot($content, new PHPDriver());
-    }
-
     protected function definition(string $fileName = 'simple.yml'): string
     {
         return $this->fixture('definitions'.DIRECTORY_SEPARATOR.$fileName);
