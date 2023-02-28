@@ -21,14 +21,14 @@
     ],
     "require": {
         "php": "^8.0",
-        "jasonmccreary/laravel-test-assertions": "^2.1",
-        "laravel-shift/blueprint": "^2.3"
+        "jasonmccreary/laravel-test-assertions": "^2.2",
+        "laravel-shift/blueprint": "^2.6.1"
     },
     "require-dev": {
         "mockery/mockery": "^1.5.1",
-        "orchestra/testbench": "^7.22",
+        "orchestra/testbench": "^8.0.4",
         "pestphp/pest": "^1.22.4",
-        "phpunit/phpunit": "^9.6.3",
+        "phpunit/phpunit": "^9.6.4",
         "spatie/pest-plugin-snapshots": "^1.1",
         "vimeo/psalm": "^4.30"
     },
