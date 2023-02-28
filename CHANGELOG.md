@@ -2,6 +2,16 @@
 
 All notable changes to `fidum/laravel-blueprint-pestphp-addon` will be documented in this file
 
+## 2.3.0 - 2023-02-28
+
+### What's Changed
+
+- Add Laravel 10 Support by @dmason30 in https://github.com/fidum/laravel-blueprint-pestphp-addon/pull/36
+
+This release adds support for Laravel 10 and drops support for Laravel 9. In accordance with the Blueprint [Support Policy](https://github.com/laravel-shift/blueprint#support-policy), Blueprint generates code inline with the latest Laravel conventions.
+
+**Full Changelog**: https://github.com/fidum/laravel-blueprint-pestphp-addon/compare/2.2.4...2.3.0
+
 ## 2.2.4 - 2023-02-10
 
 ### What's Changed
