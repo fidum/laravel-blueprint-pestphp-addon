@@ -1,5 +1,5 @@
 # ⚠️Abandoned!
-Blueprint as of [v2.8.0](https://github.com/laravel-shift/blueprint/releases/tag/v2.8.0) now has first party support for generating PestPHP test. So this package is now readonly and you should update blueprint to use their new test generation.
+Blueprint as of [v2.8.0](https://github.com/laravel-shift/blueprint/releases/tag/v2.8.0) now has first party support for generating PestPHP tests. So this package is now read only and you should update blueprint to use their new test generation.
 
 # Blueprint Pest Addon
 
