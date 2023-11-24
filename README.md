@@ -5,6 +5,9 @@
 [![Codecov](https://img.shields.io/codecov/c/github/fidum/laravel-blueprint-pestphp-addon?logo=codecov&logoColor=white&style=for-the-badge)](https://codecov.io/gh/fidum/laravel-blueprint-pestphp-addon)
 [![Twitter Follow](https://img.shields.io/badge/follow-%40danmasonmp-1DA1F2?logo=twitter&style=for-the-badge)](https://twitter.com/danmasonmp)  
 
+# ⚠️Abandoned!
+Blueprint as ov [v2.8.0](https://github.com/laravel-shift/blueprint/releases/tag/v2.8.0) now has first party support for generating PestPHP test. So this package is now readonly and you should update blueprint to use their new test generation.
+
 :mega: Shoutout to [Jason McCreary](https://github.com/jasonmccreary) whose [Blueprint](https://github.com/laravel-shift/blueprint) and [Assertions](https://github.com/jasonmccreary/laravel-test-assertions) packages lay the groundwork for this addon. :raised_hands:
 
 Installing this addon will allow you to generate [Pest](https://github.com/pestphp/pest) HTTP tests instead of the standard PHPUnit HTTP tests with the `php artisan blueprint:build` command.
